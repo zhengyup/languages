@@ -38,9 +38,7 @@ The first version of the product should allow users to:
 - read realistic dialogue or short passages
 - listen to audio narration of the dialogue
 - tap or view vocabulary explanations for difficult words
-- save vocabulary items for later review
 - track which scenarios they have completed
-- answer simple comprehension questions after reading
 
 The application should provide a smooth reading experience that works well on both desktop and mobile browsers.
 
@@ -50,6 +48,7 @@ The application should provide a smooth reading experience that works well on bo
 
 The following features are explicitly out of scope for v1:
 
+- simple comprehension questions and answers after reading
 - AI conversation or chatbot functionality
 - personalized learning recommendations
 - adaptive difficulty algorithms
@@ -76,10 +75,8 @@ The primary user journey for v1:
 4. User reads the dialogue or passage
 5. User listens to audio narration
 6. User views vocabulary explanations for unfamiliar words
-7. User saves useful vocabulary items
-8. User completes short comprehension questions
-9. User progress is stored
-10. User returns later to continue learning
+7. User progress is updated if scenario is completed
+8. User returns later to continue learning
 
 ---
 
@@ -142,7 +139,6 @@ v1 is considered successful if:
 
 - users can complete at least one scenario end-to-end
 - users can read and listen to dialogue smoothly
-- users can save vocabulary items
 - user progress is persisted correctly
 - scenarios load quickly
 - reading interface works well on mobile browser

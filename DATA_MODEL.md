@@ -2,58 +2,56 @@
 
 ## 1. Purpose
 
-This document defines the core domain model for the Mandarin Scenario Reader backend.
+This document defines the domain model for the Mandarin Scenario Reader backend.
 
-It is intended to guide:
+It provides a clear structure for:
 
 - database schema design
-- entity modelling
-- API design
-- service responsibilities
+- entity relationships
+- backend implementation boundaries
 
-This file describes the domain at a conceptual level.
+The goal is to support a minimal but solid v1 that delivers structured Mandarin learning scenarios with audio and vocabulary explanations.
 
-It should remain stable even if implementation details evolve.
+The model is intentionally simple and avoids premature abstraction.
 
 ---
 
 ## 2. Domain overview
 
-The application is centered around structured Mandarin learning content.
+The application is a structured reading platform centered around realistic Mandarin dialogue scenarios.
 
-A user interacts with:
+Users interact with:
 
 - scenarios
-- scenario lines or passages
-- vocabulary items
-- comprehension questions
-- saved vocabulary
-- learning progress
-- scenario attempts
+- scenario dialogue lines
+- vocabulary explanations linked to the dialogue
+- completion tracking for scenarios
 
-The system is designed as a content-driven learning platform.
+The system is content-driven.
 
-For v1, the system is intentionally simple:
-- scenarios are curated content
-- vocabulary is manually attached to scenarios
-- progress is tracked per user per scenario
-- comprehension is measured through simple questions
+Content is manually curated for v1 and stored in the database.
+
+No user-generated content is supported in v1.
 
 ---
 
 ## 3. Core entities
 
-The main entities in v1 are:
+The v1 system consists of the following entities:
 
 - User
 - Scenario
 - ScenarioLine
 - VocabularyItem
-- ScenarioQuestion
-- ScenarioQuestionOption
-- UserScenarioProgress
-- SavedWord
-- ScenarioAttempt
+- UserScenarioCompletion
+
+These entities are sufficient to support:
+
+- browsing scenarios
+- reading dialogue content
+- viewing vocabulary explanations
+- listening to audio narration
+- tracking completed scenarios
 
 ---
 
@@ -61,26 +59,15 @@ The main entities in v1 are:
 
 High-level relationships:
 
-- A Scenario has many ScenarioLines
-- A Scenario has many VocabularyItems
-- A Scenario has many ScenarioQuestions
-- A ScenarioQuestion has many ScenarioQuestionOptions
-- A User has many UserScenarioProgress records
-- A User has many SavedWords
-- A User has many ScenarioAttempts
+A Scenario has many ScenarioLines.
 
-A UserScenarioProgress belongs to:
-- one User
-- one Scenario
+A Scenario has many VocabularyItems.
 
-A SavedWord belongs to:
-- one User
-- one VocabularyItem
-- optionally one Scenario
+A User can complete many Scenarios.
 
-A ScenarioAttempt belongs to:
-- one User
-- one Scenario
+A Scenario can be completed by many Users.
+
+VocabularyItems may optionally reference a specific ScenarioLine.
 
 ---
 
@@ -88,14 +75,13 @@ A ScenarioAttempt belongs to:
 
 ### 5.1 User
 
-Represents an authenticated learner using the application.
+Represents a learner using the application.
 
 Purpose:
-- identify the learner
-- store learning-related state
-- link progress and saved vocabulary
+identify the learner and track scenario completion.
 
 Suggested fields:
+
 - id
 - email
 - displayName
@@ -103,27 +89,31 @@ Suggested fields:
 - updatedAt
 
 Notes:
-- v1 only needs minimal user profile information
-- authentication complexity should remain low
+
+v1 keeps user data minimal.
+
+Authentication complexity should remain simple.
 
 ---
 
 ### 5.2 Scenario
 
-Represents a single learning scenario.
+Represents a structured Mandarin learning scenario.
 
-A scenario is the main unit of learning content.
+A scenario is the primary unit of content consumed by the user.
 
 Examples:
-- ordering food at a restaurant
-- asking for directions
-- giving a project update in a meeting
+
+ordering food at a restaurant  
+asking for directions  
+giving a project update
 
 Purpose:
-- group together text, vocabulary, audio, and questions
-- serve as the main content item a user consumes
+
+group dialogue text, audio, and vocabulary explanations into a single learning unit.
 
 Suggested fields:
+
 - id
 - title
 - description
@@ -136,25 +126,33 @@ Suggested fields:
 - updatedAt
 
 Notes:
-- difficultyLevel should be represented using a controlled enum or string
-- topic should be represented using a controlled enum or string
-- scenarios should be publishable and hideable
+
+difficultyLevel should use a controlled value.
+
+topic should use a controlled value.
+
+Scenarios should be publishable so unfinished content can remain hidden.
+
+estimatedMinutes helps users choose scenarios based on available time.
 
 ---
 
 ### 5.3 ScenarioLine
 
-Represents a single ordered line or segment within a scenario.
+Represents one ordered line of dialogue or passage text.
 
-For dialogue-based scenarios, this can represent one spoken line.
-For passage-based scenarios, this can represent one sentence or paragraph chunk.
+Lines are displayed sequentially in the reading interface.
+
+Dialogue scenarios may include speaker labels.
+
+Passage scenarios may omit speaker labels.
 
 Purpose:
-- preserve the reading order of a scenario
-- support line-by-line reading UI
-- optionally support audio synchronization later
+
+preserve reading order and allow structured display of dialogue.
 
 Suggested fields:
+
 - id
 - scenarioId
 - lineOrder
@@ -167,344 +165,242 @@ Suggested fields:
 - createdAt
 - updatedAt
 
-Notes:
-- speakerName is optional and mainly useful for dialogues
-- startTimeMs and endTimeMs are optional in v1
-- lineOrder must be unique within a scenario
+Field notes:
+
+lineOrder defines the reading sequence.
+
+speakerName is optional and mainly used for dialogue scenarios.
+
+hanziText is required.
+
+pinyinText is optional.
+
+englishTranslation is optional but recommended.
+
+startTimeMs and endTimeMs allow future synchronization with audio playback.
 
 Constraints:
-- every ScenarioLine must belong to exactly one Scenario
-- lines must have a stable order within the scenario
+
+each ScenarioLine belongs to exactly one Scenario.
+
+lineOrder must be unique within each scenario.
+
+lines should always be retrieved sorted by lineOrder.
 
 ---
 
 ### 5.4 VocabularyItem
 
-Represents a word or phrase that the learner may want to understand while reading a scenario.
+Represents a word or phrase explanation linked to a scenario.
+
+VocabularyItems help users understand difficult words encountered while reading.
+
+Vocabulary is scenario-specific in v1.
 
 Purpose:
-- provide structured vocabulary explanations
-- support saved words
-- support contextual review later
+
+provide contextual explanations for words or phrases appearing in the dialogue.
 
 Suggested fields:
+
 - id
 - scenarioId
+- scenarioLineId
 - hanzi
 - pinyin
 - englishMeaning
 - explanation
-- lineReference
-- startCharIndex
-- endCharIndex
 - createdAt
 - updatedAt
 
-Notes:
-- v1 can keep vocabulary attached directly to a scenario
-- lineReference may point to a ScenarioLine if the vocabulary item is tied to a specific line
-- startCharIndex and endCharIndex are optional and may be added only if inline text highlighting is needed
-- vocabulary can represent either a single word or multi-character phrase
+Field notes:
+
+hanzi stores the word or phrase in Chinese characters.
+
+pinyin provides pronunciation guidance.
+
+englishMeaning provides a short translation.
+
+explanation optionally provides additional context or nuance.
+
+scenarioLineId is optional but recommended when vocabulary relates to a specific line.
 
 Constraints:
-- every VocabularyItem must belong to exactly one Scenario in v1
-- duplicate vocabulary within the same scenario should be avoided where possible
 
-Future note:
-- later versions may support a global vocabulary dictionary with scenario-specific usage examples
+each VocabularyItem belongs to exactly one Scenario.
+
+multiple VocabularyItems may reference the same ScenarioLine.
+
+duplicate entries within the same scenario should be avoided.
+
+VocabularyItem does not need to represent a global dictionary entry in v1.
 
 ---
 
-### 5.5 ScenarioQuestion
+### 5.5 UserScenarioCompletion
 
-Represents a comprehension question attached to a scenario.
-
-Purpose:
-- test whether the user understood the scenario
-- provide lightweight learning feedback
-
-Suggested fields:
-- id
-- scenarioId
-- questionOrder
-- questionText
-- questionType
-- explanation
-- createdAt
-- updatedAt
-
-Notes:
-- v1 should support multiple choice questions only
-- questionType can still exist for extensibility
-- explanation is optional and can be shown after submission
-
-Constraints:
-- every ScenarioQuestion must belong to exactly one Scenario
-- questionOrder must be unique within a scenario
-
----
-
-### 5.6 ScenarioQuestionOption
-
-Represents one answer option for a comprehension question.
+Represents that a user has completed a scenario.
 
 Purpose:
-- define possible answers for a ScenarioQuestion
-- indicate which option is correct
+
+track learning progress at the scenario level.
+
+Allows the application to:
+
+show completed scenarios
+display progress indicators
+encourage continued learning
 
 Suggested fields:
-- id
-- questionId
-- optionOrder
-- optionText
-- isCorrect
-- createdAt
-- updatedAt
 
-Constraints:
-- every ScenarioQuestionOption must belong to exactly one ScenarioQuestion
-- each question must have at least one correct option
-- optionOrder must be unique within a question
-
----
-
-### 5.7 UserScenarioProgress
-
-Represents a learner's current progress for a specific scenario.
-
-Purpose:
-- track whether a scenario was started or completed
-- store last reading position
-- support resume functionality
-
-Suggested fields:
 - id
 - userId
 - scenarioId
-- status
-- lastReadLineOrder
-- startedAt
 - completedAt
-- updatedAt
-
-Suggested status values:
-- NOT_STARTED
-- IN_PROGRESS
-- COMPLETED
-
-Notes:
-- v1 should track progress at the scenario level
-- line-level resume support can be approximated with lastReadLineOrder
 
 Constraints:
-- one user should have at most one progress record per scenario
+
+each user should only complete a scenario once.
+
+a unique constraint should exist on:
+
+userId + scenarioId
+
+Completion should be explicitly triggered by the user interface.
+
+Example:
+
+"Mark as completed" button.
 
 ---
 
-### 5.8 SavedWord
+## 6. Suggested enums
 
-Represents a vocabulary item saved by a learner.
-
-Purpose:
-- allow users to build a personal list of useful words and phrases
-- support future review flows
-
-Suggested fields:
-- id
-- userId
-- vocabularyItemId
-- scenarioId
-- savedAt
-
-Notes:
-- storing scenarioId redundantly is acceptable if it simplifies retrieval
-- v1 should avoid duplicate saves of the same vocabulary item by the same user
-
-Constraints:
-- one user should not save the same vocabulary item more than once
+Enums should be implemented as controlled values.
 
 ---
-
-### 5.9 ScenarioAttempt
-
-Represents one attempt by a user to answer a scenario's comprehension questions.
-
-Purpose:
-- record question completion activity
-- store assessment results
-- enable basic progress analytics later
-
-Suggested fields:
-- id
-- userId
-- scenarioId
-- score
-- totalQuestions
-- correctAnswers
-- attemptedAt
-
-Notes:
-- v1 can store only the aggregate result
-- question-by-question answer history can be deferred
-
-Constraints:
-- every ScenarioAttempt must belong to one User and one Scenario
-
-Future note:
-- later versions may introduce a ScenarioAttemptAnswer entity for per-question answer tracking
-
----
-
-## 6. Suggested enums / controlled values
-
-These should be represented as enums or constrained string values in the implementation.
 
 ### 6.1 Scenario topic
 
-Possible values for v1:
-- TRAVEL
-- WORKPLACE
-- DAILY_LIFE
-- SOCIAL
+Suggested values:
+
+TRAVEL  
+WORKPLACE  
+DAILY_LIFE  
+SOCIAL
+
+These correspond to categories defined in PRODUCT.md.
+
+---
 
 ### 6.2 Difficulty level
 
-Possible values for v1:
-- BEGINNER
-- INTERMEDIATE
-- ADVANCED
+Suggested values:
 
-If your actual target users are stronger learners, you may instead choose:
-- LOWER_INTERMEDIATE
-- INTERMEDIATE
-- UPPER_INTERMEDIATE
-- ADVANCED
+INTERMEDIATE  
+UPPER_INTERMEDIATE  
+ADVANCED
 
-### 6.3 Progress status
-
-Possible values:
-- NOT_STARTED
-- IN_PROGRESS
-- COMPLETED
-
-### 6.4 Question type
-
-Possible values for v1:
-- MULTIPLE_CHOICE
-
-Future values:
-- TRUE_FALSE
-- SHORT_ANSWER
+The product targets learners beyond beginner level.
 
 ---
 
 ## 7. Key invariants
 
-The following rules should remain true across the system:
+The following rules should always hold:
 
-- A Scenario must exist before any ScenarioLine, VocabularyItem, or ScenarioQuestion can exist for it
-- A Scenario must have at least one ScenarioLine
-- Scenario lines must have a stable ordering
-- A ScenarioQuestion must have at least one correct option
-- A User can have only one progress record per Scenario
-- A User should not save the same VocabularyItem multiple times
-- A ScenarioAttempt must be linked to a valid User and Scenario
+a Scenario must exist before ScenarioLines can exist.
+
+a Scenario must contain at least one ScenarioLine.
+
+ScenarioLines must have a stable order.
+
+a VocabularyItem must belong to a valid Scenario.
+
+a UserScenarioCompletion must reference a valid User and Scenario.
+
+a user should not complete the same scenario multiple times.
 
 ---
 
 ## 8. Ownership boundaries
 
-Ownership rules for v1:
+Ownership structure:
 
 Scenario owns:
+
 - ScenarioLines
 - VocabularyItems
-- ScenarioQuestions
-
-ScenarioQuestion owns:
-- ScenarioQuestionOptions
 
 User owns:
-- UserScenarioProgress
-- SavedWords
-- ScenarioAttempts
 
-This helps keep deletion and lifecycle rules simple.
+- UserScenarioCompletion
+
+Deleting a Scenario should delete its ScenarioLines and VocabularyItems.
+
+Deleting a User should delete their completion records.
 
 ---
 
 ## 9. Deletion rules
 
-Suggested deletion behavior:
+Recommended behavior:
 
-- deleting a Scenario should delete its ScenarioLines
-- deleting a Scenario should delete its VocabularyItems
-- deleting a Scenario should delete its ScenarioQuestions and their options
-- deleting a User should delete their progress, saved words, and attempts
+deleting a Scenario deletes:
 
-In implementation, this can be handled with either:
-- database foreign key cascade rules
-- application-managed deletion logic
+- ScenarioLines
+- VocabularyItems
 
-Prefer simplicity and consistency.
+deleting a User deletes:
+
+- UserScenarioCompletion records
+
+This can be implemented using foreign key cascade rules or application logic.
 
 ---
 
 ## 10. V1 simplifications
 
-To keep v1 manageable, the following simplifications are intentional:
+The following features are intentionally excluded from the data model:
 
-- vocabulary is scenario-scoped rather than globally deduplicated
-- comprehension attempts store only aggregate score
-- no user-generated annotations
-- no global dictionary or morphological analysis
-- no adaptive progression model
-- no spaced repetition data model
-- no pronunciation tracking
-- no social learning features
+no saved vocabulary lists
 
-These choices are intentional and should not be expanded unless explicitly requested.
+no comprehension questions
 
----
+no spaced repetition system
 
-## 11. Future extensibility
+no grammar explanation entities
 
-Possible later additions include:
+no user annotations
 
-- GlobalVocabularyEntry
-- ScenarioTag
-- GrammarNote
-- UserNote
-- ScenarioAttemptAnswer
-- RecommendedScenario
-- ReviewQueueItem
-- AudioSegmentMetadata
+no adaptive learning engine
 
-These are not part of v1 and should not be implemented yet.
+no review scheduling
+
+no collaborative content
+
+These features may be introduced in future versions.
 
 ---
 
-## 12. Summary
+## 11. Summary
 
-The v1 data model is centered around three areas:
+The v1 data model focuses on delivering structured reading content with minimal complexity.
 
-Content:
-- Scenario
-- ScenarioLine
-- VocabularyItem
-- ScenarioQuestion
-- ScenarioQuestionOption
+Content layer:
+
+Scenario  
+ScenarioLine  
+VocabularyItem
 
 User state:
-- User
-- UserScenarioProgress
-- SavedWord
 
-Assessment:
-- ScenarioAttempt
+User  
+UserScenarioCompletion
 
-This structure is intended to be:
-- simple
-- extensible
-- easy to map to relational tables
-- suitable for a web-first MVP
+This structure is:
+
+simple to implement  
+easy to test  
+easy to extend later  
+aligned with PRODUCT.md scope
