@@ -10,5 +10,17 @@ services:
     volumes:
       - pgdata_dev:/var/lib/postgresql/data
 
+  db-test:
+    image: pgvector/pgvector:pg16
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: languages
+    ports:
+      - "54322:5432"
+    volumes:
+      - pgdata_test:/var/lib/postgresql/data
+
 volumes:
   pgdata_dev:
+  pgdata_test:
