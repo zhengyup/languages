@@ -61,13 +61,11 @@ High-level relationships:
 
 A Scenario has many ScenarioLines.
 
-A Scenario has many VocabularyItems.
+A ScenarioLine has many VocabularyItems.
 
 A User can complete many Scenarios.
 
 A Scenario can be completed by many Users.
-
-VocabularyItems may optionally reference a specific ScenarioLine.
 
 ---
 
@@ -191,49 +189,57 @@ lines should always be retrieved sorted by lineOrder.
 
 ### 5.4 VocabularyItem
 
-Represents a word or phrase explanation linked to a scenario.
+Represents a contextual gloss for an expression appearing in a ScenarioLine.
 
-VocabularyItems help users understand difficult words encountered while reading.
+VocabularyItems help users understand difficult words or phrases without leaving the reading experience.
 
-Vocabulary is scenario-specific in v1.
+Vocabulary is scenario-specific and context-specific in v1.
 
 Purpose:
 
-provide contextual explanations for words or phrases appearing in the dialogue.
+provide contextual explanations for expressions as they are used in a specific line of dialogue.
 
 Suggested fields:
 
 - id
-- scenarioId
 - scenarioLineId
-- hanzi
+- expression
 - pinyin
-- englishMeaning
-- explanation
+- gloss
+- explanation (optional)
+- startCharIndex (optional)
+- endCharIndex (optional)
 - createdAt
-- updatedAt
 
 Field notes:
 
-hanzi stores the word or phrase in Chinese characters.
+expression stores the word or phrase exactly as it appears in the line.
 
 pinyin provides pronunciation guidance.
 
-englishMeaning provides a short translation.
+gloss provides a short contextual meaning.
 
 explanation optionally provides additional context or nuance.
 
-scenarioLineId is optional but recommended when vocabulary relates to a specific line.
+startCharIndex and endCharIndex may be used to highlight the expression inside the line in the frontend UI.
+
+Vocabulary is phrase-based rather than character-based in v1.
+
+The same expression may appear multiple times within a scenario and may have different meanings depending on context.
 
 Constraints:
 
-each VocabularyItem belongs to exactly one Scenario.
+each VocabularyItem belongs to exactly one ScenarioLine.
 
-multiple VocabularyItems may reference the same ScenarioLine.
+multiple VocabularyItems may belong to the same ScenarioLine.
 
-duplicate entries within the same scenario should be avoided.
+VocabularyItems support inline reading comprehension by giving learners help at the point of need.
 
-VocabularyItem does not need to represent a global dictionary entry in v1.
+v1 keeps vocabulary scoped to ScenarioLine for simplicity.
+
+VocabularyItem does not represent a global dictionary entry in v1.
+
+Global dictionary modeling is intentionally out of scope.
 
 ---
 
