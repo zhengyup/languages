@@ -8,7 +8,6 @@ import com.huskie.languages.dto.scenario.ScenarioDetailResponse
 import com.huskie.languages.dto.scenario.ScenarioLineResponse
 import com.huskie.languages.dto.scenario.ScenarioResponse
 import com.huskie.languages.dto.scenario.VocabularyItemResponse
-import com.huskie.languages.exception.scenario.IncompleteVocabularyCoverageException
 import com.huskie.languages.exception.scenario.ScenarioNotFoundException
 import com.huskie.languages.repository.scenario.ScenarioLineRepository
 import com.huskie.languages.repository.scenario.ScenarioRepository
@@ -21,7 +20,8 @@ import java.time.Instant
 class ScenarioService(
     private val scenarioRepository: ScenarioRepository,
     private val scenarioLineRepository: ScenarioLineRepository,
-    private val vocabularyItemRepository: VocabularyItemRepository
+    private val vocabularyItemRepository: VocabularyItemRepository,
+    private val scenarioLineVocabularyCoverageValidator: ScenarioLineVocabularyCoverageValidator
 ) {
     fun createScenario(request: CreateScenarioRequest): ScenarioResponse {
         val scenario = Scenario(
@@ -42,20 +42,31 @@ class ScenarioService(
         val scenario = scenarioRepository.findById(id)
             .orElseThrow { ScenarioNotFoundException(id) }
         val lines = scenarioLineRepository.findAllByScenarioIdOrderByLineOrderAsc(id)
-        val vocabularyItemsByLineId = vocabularyItemRepository
-            .findAllByScenarioLineIdInOrderByScenarioLineIdAscStartCharIndexAscIdAsc(
-                lines.mapNotNull { it.id }
-            )
-            .groupBy { checkNotNull(it.scenarioLine.id) }
+        val vocabularyItemsByLineId = getVocabularyItemsByLineId(lines)
 
+        validateVocabularyCoverage(lines, vocabularyItemsByLineId)
+
+        return scenario.toDetailResponse(lines, vocabularyItemsByLineId)
+    }
+
+    private fun getVocabularyItemsByLineId(lines: List<ScenarioLine>): Map<Long, List<VocabularyItem>> {
+        val lineIds = lines.mapNotNull { it.id }
+
+        return vocabularyItemRepository
+            .findAllByScenarioLineIdInOrderByScenarioLineIdAscStartCharIndexAscIdAsc(lineIds)
+            .groupBy { checkNotNull(it.scenarioLine.id) }
+    }
+
+    private fun validateVocabularyCoverage(
+        lines: List<ScenarioLine>,
+        vocabularyItemsByLineId: Map<Long, List<VocabularyItem>>
+    ) {
         lines.forEach { line ->
-            validateVocabularyCoverage(
+            scenarioLineVocabularyCoverageValidator.validate(
                 line = line,
                 vocabularyItems = vocabularyItemsByLineId[checkNotNull(line.id)].orEmpty()
             )
         }
-
-        return scenario.toDetailResponse(lines, vocabularyItemsByLineId)
     }
 
     private fun Scenario.toResponse(): ScenarioResponse =
@@ -107,57 +118,4 @@ class ScenarioService(
             endCharIndex = endCharIndex,
             createdAt = createdAt
         )
-
-    private fun validateVocabularyCoverage(line: ScenarioLine, vocabularyItems: List<VocabularyItem>) {
-        if (vocabularyItems.isEmpty()) {
-            throw IncompleteVocabularyCoverageException(line.lineOrder)
-        }
-
-        val coveredIndexes = BooleanArray(line.hanziText.length)
-
-        vocabularyItems.forEach { vocabularyItem ->
-            val startIndex = vocabularyItem.startCharIndex
-            val endIndex = vocabularyItem.endCharIndex
-
-            if (startIndex < 0 || endIndex > line.hanziText.length || startIndex >= endIndex) {
-                throw IncompleteVocabularyCoverageException(line.lineOrder)
-            }
-
-            val expressionInLine = line.hanziText.substring(startIndex, endIndex)
-            if (expressionInLine != vocabularyItem.expression) {
-                throw IncompleteVocabularyCoverageException(line.lineOrder)
-            }
-
-            for (index in startIndex until endIndex) {
-                if (shouldRequireVocabularyCoverage(line.hanziText[index]).not()) {
-                    throw IncompleteVocabularyCoverageException(line.lineOrder)
-                }
-                if (coveredIndexes[index]) {
-                    throw IncompleteVocabularyCoverageException(line.lineOrder)
-                }
-                coveredIndexes[index] = true
-            }
-        }
-
-        line.hanziText.forEachIndexed { index, character ->
-            if (shouldRequireVocabularyCoverage(character) && coveredIndexes[index].not()) {
-                throw IncompleteVocabularyCoverageException(line.lineOrder)
-            }
-        }
-    }
-
-    private fun shouldRequireVocabularyCoverage(character: Char): Boolean =
-        when (Character.getType(character)) {
-            Character.SPACE_SEPARATOR.toInt(),
-            Character.LINE_SEPARATOR.toInt(),
-            Character.PARAGRAPH_SEPARATOR.toInt(),
-            Character.CONNECTOR_PUNCTUATION.toInt(),
-            Character.DASH_PUNCTUATION.toInt(),
-            Character.START_PUNCTUATION.toInt(),
-            Character.END_PUNCTUATION.toInt(),
-            Character.INITIAL_QUOTE_PUNCTUATION.toInt(),
-            Character.FINAL_QUOTE_PUNCTUATION.toInt(),
-            Character.OTHER_PUNCTUATION.toInt() -> false
-            else -> true
-        }
 }
