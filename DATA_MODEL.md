@@ -227,6 +227,10 @@ Vocabulary is phrase-based rather than character-based in v1.
 
 The same expression may appear multiple times within a scenario and may have different meanings depending on context.
 
+Each meaningful phrase in a ScenarioLine should have a corresponding VocabularyItem so the line can be read entirely in-app.
+
+In practice, a line such as `请问，地铁站在哪里？` should be segmented into multiple VocabularyItems such as `请问`, `地铁站`, and `在哪里`.
+
 Constraints:
 
 each VocabularyItem belongs to exactly one ScenarioLine.
@@ -236,6 +240,10 @@ multiple VocabularyItems may belong to the same ScenarioLine.
 VocabularyItems support inline reading comprehension by giving learners help at the point of need.
 
 v1 keeps vocabulary scoped to ScenarioLine for simplicity.
+
+startCharIndex and endCharIndex should be present for each VocabularyItem in v1 so the system can enforce complete line coverage and the UI can highlight the exact phrase.
+
+VocabularyItems within a line should collectively cover the full meaningful content of the line, excluding punctuation and spacing.
 
 VocabularyItem does not represent a global dictionary entry in v1.
 

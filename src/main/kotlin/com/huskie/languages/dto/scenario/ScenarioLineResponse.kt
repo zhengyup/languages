@@ -9,5 +9,6 @@ data class ScenarioLineResponse(
     val hanziText: String,
     val pinyinText: String?,
     val englishTranslation: String?,
-    val createdAt: Instant
+    val createdAt: Instant,
+    val vocabularyItems: List<VocabularyItemResponse>
 )
