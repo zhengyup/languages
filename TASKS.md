@@ -1,3 +1,3 @@
-TASK 1 — Scenario entity
-TASK 2 — ScenarioLine entity
-TASK 3 — VocabularyItem entity
+-[x] TASK 1 — Scenario entity
+-[x] TASK 2 — ScenarioLine entity
+-[ ] TASK 3 — VocabularyItem entity

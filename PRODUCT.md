@@ -37,7 +37,7 @@ The first version of the product should allow users to:
 - browse a library of Mandarin learning scenarios
 - read realistic dialogue or short passages
 - listen to audio narration of the dialogue
-- tap or view vocabulary explanations for difficult words
+- tap or view contextual vocabulary explanations for difficult expressions
 - track which scenarios they have completed
 
 The application should provide a smooth reading experience that works well on both desktop and mobile browsers.
@@ -74,7 +74,7 @@ The primary user journey for v1:
 3. User selects a scenario
 4. User reads the dialogue or passage
 5. User listens to audio narration
-6. User views vocabulary explanations for unfamiliar words
+6. User views contextual phrase glosses for unfamiliar expressions directly inside the reading experience
 7. User progress is updated if scenario is completed
 8. User returns later to continue learning
 
@@ -99,7 +99,13 @@ Scenario fields:
 
 Dialogue content may be structured line-by-line.
 
-Vocabulary items may be linked to specific words or phrases in the text.
+Vocabulary explanations are contextual phrase glosses tied to specific dialogue lines.
+
+Vocabulary items may represent multi-character expressions such as common phrases or verbs.
+
+Vocabulary meaning depends on how the expression is used in that specific line.
+
+The goal is to help learners understand difficult expressions without leaving the app for external lookup.
 
 ---
 
@@ -142,7 +148,7 @@ v1 is considered successful if:
 - user progress is persisted correctly
 - scenarios load quickly
 - reading interface works well on mobile browser
-- vocabulary explanations are accessible during reading
+- vocabulary explanations are accessible during reading and reduce the need for external lookup
 
 ---
 
