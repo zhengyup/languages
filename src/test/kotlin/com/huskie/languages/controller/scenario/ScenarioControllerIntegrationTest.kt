@@ -4,8 +4,10 @@ import com.huskie.languages.domain.scenario.DifficultyLevel
 import com.huskie.languages.domain.scenario.Scenario
 import com.huskie.languages.domain.scenario.ScenarioLine
 import com.huskie.languages.domain.scenario.ScenarioTopic
+import com.huskie.languages.domain.scenario.VocabularyItem
 import com.huskie.languages.repository.scenario.ScenarioLineRepository
 import com.huskie.languages.repository.scenario.ScenarioRepository
+import com.huskie.languages.repository.scenario.VocabularyItemRepository
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -34,8 +36,12 @@ class ScenarioControllerIntegrationTest {
     @Autowired
     private lateinit var scenarioLineRepository: ScenarioLineRepository
 
+    @Autowired
+    private lateinit var vocabularyItemRepository: VocabularyItemRepository
+
     @AfterEach
     fun tearDown() {
+        vocabularyItemRepository.deleteAll()
         scenarioLineRepository.deleteAll()
         scenarioRepository.deleteAll()
     }
@@ -90,7 +96,7 @@ class ScenarioControllerIntegrationTest {
             )
         )
 
-        scenarioLineRepository.saveAll(
+        val savedLines = scenarioLineRepository.saveAll(
             listOf(
                 ScenarioLine(
                     scenario = scenario,
@@ -112,6 +118,33 @@ class ScenarioControllerIntegrationTest {
                 )
             )
         )
+        val travelerLine = savedLines.single { it.lineOrder == 1 }
+        val localLine = savedLines.single { it.lineOrder == 2 }
+
+        vocabularyItemRepository.saveAll(
+            listOf(
+                VocabularyItem(
+                    scenarioLine = travelerLine,
+                    expression = "请问",
+                    pinyin = "qing wen",
+                    gloss = "excuse me",
+                    explanation = "A polite way to begin a question.",
+                    startCharIndex = 0,
+                    endCharIndex = 2,
+                    createdAt = Instant.now()
+                ),
+                VocabularyItem(
+                    scenarioLine = localLine,
+                    expression = "左转",
+                    pinyin = "zuo zhuan",
+                    gloss = "turn left",
+                    explanation = "Directional phrase used when guiding someone.",
+                    startCharIndex = 6,
+                    endCharIndex = 8,
+                    createdAt = Instant.now()
+                )
+            )
+        )
 
         mockMvc.perform(get("/scenarios/${scenario.id}"))
             .andExpect(status().isOk)
@@ -121,9 +154,24 @@ class ScenarioControllerIntegrationTest {
             .andExpect(jsonPath("$.lines[0].lineOrder").value(1))
             .andExpect(jsonPath("$.lines[0].speakerName").value("Traveler"))
             .andExpect(jsonPath("$.lines[0].hanziText").value("请问，地铁站在哪里？"))
+            .andExpect(jsonPath("$.lines[0].vocabularyItems.length()").value(1))
+            .andExpect(jsonPath("$.lines[0].vocabularyItems[0].expression").value("请问"))
+            .andExpect(jsonPath("$.lines[0].vocabularyItems[0].gloss").value("excuse me"))
+            .andExpect(jsonPath("$.lines[0].vocabularyItems[0].startCharIndex").value(0))
+            .andExpect(jsonPath("$.lines[0].vocabularyItems[0].endCharIndex").value(2))
             .andExpect(jsonPath("$.lines[1].lineOrder").value(2))
             .andExpect(jsonPath("$.lines[1].speakerName").value("Local"))
             .andExpect(jsonPath("$.lines[1].hanziText").value("一直走，然后左转。"))
+            .andExpect(jsonPath("$.lines[1].vocabularyItems.length()").value(1))
+            .andExpect(jsonPath("$.lines[1].vocabularyItems[0].expression").value("左转"))
+            .andExpect(jsonPath("$.lines[1].vocabularyItems[0].gloss").value("turn left"))
+            .andExpect(jsonPath("$.lines[1].vocabularyItems[0].startCharIndex").value(6))
+            .andExpect(jsonPath("$.lines[1].vocabularyItems[0].endCharIndex").value(8))
+
+        val storedVocabularyItems = vocabularyItemRepository.findAll()
+        kotlin.test.assertEquals(2, storedVocabularyItems.size)
+        kotlin.test.assertTrue(storedVocabularyItems.any { it.scenarioLine.id == travelerLine.id && it.expression == "请问" })
+        kotlin.test.assertTrue(storedVocabularyItems.any { it.scenarioLine.id == localLine.id && it.expression == "左转" })
     }
 
     @Test

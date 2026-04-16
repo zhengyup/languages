@@ -8,6 +8,7 @@ import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 import jakarta.persistence.JoinColumn
 import jakarta.persistence.ManyToOne
+import jakarta.persistence.OneToMany
 import jakarta.persistence.Table
 import java.time.Instant
 
@@ -31,5 +32,7 @@ class ScenarioLine(
     @Column(name = "english_translation")
     val englishTranslation: String? = null,
     @Column(name = "created_at", nullable = false, updatable = false)
-    val createdAt: Instant
+    val createdAt: Instant,
+    @OneToMany(mappedBy = "scenarioLine")
+    val vocabularyItems: List<VocabularyItem> = emptyList()
 )
