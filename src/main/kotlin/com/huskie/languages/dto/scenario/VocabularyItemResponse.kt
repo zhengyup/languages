@@ -8,7 +8,7 @@ data class VocabularyItemResponse(
     val pinyin: String,
     val gloss: String,
     val explanation: String?,
-    val startCharIndex: Int?,
-    val endCharIndex: Int?,
+    val startCharIndex: Int,
+    val endCharIndex: Int,
     val createdAt: Instant
 )

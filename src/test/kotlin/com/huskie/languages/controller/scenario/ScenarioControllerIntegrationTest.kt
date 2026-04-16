@@ -134,6 +134,46 @@ class ScenarioControllerIntegrationTest {
                     createdAt = Instant.now()
                 ),
                 VocabularyItem(
+                    scenarioLine = travelerLine,
+                    expression = "地铁站",
+                    pinyin = "di tie zhan",
+                    gloss = "subway station",
+                    explanation = "The destination being asked about.",
+                    startCharIndex = 3,
+                    endCharIndex = 6,
+                    createdAt = Instant.now()
+                ),
+                VocabularyItem(
+                    scenarioLine = travelerLine,
+                    expression = "在哪里",
+                    pinyin = "zai na li",
+                    gloss = "where is it",
+                    explanation = "Asks for location.",
+                    startCharIndex = 6,
+                    endCharIndex = 9,
+                    createdAt = Instant.now()
+                ),
+                VocabularyItem(
+                    scenarioLine = localLine,
+                    expression = "一直走",
+                    pinyin = "yi zhi zou",
+                    gloss = "go straight",
+                    explanation = "Tells someone to continue forward.",
+                    startCharIndex = 0,
+                    endCharIndex = 3,
+                    createdAt = Instant.now()
+                ),
+                VocabularyItem(
+                    scenarioLine = localLine,
+                    expression = "然后",
+                    pinyin = "ran hou",
+                    gloss = "then",
+                    explanation = "Connects the next step in the directions.",
+                    startCharIndex = 4,
+                    endCharIndex = 6,
+                    createdAt = Instant.now()
+                ),
+                VocabularyItem(
                     scenarioLine = localLine,
                     expression = "左转",
                     pinyin = "zuo zhuan",
@@ -154,24 +194,79 @@ class ScenarioControllerIntegrationTest {
             .andExpect(jsonPath("$.lines[0].lineOrder").value(1))
             .andExpect(jsonPath("$.lines[0].speakerName").value("Traveler"))
             .andExpect(jsonPath("$.lines[0].hanziText").value("请问，地铁站在哪里？"))
-            .andExpect(jsonPath("$.lines[0].vocabularyItems.length()").value(1))
+            .andExpect(jsonPath("$.lines[0].vocabularyItems.length()").value(3))
             .andExpect(jsonPath("$.lines[0].vocabularyItems[0].expression").value("请问"))
             .andExpect(jsonPath("$.lines[0].vocabularyItems[0].gloss").value("excuse me"))
             .andExpect(jsonPath("$.lines[0].vocabularyItems[0].startCharIndex").value(0))
             .andExpect(jsonPath("$.lines[0].vocabularyItems[0].endCharIndex").value(2))
+            .andExpect(jsonPath("$.lines[0].vocabularyItems[1].expression").value("地铁站"))
+            .andExpect(jsonPath("$.lines[0].vocabularyItems[1].startCharIndex").value(3))
+            .andExpect(jsonPath("$.lines[0].vocabularyItems[1].endCharIndex").value(6))
+            .andExpect(jsonPath("$.lines[0].vocabularyItems[2].expression").value("在哪里"))
+            .andExpect(jsonPath("$.lines[0].vocabularyItems[2].startCharIndex").value(6))
+            .andExpect(jsonPath("$.lines[0].vocabularyItems[2].endCharIndex").value(9))
             .andExpect(jsonPath("$.lines[1].lineOrder").value(2))
             .andExpect(jsonPath("$.lines[1].speakerName").value("Local"))
             .andExpect(jsonPath("$.lines[1].hanziText").value("一直走，然后左转。"))
-            .andExpect(jsonPath("$.lines[1].vocabularyItems.length()").value(1))
-            .andExpect(jsonPath("$.lines[1].vocabularyItems[0].expression").value("左转"))
-            .andExpect(jsonPath("$.lines[1].vocabularyItems[0].gloss").value("turn left"))
-            .andExpect(jsonPath("$.lines[1].vocabularyItems[0].startCharIndex").value(6))
-            .andExpect(jsonPath("$.lines[1].vocabularyItems[0].endCharIndex").value(8))
+            .andExpect(jsonPath("$.lines[1].vocabularyItems.length()").value(3))
+            .andExpect(jsonPath("$.lines[1].vocabularyItems[0].expression").value("一直走"))
+            .andExpect(jsonPath("$.lines[1].vocabularyItems[0].startCharIndex").value(0))
+            .andExpect(jsonPath("$.lines[1].vocabularyItems[0].endCharIndex").value(3))
+            .andExpect(jsonPath("$.lines[1].vocabularyItems[1].expression").value("然后"))
+            .andExpect(jsonPath("$.lines[1].vocabularyItems[1].startCharIndex").value(4))
+            .andExpect(jsonPath("$.lines[1].vocabularyItems[1].endCharIndex").value(6))
+            .andExpect(jsonPath("$.lines[1].vocabularyItems[2].expression").value("左转"))
+            .andExpect(jsonPath("$.lines[1].vocabularyItems[2].gloss").value("turn left"))
+            .andExpect(jsonPath("$.lines[1].vocabularyItems[2].startCharIndex").value(6))
+            .andExpect(jsonPath("$.lines[1].vocabularyItems[2].endCharIndex").value(8))
 
         val storedVocabularyItems = vocabularyItemRepository.findAll()
-        kotlin.test.assertEquals(2, storedVocabularyItems.size)
+        kotlin.test.assertEquals(6, storedVocabularyItems.size)
         kotlin.test.assertTrue(storedVocabularyItems.any { it.scenarioLine.id == travelerLine.id && it.expression == "请问" })
         kotlin.test.assertTrue(storedVocabularyItems.any { it.scenarioLine.id == localLine.id && it.expression == "左转" })
+    }
+
+    @Test
+    fun shouldReturnServerErrorWhenScenarioLineVocabularyCoverageIsIncomplete() {
+        val scenario = scenarioRepository.save(
+            Scenario(
+                title = "Restaurant Check-in",
+                description = "Practice checking in with the host.",
+                topic = ScenarioTopic.RESTAURANT,
+                difficultyLevel = DifficultyLevel.BEGINNER,
+                createdAt = Instant.now()
+            )
+        )
+
+        val line = scenarioLineRepository.save(
+            ScenarioLine(
+                scenario = scenario,
+                lineOrder = 1,
+                speakerName = "Host",
+                hanziText = "请问，几位？",
+                pinyinText = "Qing wen, ji wei?",
+                englishTranslation = "Hello, for how many people?",
+                createdAt = Instant.now()
+            )
+        )
+
+        vocabularyItemRepository.save(
+            VocabularyItem(
+                scenarioLine = line,
+                expression = "请问",
+                pinyin = "qing wen",
+                gloss = "may I ask",
+                explanation = "Polite opener before a question.",
+                startCharIndex = 0,
+                endCharIndex = 2,
+                createdAt = Instant.now()
+            )
+        )
+
+        mockMvc.perform(get("/scenarios/${scenario.id}"))
+            .andExpect(status().isInternalServerError)
+            .andExpect(jsonPath("$.message").value("Scenario line 1 does not have complete vocabulary coverage"))
+            .andExpect(jsonPath("$.timestamp").isNotEmpty)
     }
 
     @Test

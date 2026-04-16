@@ -6,7 +6,7 @@
 Mandarin Scenario Reader
 
 ### Summary
-A web application that helps intermediate to advanced learners improve Mandarin fluency through realistic dialogue scenarios. Users can read and listen to conversations, tap for vocabulary explanations, and track learning progress.
+A web application that helps intermediate to advanced learners improve Mandarin fluency through realistic dialogue scenarios. Users can read and listen to conversations, view complete line-level vocabulary segmentation with contextual phrase glosses, and track learning progress.
 
 ### Problem
 Existing language learning apps often focus on vocabulary memorization, grammar drills, or speaking practice, but provide limited structured exposure to realistic scenario-based dialogue.
@@ -37,7 +37,7 @@ The first version of the product should allow users to:
 - browse a library of Mandarin learning scenarios
 - read realistic dialogue or short passages
 - listen to audio narration of the dialogue
-- tap or view contextual vocabulary explanations for difficult expressions
+- view contextual vocabulary explanations for each meaningful expression in a dialogue line
 - track which scenarios they have completed
 
 The application should provide a smooth reading experience that works well on both desktop and mobile browsers.
@@ -74,7 +74,7 @@ The primary user journey for v1:
 3. User selects a scenario
 4. User reads the dialogue or passage
 5. User listens to audio narration
-6. User views contextual phrase glosses for unfamiliar expressions directly inside the reading experience
+6. User views contextual phrase glosses for each expression in the current line directly inside the reading experience
 7. User progress is updated if scenario is completed
 8. User returns later to continue learning
 
@@ -104,6 +104,10 @@ Vocabulary explanations are contextual phrase glosses tied to specific dialogue 
 Vocabulary items may represent multi-character expressions such as common phrases or verbs.
 
 Vocabulary meaning depends on how the expression is used in that specific line.
+
+Each meaningful phrase in a line should have a corresponding vocabulary item so the full line can be understood without external lookup.
+
+For example, `请问，地铁站在哪里？` should be segmented into contextual vocabulary items such as `请问`, `地铁站`, and `在哪里`.
 
 The goal is to help learners understand difficult expressions without leaving the app for external lookup.
 

@@ -29,9 +29,9 @@ class VocabularyItem(
     @Column
     val explanation: String? = null,
     @Column(name = "start_char_index")
-    val startCharIndex: Int? = null,
+    val startCharIndex: Int,
     @Column(name = "end_char_index")
-    val endCharIndex: Int? = null,
+    val endCharIndex: Int,
     @Column(name = "created_at", nullable = false, updatable = false)
     val createdAt: Instant
 )
