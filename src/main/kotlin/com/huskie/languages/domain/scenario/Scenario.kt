@@ -7,6 +7,7 @@ import jakarta.persistence.Enumerated
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
+import jakarta.persistence.OneToMany
 import jakarta.persistence.Table
 import java.time.Instant
 
@@ -27,5 +28,7 @@ class Scenario(
     @Column(name = "difficulty_level", nullable = false)
     val difficultyLevel: DifficultyLevel,
     @Column(name = "created_at", nullable = false, updatable = false)
-    val createdAt: Instant
+    val createdAt: Instant,
+    @OneToMany(mappedBy = "scenario")
+    val lines: List<ScenarioLine> = emptyList()
 )

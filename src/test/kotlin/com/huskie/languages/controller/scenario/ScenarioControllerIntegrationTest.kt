@@ -1,7 +1,10 @@
 package com.huskie.languages.controller.scenario
 
 import com.huskie.languages.domain.scenario.DifficultyLevel
+import com.huskie.languages.domain.scenario.Scenario
+import com.huskie.languages.domain.scenario.ScenarioLine
 import com.huskie.languages.domain.scenario.ScenarioTopic
+import com.huskie.languages.repository.scenario.ScenarioLineRepository
 import com.huskie.languages.repository.scenario.ScenarioRepository
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Test
@@ -15,6 +18,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
+import java.time.Instant
 
 
 @ActiveProfiles("test")
@@ -27,8 +31,12 @@ class ScenarioControllerIntegrationTest {
     @Autowired
     private lateinit var scenarioRepository: ScenarioRepository
 
+    @Autowired
+    private lateinit var scenarioLineRepository: ScenarioLineRepository
+
     @AfterEach
     fun tearDown() {
+        scenarioLineRepository.deleteAll()
         scenarioRepository.deleteAll()
     }
 
@@ -68,5 +76,61 @@ class ScenarioControllerIntegrationTest {
         kotlin.test.assertEquals("Practice a common dining conversation in Mandarin.", storedScenario.description)
         kotlin.test.assertEquals(ScenarioTopic.RESTAURANT, storedScenario.topic)
         kotlin.test.assertEquals(DifficultyLevel.BEGINNER, storedScenario.difficultyLevel)
+    }
+
+    @Test
+    fun shouldRetrieveScenarioDetailWithOrderedLines() {
+        val scenario = scenarioRepository.save(
+            Scenario(
+                title = "Asking for Directions",
+                description = "Practice asking for directions in Mandarin.",
+                topic = ScenarioTopic.DIRECTIONS,
+                difficultyLevel = DifficultyLevel.BEGINNER,
+                createdAt = Instant.now()
+            )
+        )
+
+        scenarioLineRepository.saveAll(
+            listOf(
+                ScenarioLine(
+                    scenario = scenario,
+                    lineOrder = 2,
+                    speakerName = "Local",
+                    hanziText = "一直走，然后左转。",
+                    pinyinText = "Yi zhi zou, ran hou zuo zhuan.",
+                    englishTranslation = "Go straight, then turn left.",
+                    createdAt = Instant.now()
+                ),
+                ScenarioLine(
+                    scenario = scenario,
+                    lineOrder = 1,
+                    speakerName = "Traveler",
+                    hanziText = "请问，地铁站在哪里？",
+                    pinyinText = "Qing wen, ditiezhan zai nali?",
+                    englishTranslation = "Excuse me, where is the subway station?",
+                    createdAt = Instant.now()
+                )
+            )
+        )
+
+        mockMvc.perform(get("/scenarios/${scenario.id}"))
+            .andExpect(status().isOk)
+            .andExpect(jsonPath("$.id").value(scenario.id))
+            .andExpect(jsonPath("$.title").value("Asking for Directions"))
+            .andExpect(jsonPath("$.lines.length()").value(2))
+            .andExpect(jsonPath("$.lines[0].lineOrder").value(1))
+            .andExpect(jsonPath("$.lines[0].speakerName").value("Traveler"))
+            .andExpect(jsonPath("$.lines[0].hanziText").value("请问，地铁站在哪里？"))
+            .andExpect(jsonPath("$.lines[1].lineOrder").value(2))
+            .andExpect(jsonPath("$.lines[1].speakerName").value("Local"))
+            .andExpect(jsonPath("$.lines[1].hanziText").value("一直走，然后左转。"))
+    }
+
+    @Test
+    fun shouldReturnNotFoundWhenScenarioDoesNotExist() {
+        mockMvc.perform(get("/scenarios/999999"))
+            .andExpect(status().isNotFound)
+            .andExpect(jsonPath("$.message").value("Scenario with id 999999 was not found"))
+            .andExpect(jsonPath("$.timestamp").isNotEmpty)
     }
 }
