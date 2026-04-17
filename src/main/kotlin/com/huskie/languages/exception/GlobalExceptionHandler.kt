@@ -4,6 +4,7 @@ import com.huskie.languages.dto.ErrorResponse
 import com.huskie.languages.exception.scenario.IncompleteVocabularyCoverageException
 import com.huskie.languages.exception.scenario.ScenarioNotFoundException
 import com.huskie.languages.exception.user.DuplicateUserEmailException
+import com.huskie.languages.exception.user.DuplicateUserScenarioCompletionException
 import com.huskie.languages.exception.user.UserEmailNotFoundException
 import com.huskie.languages.exception.user.UserNotFoundException
 import org.springframework.http.HttpStatus
@@ -40,6 +41,18 @@ class GlobalExceptionHandler {
             .body(
                 ErrorResponse(
                     message = exception.message ?: "User email already exists",
+                    timestamp = Instant.now()
+                )
+            )
+
+    @ExceptionHandler(DuplicateUserScenarioCompletionException::class)
+    fun handleDuplicateUserScenarioCompletion(
+        exception: DuplicateUserScenarioCompletionException
+    ): ResponseEntity<ErrorResponse> =
+        ResponseEntity.status(HttpStatus.CONFLICT)
+            .body(
+                ErrorResponse(
+                    message = exception.message ?: "Scenario completion already exists",
                     timestamp = Instant.now()
                 )
             )

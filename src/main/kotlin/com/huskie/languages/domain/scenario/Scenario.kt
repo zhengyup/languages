@@ -1,5 +1,6 @@
 package com.huskie.languages.domain.scenario
 
+import com.huskie.languages.domain.user.UserScenarioCompletion
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.EnumType
@@ -30,5 +31,7 @@ class Scenario(
     @Column(name = "created_at", nullable = false, updatable = false)
     val createdAt: Instant,
     @OneToMany(mappedBy = "scenario")
-    val lines: List<ScenarioLine> = emptyList()
+    val lines: List<ScenarioLine> = emptyList(),
+    @OneToMany(mappedBy = "scenario")
+    val userScenarioCompletions: List<UserScenarioCompletion> = emptyList()
 )
