@@ -17,17 +17,17 @@ class UserService(
     fun createUser(request: CreateUserRequest): UserResponse {
         val normalizedEmail = request.email.trim()
         checkUserExistsByEmail(normalizedEmail)
-        generateUser(request)
+        val user = generateUser(request)
         return userRepository.save(user).toResponse()
     }
 
     fun checkUserExistsByEmail(email : String) {
-        if (userRepository.existsByEmail(normalizedEmail)) {
-            throw DuplicateUserEmailException(normalizedEmail)
+        if (userRepository.existsByEmail(email)) {
+            throw DuplicateUserEmailException(email)
         }
     }
 
-    fun generateUser(request : CreateUserRequest) {
+    fun generateUser(request : CreateUserRequest) : User {
         val normalizedEmail = request.email.trim()
         val now = Instant.now()
         val user = User(
@@ -36,6 +36,7 @@ class UserService(
                 createdAt = now,
                 updatedAt = now
         )
+        return user
     }
 
     fun getUserById(id: Long): UserResponse =
