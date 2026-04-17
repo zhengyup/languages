@@ -2,4 +2,4 @@
 -[x] TASK 2 — ScenarioLine entity
 -[x] TASK 3 — VocabularyItem entity
 -[x] TASK 4 - User entity
--[ ] TASK 5 - UserScenarioCompletion entity
+-[x] TASK 5 - UserScenarioCompletion entity
