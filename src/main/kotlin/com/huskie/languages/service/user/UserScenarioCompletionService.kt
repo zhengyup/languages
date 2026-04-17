@@ -22,10 +22,7 @@ class UserScenarioCompletionService(
             .orElseThrow { UserNotFoundException(userId) }
         val scenario = scenarioRepository.findById(scenarioId)
             .orElseThrow { ScenarioNotFoundException(scenarioId) }
-
-        if (userScenarioCompletionRepository.existsByUserIdAndScenarioId(userId, scenarioId)) {
-            throw DuplicateUserScenarioCompletionException(userId, scenarioId)
-        }
+        checkUserScenarioCompletionAlreadyExists(userId, scenarioId)
 
         val completion = UserScenarioCompletion(
             user = user,
@@ -34,6 +31,12 @@ class UserScenarioCompletionService(
         )
 
         return userScenarioCompletionRepository.save(completion).toResponse()
+    }
+
+    fun checkUserScenarioCompletionAlreadyExists(userId : Long, scenarioId: Long) {
+        if (userScenarioCompletionRepository.existsByUserIdAndScenarioId(userId, scenarioId)) {
+            throw DuplicateUserScenarioCompletionException(userId, scenarioId)
+        }
     }
 
     fun isScenarioCompleted(userId: Long, scenarioId: Long): Boolean =
