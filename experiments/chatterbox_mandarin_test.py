@@ -1,67 +1,77 @@
-"""
-Small experimental script for Mandarin TTS with Resemble AI's open-source
-Chatterbox Multilingual model.
+"""Minimal Chatterbox multilingual Mandarin TTS experiment.
 
-Install dependencies:
-    pip install chatterbox-tts torchaudio
+Install: pip install chatterbox-tts torchaudio
+Run: python experiments/chatterbox_mandarin_test.py
+Change text: edit TEST_CASES below and keep language_id="zh".
+Change length: adjust MAX_NEW_TOKENS. Short dialogue lines usually work well in
+the 80-150 range; start around 100-120.
+Change speed: adjust PLAYBACK_SPEED. Use 0.9 to make audio 10% slower.
 
-How to run:
-    python experiments/chatterbox_mandarin_test.py
-
-Recommended Python version:
-    Python 3.11 is the safest choice for Chatterbox right now. Newer Python
-    versions may work, but they are not the primary tested target in the
-    official project.
-
-Where the model is downloaded from:
-    ChatterboxMultilingualTTS.from_pretrained(...) downloads the pretrained
-    Resemble AI multilingual Chatterbox model from the official hosted weights
-    used by the `chatterbox-tts` package and caches them locally.
-
-How to change the text:
-    Edit the `TEXT` constant below and keep `language_id="zh"` for Mandarin.
+What changed and why:
+- Chatterbox's built-in multilingual generate() hardcodes max_new_tokens=1000.
+- custom_generate() follows the same path but lets us control max_new_tokens.
+- trim_audio() removes the common trailing tail after short generations.
+- slow_audio() uses simple waveform stretching and returns the original audio
+  unchanged when PLAYBACK_SPEED is 1.0.
 """
 
 from __future__ import annotations
 
-import sys
-
 import perth
 import torch
 import torch.nn.functional as F
-import torchaudio as ta
-from chatterbox.mtl_tts import (
-    SUPPORTED_LANGUAGES,
-    ChatterboxMultilingualTTS,
-    T3Cond,
-    drop_invalid_tokens,
-    punc_norm,
-)
+import torchaudio
+from chatterbox.mtl_tts import SUPPORTED_LANGUAGES, ChatterboxMultilingualTTS, T3Cond, drop_invalid_tokens, punc_norm
 
-
-TEXT = "你好，欢迎来到中文情景阅读器。"
-OUTPUT_PATH = "mandarin_test.wav"
 DEVICE = "cpu"
-EXAGGERATION = 0.35
+DEFAULT_MAX_NEW_TOKENS = 140
 CFG_WEIGHT = 0.3
-MAX_NEW_TOKENS = 180
+EXAGGERATION = 0.35
+TRIM_THRESHOLD = 0.05
+TAIL_PADDING_MS = 10
 MAX_SECONDS = 5.0
-TRIM_THRESHOLD = 0.01
-TAIL_PADDING_MS = 250
+PLAYBACK_SPEED = 1
+TEST_CASES = [
+    ("mandarin_test_trimmed.wav", "你好，欢迎来到中文情景阅读器。"),
+    ("mandarin_test_trimmed_short.wav", "请问，地铁站在哪里？"),
+    ("mandarin_test_trimmed_long.wav", "如果你今天晚上有空，我们下班以后一起去吃饭，好吗？"),
+]
 
 
-def patch_perth_watermarker_if_needed() -> None:
+def recommend_max_new_tokens(text: str) -> int:
     """
-    Work around environments where perth.PerthImplicitWatermarker is exposed
-    as None. In that case, use the built-in dummy watermarker so the TTS test
-    can still run.
+    Short Mandarin lines should not get the same token budget as longer lines.
+    A smaller budget reduces the chance of trailing breaths, silence, and
+    repeated fragments before trimming even runs.
     """
-    if getattr(perth, "PerthImplicitWatermarker", None) is None:
-        print(
-            "PerthImplicitWatermarker is unavailable in this environment. "
-            "Falling back to DummyWatermarker."
-        )
-        perth.PerthImplicitWatermarker = perth.DummyWatermarker
+    content_chars = sum(1 for ch in text if ch.strip() and ch not in "，。！？、；：,.!?;:-")
+    if content_chars <= 10:
+        return 60
+    if content_chars <= 16:
+        return 80
+    if content_chars <= 24:
+        return 110
+    return DEFAULT_MAX_NEW_TOKENS
+
+
+def custom_generate(model: ChatterboxMultilingualTTS, text: str, language_id: str = "zh", max_new_tokens: int | None = None, cfg_weight: float = CFG_WEIGHT, exaggeration: float = EXAGGERATION) -> torch.Tensor:
+    if language_id.lower() not in SUPPORTED_LANGUAGES:
+        raise ValueError(f"Unsupported language_id: {language_id}")
+    if max_new_tokens is None:
+        max_new_tokens = recommend_max_new_tokens(text)
+    if float(exaggeration) != float(model.conds.t3.emotion_adv[0, 0, 0].item()):
+        conds: T3Cond = model.conds.t3
+        model.conds.t3 = T3Cond(speaker_emb=conds.speaker_emb, clap_emb=conds.clap_emb, cond_prompt_speech_tokens=conds.cond_prompt_speech_tokens, cond_prompt_speech_emb=conds.cond_prompt_speech_emb, emotion_adv=exaggeration * torch.ones(1, 1, 1)).to(device=model.device)
+    tokens = model.tokenizer.text_to_tokens(punc_norm(text), language_id=language_id.lower()).to(model.device)
+    tokens = torch.cat([tokens, tokens], dim=0)
+    tokens = F.pad(tokens, (1, 0), value=model.t3.hp.start_text_token)
+    tokens = F.pad(tokens, (0, 1), value=model.t3.hp.stop_text_token)
+    with torch.inference_mode():
+        speech_tokens = model.t3.inference(t3_cond=model.conds.t3, text_tokens=tokens, max_new_tokens=max_new_tokens, temperature=0.8, cfg_weight=cfg_weight, repetition_penalty=2.0, min_p=0.05, top_p=1.0)[0]
+        speech_tokens = drop_invalid_tokens(speech_tokens).to(model.device)
+        wav, _ = model.s3gen.inference(speech_tokens=speech_tokens, ref_dict=model.conds.gen)
+        wav = wav.squeeze(0).detach().cpu().numpy()
+        return torch.from_numpy(model.watermarker.apply_watermark(wav, sample_rate=model.sr)).unsqueeze(0)
 
 
 def trim_generated_audio(
@@ -72,13 +82,9 @@ def trim_generated_audio(
     tail_padding_ms: int = TAIL_PADDING_MS,
 ) -> torch.Tensor:
     """
-    Trim the common long trailing tail that sometimes appears with short
-    multilingual Chatterbox generations.
-
-    This keeps the script simple:
-    - remove mostly-silent audio after the last strong sample
-    - keep a small natural tail so the ending is not cut abruptly
-    - cap the final duration as a safeguard for obviously overlong output
+    Reuse the earlier trim behavior that worked well for short Mandarin TTS:
+    trim after the last strong sample, keep a small natural tail, and cap the
+    total duration as a final safeguard.
     """
     mono_wav = wav.squeeze(0)
     significant = torch.nonzero(torch.abs(mono_wav) > threshold, as_tuple=False)
@@ -95,111 +101,43 @@ def trim_generated_audio(
     return mono_wav.unsqueeze(0)
 
 
-def generate_short_utterance(
-    model: ChatterboxMultilingualTTS,
-    text: str,
-    language_id: str,
-    max_new_tokens: int = MAX_NEW_TOKENS,
-    exaggeration: float = EXAGGERATION,
-    cfg_weight: float = CFG_WEIGHT,
-    temperature: float = 0.8,
-    repetition_penalty: float = 2.0,
-    min_p: float = 0.05,
-    top_p: float = 1.0,
-) -> torch.Tensor:
+def slow_audio(wav: torch.Tensor, sample_rate: int, speed: float = PLAYBACK_SPEED) -> torch.Tensor:
     """
-    Chatterbox's built-in multilingual generate() currently uses a hardcoded
-    max_new_tokens=1000. That is generous for long passages, but it often
-    produces breathing, silence, or a short repeated fragment for very short
-    utterances like this Mandarin test sentence.
-
-    This helper follows the same official generation path, but caps the token
-    budget to keep short-form synthesis tighter and more natural.
+    Slow down playback with simple waveform stretching.
+    Use PLAYBACK_SPEED < 1.0 for slower audio, e.g. 0.9 for 10% slower.
+    When PLAYBACK_SPEED is 1.0, return the input unchanged.
     """
-    normalized_language_id = language_id.lower()
-    if normalized_language_id not in SUPPORTED_LANGUAGES:
-        supported_languages = ", ".join(sorted(SUPPORTED_LANGUAGES))
-        raise ValueError(
-            f"Unsupported language_id '{language_id}'. "
-            f"Supported languages: {supported_languages}"
-        )
+    if abs(speed - 1.0) < 1e-6:
+        return wav
 
-    if model.conds is None:
-        raise ValueError(
-            "Model conditionals were not initialized. "
-            "Load the model with from_pretrained() before generating."
-        )
-
-    if float(exaggeration) != float(model.conds.t3.emotion_adv[0, 0, 0].item()):
-        current_conditionals: T3Cond = model.conds.t3
-        model.conds.t3 = T3Cond(
-            speaker_emb=current_conditionals.speaker_emb,
-            cond_prompt_speech_tokens=current_conditionals.cond_prompt_speech_tokens,
-            emotion_adv=exaggeration * torch.ones(1, 1, 1),
-        ).to(device=model.device)
-
-    normalized_text = punc_norm(text)
-    text_tokens = model.tokenizer.text_to_tokens(
-        normalized_text,
-        language_id=normalized_language_id,
-    ).to(model.device)
-    text_tokens = torch.cat([text_tokens, text_tokens], dim=0)
-
-    start_token = model.t3.hp.start_text_token
-    stop_token = model.t3.hp.stop_text_token
-    text_tokens = F.pad(text_tokens, (1, 0), value=start_token)
-    text_tokens = F.pad(text_tokens, (0, 1), value=stop_token)
-
-    with torch.inference_mode():
-        speech_tokens = model.t3.inference(
-            t3_cond=model.conds.t3,
-            text_tokens=text_tokens,
-            max_new_tokens=max_new_tokens,
-            temperature=temperature,
-            cfg_weight=cfg_weight,
-            repetition_penalty=repetition_penalty,
-            min_p=min_p,
-            top_p=top_p,
-        )
-        speech_tokens = speech_tokens[0]
-        speech_tokens = drop_invalid_tokens(speech_tokens).to(model.device)
-
-        wav, _ = model.s3gen.inference(
-            speech_tokens=speech_tokens,
-            ref_dict=model.conds.gen,
-        )
-        wav = wav.squeeze(0).detach().cpu().numpy()
-        watermarked_wav = model.watermarker.apply_watermark(wav, sample_rate=model.sr)
-
-    return torch.from_numpy(watermarked_wav).unsqueeze(0)
+    channel_first_wav = wav if wav.dim() == 2 else wav.unsqueeze(0)
+    target_length = max(1, int(channel_first_wav.shape[-1] / speed))
+    slowed_wav = F.interpolate(
+        channel_first_wav.unsqueeze(0),
+        size=target_length,
+        mode="linear",
+        align_corners=False,
+    ).squeeze(0)
+    return slowed_wav
 
 
 def main() -> None:
-    """Generate one short Mandarin utterance and save it as a WAV file."""
-    patch_perth_watermarker_if_needed()
-
-    print(f"Loading Chatterbox Multilingual on {DEVICE}...")
+    if getattr(perth, "PerthImplicitWatermarker", None) is None:
+        perth.PerthImplicitWatermarker = perth.DummyWatermarker
+    print(f"Loading model on {DEVICE}...")
     model = ChatterboxMultilingualTTS.from_pretrained(device=DEVICE)
-
-    print(f"Generating Mandarin audio for: {TEXT}")
-    wav = generate_short_utterance(
-        model,
-        TEXT,
-        language_id="zh",
-    )
-    wav = trim_generated_audio(wav, model.sr)
-
-    print(f"Saving audio to {OUTPUT_PATH}")
-    ta.save(OUTPUT_PATH, wav.cpu(), model.sr)
-    print("Done.")
+    for output_path, text in TEST_CASES:
+        max_new_tokens = recommend_max_new_tokens(text)
+        print(f"Generating: {text}")
+        raw_wav = custom_generate(model, text, max_new_tokens=max_new_tokens, cfg_weight=CFG_WEIGHT, exaggeration=EXAGGERATION)
+        trimmed_wav = trim_generated_audio(raw_wav, model.sr)
+        slowed_wav = slow_audio(trimmed_wav, model.sr)
+        torchaudio.save(output_path, slowed_wav.cpu(), model.sr)
+        raw_seconds = raw_wav.shape[1] / model.sr
+        trimmed_seconds = trimmed_wav.shape[1] / model.sr
+        slowed_seconds = slowed_wav.shape[1] / model.sr
+        print(f"Saved {output_path} | raw={raw_seconds:.2f}s trimmed={trimmed_seconds:.2f}s slowed={slowed_seconds:.2f}s | speed={PLAYBACK_SPEED}, max_new_tokens={max_new_tokens}, cfg_weight={CFG_WEIGHT}, exaggeration={EXAGGERATION}")
 
 
 if __name__ == "__main__":
-    try:
-        main()
-    except ImportError as exc:
-        print(
-            "Missing dependency. Install with: pip install chatterbox-tts torchaudio",
-            file=sys.stderr,
-        )
-        raise exc
+    main()
