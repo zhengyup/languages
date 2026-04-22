@@ -46,4 +46,50 @@ class ScenarioLine(
     val createdAt: Instant,
     @OneToMany(mappedBy = "scenarioLine")
     val vocabularyItems: List<VocabularyItem> = emptyList()
-)
+) {
+    fun invalidateAudio(): ScenarioLine =
+        ScenarioLine(
+            id = id,
+            scenario = scenario,
+            lineOrder = lineOrder,
+            speakerName = speakerName,
+            hanziText = hanziText,
+            pinyinText = pinyinText,
+            englishTranslation = englishTranslation,
+            audioUrl = null,
+            audioStatus = AudioStatus.PENDING_REGENERATION,
+            audioGeneratedAt = null,
+            audioSourceTextHash = null,
+            createdAt = createdAt,
+            vocabularyItems = vocabularyItems
+        )
+
+    fun withUpdatedContent(
+        speakerName: String?,
+        hanziText: String,
+        pinyinText: String?,
+        englishTranslation: String?
+    ): ScenarioLine {
+        val updatedLine = ScenarioLine(
+            id = id,
+            scenario = scenario,
+            lineOrder = lineOrder,
+            speakerName = speakerName,
+            hanziText = hanziText,
+            pinyinText = pinyinText,
+            englishTranslation = englishTranslation,
+            audioUrl = audioUrl,
+            audioStatus = audioStatus,
+            audioGeneratedAt = audioGeneratedAt,
+            audioSourceTextHash = audioSourceTextHash,
+            createdAt = createdAt,
+            vocabularyItems = vocabularyItems
+        )
+
+        return if (this.hanziText != hanziText) {
+            updatedLine.invalidateAudio()
+        } else {
+            updatedLine
+        }
+    }
+}

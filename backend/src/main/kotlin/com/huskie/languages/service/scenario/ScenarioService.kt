@@ -7,13 +7,16 @@ import com.huskie.languages.dto.scenario.CreateScenarioRequest
 import com.huskie.languages.dto.scenario.ScenarioDetailResponse
 import com.huskie.languages.dto.scenario.ScenarioLineResponse
 import com.huskie.languages.dto.scenario.ScenarioResponse
+import com.huskie.languages.dto.scenario.UpdateScenarioLineRequest
 import com.huskie.languages.dto.scenario.VocabularyItemResponse
+import com.huskie.languages.exception.scenario.ScenarioLineNotFoundException
 import com.huskie.languages.exception.scenario.ScenarioNotFoundException
 import com.huskie.languages.repository.scenario.ScenarioLineRepository
 import com.huskie.languages.repository.scenario.ScenarioRepository
 import com.huskie.languages.repository.scenario.VocabularyItemRepository
 import org.springframework.data.domain.Sort
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 import java.time.Instant
 
 @Service
@@ -49,6 +52,43 @@ class ScenarioService(
         return scenario.toDetailResponse(lines, vocabularyItemsByLineId)
     }
 
+    @Transactional
+    fun updateScenarioLine(
+        scenarioId: Long,
+        lineId: Long,
+        request: UpdateScenarioLineRequest
+    ): ScenarioLineResponse {
+        val scenarioLine = scenarioLineRepository.findByIdAndScenarioId(lineId, scenarioId)
+            ?: throw ScenarioLineNotFoundException(scenarioId, lineId)
+
+        val updatedLine = scenarioLine.withUpdatedContent(
+            speakerName = request.speakerName?.trim(),
+            hanziText = request.hanziText.trim(),
+            pinyinText = request.pinyinText?.trim(),
+            englishTranslation = request.englishTranslation?.trim()
+        )
+
+        val replacementVocabularyItems = request.vocabularyItems.map {
+            VocabularyItem(
+                scenarioLine = updatedLine,
+                expression = it.expression.trim(),
+                pinyin = it.pinyin.trim(),
+                gloss = it.gloss.trim(),
+                explanation = it.explanation?.trim(),
+                startCharIndex = it.startCharIndex,
+                endCharIndex = it.endCharIndex,
+                createdAt = Instant.now()
+            )
+        }
+
+        scenarioLineVocabularyCoverageValidator.validate(updatedLine, replacementVocabularyItems)
+
+        val savedLine = scenarioLineRepository.save(updatedLine)
+        replaceVocabularyItemsForLine(savedLine, replacementVocabularyItems)
+
+        return savedLine.toResponse(replacementVocabularyItems)
+    }
+
     private fun getVocabularyItemsByLineId(lines: List<ScenarioLine>): Map<Long, List<VocabularyItem>> {
         val lineIds = lines.mapNotNull { it.id }
 
@@ -67,6 +107,27 @@ class ScenarioService(
                 vocabularyItems = vocabularyItemsByLineId[checkNotNull(line.id)].orEmpty()
             )
         }
+    }
+
+    private fun replaceVocabularyItemsForLine(
+        scenarioLine: ScenarioLine,
+        vocabularyItems: List<VocabularyItem>
+    ) {
+        vocabularyItemRepository.deleteAllByScenarioLineId(checkNotNull(scenarioLine.id))
+        vocabularyItemRepository.saveAll(
+            vocabularyItems.map {
+                VocabularyItem(
+                    scenarioLine = scenarioLine,
+                    expression = it.expression,
+                    pinyin = it.pinyin,
+                    gloss = it.gloss,
+                    explanation = it.explanation,
+                    startCharIndex = it.startCharIndex,
+                    endCharIndex = it.endCharIndex,
+                    createdAt = it.createdAt
+                )
+            }
+        )
     }
 
     private fun Scenario.toResponse(): ScenarioResponse =

@@ -5,4 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository
 
 interface ScenarioLineRepository : JpaRepository<ScenarioLine, Long> {
     fun findAllByScenarioIdOrderByLineOrderAsc(scenarioId: Long): List<ScenarioLine>
+    fun findByIdAndScenarioId(id: Long, scenarioId: Long): ScenarioLine?
 }
