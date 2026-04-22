@@ -1,5 +1,6 @@
 HELP.md
-backend/.gradle
+.gradle/
+generated/
 build/
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
@@ -18,7 +19,7 @@ bin/
 !**/src/test/**/bin/
 
 ### IntelliJ IDEA ###
-backend/.idea
+.idea/
 *.iws
 *.iml
 *.ipr
@@ -37,4 +38,4 @@ out/
 .vscode/
 
 ### Kotlin ###
-backend/.kotlin
+.kotlin/
