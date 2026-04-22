@@ -5,4 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository
 
 interface VocabularyItemRepository : JpaRepository<VocabularyItem, Long> {
     fun findAllByScenarioLineIdInOrderByScenarioLineIdAscStartCharIndexAscIdAsc(scenarioLineIds: Collection<Long>): List<VocabularyItem>
+    fun deleteAllByScenarioLineId(scenarioLineId: Long)
 }

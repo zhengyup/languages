@@ -18,9 +18,11 @@ import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 import java.time.Instant
+import com.huskie.languages.domain.scenario.AudioStatus
 
 
 @ActiveProfiles("test")
@@ -283,5 +285,128 @@ class ScenarioControllerIntegrationTest {
             .andExpect(status().isNotFound)
             .andExpect(jsonPath("$.message").value("Scenario with id 999999 was not found"))
             .andExpect(jsonPath("$.timestamp").isNotEmpty)
+    }
+
+    @Test
+    fun shouldInvalidateAudioMetadataWhenScenarioLineHanziTextChanges() {
+        val scenario = scenarioRepository.save(
+            Scenario(
+                title = "Audio Update Test",
+                description = "Practice updating a line.",
+                topic = ScenarioTopic.RESTAURANT,
+                difficultyLevel = DifficultyLevel.INTERMEDIATE,
+                createdAt = Instant.now()
+            )
+        )
+
+        val line = scenarioLineRepository.save(
+            ScenarioLine(
+                scenario = scenario,
+                lineOrder = 1,
+                speakerName = "服务员",
+                hanziText = "欢迎光临，请问几位？",
+                pinyinText = "huān yíng guāng lín, qǐng wèn jǐ wèi?",
+                englishTranslation = "Welcome, how many people?",
+                audioUrl = "https://cdn.example.com/audio/line-1.wav",
+                audioStatus = AudioStatus.GENERATED,
+                audioGeneratedAt = Instant.now(),
+                audioSourceTextHash = "original-hash",
+                createdAt = Instant.now()
+            )
+        )
+
+        vocabularyItemRepository.saveAll(
+            listOf(
+                VocabularyItem(
+                    scenarioLine = line,
+                    expression = "欢迎光临",
+                    pinyin = "huān yíng guāng lín",
+                    gloss = "welcome",
+                    explanation = "A greeting for customers entering a restaurant.",
+                    startCharIndex = 0,
+                    endCharIndex = 4,
+                    createdAt = Instant.now()
+                ),
+                VocabularyItem(
+                    scenarioLine = line,
+                    expression = "请问",
+                    pinyin = "qǐng wèn",
+                    gloss = "may I ask",
+                    explanation = "A polite phrase before asking a question.",
+                    startCharIndex = 5,
+                    endCharIndex = 7,
+                    createdAt = Instant.now()
+                ),
+                VocabularyItem(
+                    scenarioLine = line,
+                    expression = "几位",
+                    pinyin = "jǐ wèi",
+                    gloss = "how many guests",
+                    explanation = "Asks for the number of diners.",
+                    startCharIndex = 7,
+                    endCharIndex = 9,
+                    createdAt = Instant.now()
+                )
+            )
+        )
+
+        val requestBody = """
+            {
+              "speakerName": "服务员",
+              "hanziText": "欢迎光临，请问有几位？",
+              "pinyinText": "huān yíng guāng lín, qǐng wèn yǒu jǐ wèi?",
+              "englishTranslation": "Welcome, may I ask how many guests there are?",
+              "vocabularyItems": [
+                {
+                  "expression": "欢迎光临",
+                  "pinyin": "huān yíng guāng lín",
+                  "gloss": "welcome",
+                  "explanation": "A greeting for customers entering a restaurant.",
+                  "startCharIndex": 0,
+                  "endCharIndex": 4
+                },
+                {
+                  "expression": "请问",
+                  "pinyin": "qǐng wèn",
+                  "gloss": "may I ask",
+                  "explanation": "A polite phrase before asking a question.",
+                  "startCharIndex": 5,
+                  "endCharIndex": 7
+                },
+                {
+                  "expression": "有几位",
+                  "pinyin": "yǒu jǐ wèi",
+                  "gloss": "how many people there are",
+                  "explanation": "Asks for the number of diners in a slightly fuller phrasing.",
+                  "startCharIndex": 7,
+                  "endCharIndex": 10
+                }
+              ]
+            }
+        """.trimIndent()
+
+        mockMvc.perform(
+            put("/scenarios/${scenario.id}/lines/${line.id}")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(requestBody)
+        )
+            .andExpect(status().isOk)
+            .andExpect(jsonPath("$.id").value(line.id))
+            .andExpect(jsonPath("$.hanziText").value("欢迎光临，请问有几位？"))
+            .andExpect(jsonPath("$.vocabularyItems.length()").value(3))
+            .andExpect(jsonPath("$.vocabularyItems[2].expression").value("有几位"))
+
+        val updatedLine = scenarioLineRepository.findById(line.id!!).orElseThrow()
+        kotlin.test.assertEquals("欢迎光临，请问有几位？", updatedLine.hanziText)
+        kotlin.test.assertEquals(AudioStatus.PENDING_REGENERATION, updatedLine.audioStatus)
+        kotlin.test.assertEquals(null, updatedLine.audioUrl)
+        kotlin.test.assertEquals(null, updatedLine.audioGeneratedAt)
+        kotlin.test.assertEquals(null, updatedLine.audioSourceTextHash)
+
+        val updatedVocabularyItems = vocabularyItemRepository
+            .findAllByScenarioLineIdInOrderByScenarioLineIdAscStartCharIndexAscIdAsc(listOf(line.id!!))
+        kotlin.test.assertEquals(3, updatedVocabularyItems.size)
+        kotlin.test.assertTrue(updatedVocabularyItems.any { it.expression == "有几位" })
+        kotlin.test.assertFalse(updatedVocabularyItems.any { it.expression == "几位" })
     }
 }

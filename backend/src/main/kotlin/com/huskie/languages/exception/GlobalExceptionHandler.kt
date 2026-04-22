@@ -2,6 +2,7 @@ package com.huskie.languages.exception
 
 import com.huskie.languages.dto.ErrorResponse
 import com.huskie.languages.exception.scenario.IncompleteVocabularyCoverageException
+import com.huskie.languages.exception.scenario.ScenarioLineNotFoundException
 import com.huskie.languages.exception.scenario.ScenarioNotFoundException
 import com.huskie.languages.exception.user.DuplicateUserEmailException
 import com.huskie.languages.exception.user.DuplicateUserScenarioCompletionException
@@ -63,6 +64,16 @@ class GlobalExceptionHandler {
             .body(
                 ErrorResponse(
                     message = exception.message ?: "Scenario was not found",
+                    timestamp = Instant.now()
+                )
+            )
+
+    @ExceptionHandler(ScenarioLineNotFoundException::class)
+    fun handleScenarioLineNotFound(exception: ScenarioLineNotFoundException): ResponseEntity<ErrorResponse> =
+        ResponseEntity.status(HttpStatus.NOT_FOUND)
+            .body(
+                ErrorResponse(
+                    message = exception.message ?: "Scenario line was not found",
                     timestamp = Instant.now()
                 )
             )
