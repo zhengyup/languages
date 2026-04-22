@@ -2,6 +2,8 @@ package com.huskie.languages.domain.scenario
 
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
+import jakarta.persistence.EnumType
+import jakarta.persistence.Enumerated
 import jakarta.persistence.FetchType
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
@@ -31,6 +33,15 @@ class ScenarioLine(
     val pinyinText: String? = null,
     @Column(name = "english_translation")
     val englishTranslation: String? = null,
+    @Column(name = "audio_url")
+    val audioUrl: String? = null,
+    @Enumerated(EnumType.STRING)
+    @Column(name = "audio_status", nullable = false)
+    val audioStatus: AudioStatus = AudioStatus.NOT_GENERATED,
+    @Column(name = "audio_generated_at")
+    val audioGeneratedAt: Instant? = null,
+    @Column(name = "audio_source_text_hash")
+    val audioSourceTextHash: String? = null,
     @Column(name = "created_at", nullable = false, updatable = false)
     val createdAt: Instant,
     @OneToMany(mappedBy = "scenarioLine")
