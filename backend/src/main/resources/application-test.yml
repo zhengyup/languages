@@ -4,5 +4,9 @@ spring:
     username: postgres
     password: postgres
 
+audio:
+  storage-path: generated/audio
+  base-url-path: /audio
+
 server:
   port: 8080
