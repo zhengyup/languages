@@ -61,25 +61,8 @@ class ScenarioService(
         val scenarioLine = scenarioLineRepository.findByIdAndScenarioId(lineId, scenarioId)
             ?: throw ScenarioLineNotFoundException(scenarioId, lineId)
 
-        val updatedLine = scenarioLine.withUpdatedContent(
-            speakerName = request.speakerName?.trim(),
-            hanziText = request.hanziText.trim(),
-            pinyinText = request.pinyinText?.trim(),
-            englishTranslation = request.englishTranslation?.trim()
-        )
-
-        val replacementVocabularyItems = request.vocabularyItems.map {
-            VocabularyItem(
-                scenarioLine = updatedLine,
-                expression = it.expression.trim(),
-                pinyin = it.pinyin.trim(),
-                gloss = it.gloss.trim(),
-                explanation = it.explanation?.trim(),
-                startCharIndex = it.startCharIndex,
-                endCharIndex = it.endCharIndex,
-                createdAt = Instant.now()
-            )
-        }
+        val updatedLine = buildUpdatedScenarioLine(scenarioLine, request)
+        val replacementVocabularyItems = buildReplacementVocabularyItems(updatedLine, request)
 
         scenarioLineVocabularyCoverageValidator.validate(updatedLine, replacementVocabularyItems)
 
@@ -108,6 +91,34 @@ class ScenarioService(
             )
         }
     }
+
+    private fun buildUpdatedScenarioLine(
+        scenarioLine: ScenarioLine,
+        request: UpdateScenarioLineRequest
+    ): ScenarioLine =
+        scenarioLine.withUpdatedContent(
+            speakerName = request.speakerName?.trim(),
+            hanziText = request.hanziText.trim(),
+            pinyinText = request.pinyinText?.trim(),
+            englishTranslation = request.englishTranslation?.trim()
+        )
+
+    private fun buildReplacementVocabularyItems(
+        scenarioLine: ScenarioLine,
+        request: UpdateScenarioLineRequest
+    ): List<VocabularyItem> =
+        request.vocabularyItems.map {
+            VocabularyItem(
+                scenarioLine = scenarioLine,
+                expression = it.expression.trim(),
+                pinyin = it.pinyin.trim(),
+                gloss = it.gloss.trim(),
+                explanation = it.explanation?.trim(),
+                startCharIndex = it.startCharIndex,
+                endCharIndex = it.endCharIndex,
+                createdAt = Instant.now()
+            )
+        }
 
     private fun replaceVocabularyItemsForLine(
         scenarioLine: ScenarioLine,
