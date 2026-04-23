@@ -175,6 +175,7 @@ class ScenarioService(
             hanziText = hanziText,
             pinyinText = pinyinText,
             englishTranslation = englishTranslation,
+            audioUrl = audioUrl,
             createdAt = createdAt,
             vocabularyItems = vocabularyItems.map { it.toResponse() }
         )
