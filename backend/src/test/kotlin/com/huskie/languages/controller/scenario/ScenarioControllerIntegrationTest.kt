@@ -107,6 +107,7 @@ class ScenarioControllerIntegrationTest {
                     hanziText = "一直走，然后左转。",
                     pinyinText = "yì zhí zǒu, rán hòu zuǒ zhuǎn.",
                     englishTranslation = "Go straight, then turn left.",
+                    audioUrl = "http://localhost:8080/audio/scenario-line-2.wav",
                     createdAt = Instant.now()
                 ),
                 ScenarioLine(
@@ -197,6 +198,7 @@ class ScenarioControllerIntegrationTest {
             .andExpect(jsonPath("$.lines[0].speakerName").value("Traveler"))
             .andExpect(jsonPath("$.lines[0].hanziText").value("请问，地铁站在哪里？"))
             .andExpect(jsonPath("$.lines[0].pinyinText").value("qǐng wèn, dì tiě zhàn zài nǎ lǐ?"))
+            .andExpect(jsonPath("$.lines[0].audioUrl").isEmpty)
             .andExpect(jsonPath("$.lines[0].vocabularyItems.length()").value(3))
             .andExpect(jsonPath("$.lines[0].vocabularyItems[0].expression").value("请问"))
             .andExpect(jsonPath("$.lines[0].vocabularyItems[0].pinyin").value("qǐng wèn"))
@@ -215,6 +217,7 @@ class ScenarioControllerIntegrationTest {
             .andExpect(jsonPath("$.lines[1].speakerName").value("Local"))
             .andExpect(jsonPath("$.lines[1].hanziText").value("一直走，然后左转。"))
             .andExpect(jsonPath("$.lines[1].pinyinText").value("yì zhí zǒu, rán hòu zuǒ zhuǎn."))
+            .andExpect(jsonPath("$.lines[1].audioUrl").value("http://localhost:8080/audio/scenario-line-2.wav"))
             .andExpect(jsonPath("$.lines[1].vocabularyItems.length()").value(3))
             .andExpect(jsonPath("$.lines[1].vocabularyItems[0].expression").value("一直走"))
             .andExpect(jsonPath("$.lines[1].vocabularyItems[0].pinyin").value("yì zhí zǒu"))
