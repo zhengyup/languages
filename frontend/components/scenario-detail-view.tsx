@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { ScenarioDetail } from "@/lib/types";
 import { ToggleSwitch } from "@/components/toggle-switch";
 import { ScenarioLineCard } from "@/components/scenario-line-card";
@@ -20,6 +20,8 @@ export function ScenarioDetailView({ scenario }: ScenarioDetailViewProps) {
   const [completionReady, setCompletionReady] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [playingLineId, setPlayingLineId] = useState<number | null>(null);
+  const currentAudioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
     let cancelled = false;
@@ -56,6 +58,60 @@ export function ScenarioDetailView({ scenario }: ScenarioDetailViewProps) {
     () => completedScenarioIds.includes(scenario.id),
     [completedScenarioIds, scenario.id]
   );
+
+  useEffect(() => {
+    const currentAudio = currentAudioRef.current;
+
+    return () => {
+      currentAudio?.pause();
+      currentAudioRef.current = null;
+    };
+  }, []);
+
+  async function handlePlayLine(lineId: number, audioUrl: string) {
+    if (currentAudioRef.current) {
+      currentAudioRef.current.pause();
+      currentAudioRef.current.currentTime = 0;
+      currentAudioRef.current = null;
+    }
+
+    const audio = new Audio(audioUrl);
+    currentAudioRef.current = audio;
+    setPlayingLineId(lineId);
+
+    audio.addEventListener("ended", () => {
+      if (currentAudioRef.current === audio) {
+        currentAudioRef.current = null;
+        setPlayingLineId(null);
+      }
+    });
+
+    audio.addEventListener("error", () => {
+      if (currentAudioRef.current === audio) {
+        currentAudioRef.current = null;
+        setPlayingLineId(null);
+      }
+    });
+
+    try {
+      await audio.play();
+    } catch (error) {
+      console.error("Could not play audio", error);
+      if (currentAudioRef.current === audio) {
+        currentAudioRef.current = null;
+        setPlayingLineId(null);
+      }
+    }
+  }
+
+  function handleStopLine(lineId: number) {
+    if (currentAudioRef.current && playingLineId === lineId) {
+      currentAudioRef.current.pause();
+      currentAudioRef.current.currentTime = 0;
+      currentAudioRef.current = null;
+    }
+    setPlayingLineId(null);
+  }
 
   async function handleMarkCompleted() {
     setIsSubmitting(true);
@@ -118,6 +174,9 @@ export function ScenarioDetailView({ scenario }: ScenarioDetailViewProps) {
             line={line}
             showPinyin={showPinyin}
             showTranslation={showTranslation}
+            isPlaying={playingLineId === line.id}
+            onPlay={handlePlayLine}
+            onStop={handleStopLine}
           />
         ))}
       </section>
@@ -156,4 +215,3 @@ export function ScenarioDetailView({ scenario }: ScenarioDetailViewProps) {
     </div>
   );
 }
-

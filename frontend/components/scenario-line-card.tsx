@@ -7,6 +7,9 @@ type ScenarioLineCardProps = {
   line: ScenarioLine;
   showPinyin: boolean;
   showTranslation: boolean;
+  isPlaying: boolean;
+  onPlay: (lineId: number, audioUrl: string) => void;
+  onStop: (lineId: number) => void;
 };
 
 type LineSegment =
@@ -16,7 +19,10 @@ type LineSegment =
 export function ScenarioLineCard({
   line,
   showPinyin,
-  showTranslation
+  showTranslation,
+  isPlaying,
+  onPlay,
+  onStop
 }: ScenarioLineCardProps) {
   const [activeVocabularyId, setActiveVocabularyId] = useState<number | null>(null);
 
@@ -29,9 +35,25 @@ export function ScenarioLineCard({
   return (
     <article className="rounded-[24px] border border-border bg-white px-5 py-5 shadow-card">
       <div className="mb-3 flex items-start justify-between gap-4">
-        <span className="text-sm font-semibold text-accent">
-          {line.speakerName ?? "Narration"}
-        </span>
+        <div className="flex items-center gap-3">
+          <span className="text-sm font-semibold text-accent">
+            {line.speakerName ?? "Narration"}
+          </span>
+          {line.audioUrl ? (
+            <button
+              type="button"
+              onClick={() => (isPlaying ? onStop(line.id) : onPlay(line.id, line.audioUrl))}
+              className={`inline-flex h-8 w-8 items-center justify-center rounded-full border text-sm font-semibold transition ${
+                isPlaying
+                  ? "border-accent bg-accent text-white"
+                  : "border-border bg-soft text-accent hover:border-accent/50"
+              }`}
+              aria-label={isPlaying ? "Stop line audio" : "Play line audio"}
+            >
+              {isPlaying ? "■" : "▶"}
+            </button>
+          ) : null}
+        </div>
         <span className="text-sm font-medium text-muted">#{line.lineOrder}</span>
       </div>
 

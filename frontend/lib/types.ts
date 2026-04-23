@@ -34,6 +34,7 @@ export type ScenarioLine = {
   hanziText: string;
   pinyinText?: string | null;
   englishTranslation?: string | null;
+  audioUrl?: string | null;
   createdAt: string;
   vocabularyItems: VocabularyItem[];
 };
@@ -73,4 +74,3 @@ export type UserScenarioCompletion = {
   scenarioId: number;
   completedAt: string;
 };
-
