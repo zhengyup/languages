@@ -2,3 +2,14 @@
 .idea/
 
 experiments/.idea/
+
+# Python local environments and caches
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Local Python tooling folders in this repo
+audio-gen/.venv/
+experiments/venv/

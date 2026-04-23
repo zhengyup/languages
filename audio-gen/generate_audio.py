@@ -64,7 +64,14 @@ class ScenarioLineRow:
 
 def resolve_audio_storage_path() -> Path:
     configured_path = os.getenv("AUDIO_STORAGE_PATH")
-    return Path(configured_path).expanduser().resolve() if configured_path else DEFAULT_AUDIO_DIR
+    if not configured_path:
+        return DEFAULT_AUDIO_DIR
+
+    normalized_path = configured_path.strip()
+    if not normalized_path or normalized_path.startswith("/absolute/path/"):
+        return DEFAULT_AUDIO_DIR
+
+    return Path(normalized_path).expanduser().resolve()
 
 
 def patch_perth_watermarker_if_needed() -> None:
