@@ -67,9 +67,9 @@ class ScenarioService(
         scenarioLineVocabularyCoverageValidator.validate(updatedLine, replacementVocabularyItems)
 
         val savedLine = scenarioLineRepository.save(updatedLine)
-        replaceVocabularyItemsForLine(savedLine, replacementVocabularyItems)
+        val savedVocabularyItems = replaceVocabularyItemsForLine(savedLine, replacementVocabularyItems)
 
-        return savedLine.toResponse(replacementVocabularyItems)
+        return savedLine.toResponse(savedVocabularyItems)
     }
 
     private fun getVocabularyItemsByLineId(lines: List<ScenarioLine>): Map<Long, List<VocabularyItem>> {
@@ -111,7 +111,7 @@ class ScenarioService(
             VocabularyItem(
                 scenarioLine = scenarioLine,
                 expression = it.expression.trim(),
-                pinyin = it.pinyin.trim(),
+                pronunciationGuide = it.pronunciationGuide.trim(),
                 gloss = it.gloss.trim(),
                 explanation = it.explanation?.trim(),
                 startCharIndex = it.startCharIndex,
@@ -123,14 +123,16 @@ class ScenarioService(
     private fun replaceVocabularyItemsForLine(
         scenarioLine: ScenarioLine,
         vocabularyItems: List<VocabularyItem>
-    ) {
+    ): List<VocabularyItem> {
         vocabularyItemRepository.deleteAllByScenarioLineId(checkNotNull(scenarioLine.id))
-        vocabularyItemRepository.saveAll(
+        vocabularyItemRepository.flush()
+
+        return vocabularyItemRepository.saveAll(
             vocabularyItems.map {
                 VocabularyItem(
                     scenarioLine = scenarioLine,
                     expression = it.expression,
-                    pinyin = it.pinyin,
+                    pronunciationGuide = it.pronunciationGuide,
                     gloss = it.gloss,
                     explanation = it.explanation,
                     startCharIndex = it.startCharIndex,
@@ -146,6 +148,7 @@ class ScenarioService(
             id = checkNotNull(id),
             title = title,
             description = description,
+            language = language,
             topic = topic,
             difficultyLevel = difficultyLevel,
             createdAt = createdAt
@@ -159,6 +162,7 @@ class ScenarioService(
             id = checkNotNull(id),
             title = title,
             description = description,
+            language = language,
             topic = topic,
             difficultyLevel = difficultyLevel,
             createdAt = createdAt,
@@ -184,7 +188,7 @@ class ScenarioService(
         VocabularyItemResponse(
             id = checkNotNull(id),
             expression = expression,
-            pinyin = pinyin,
+            pronunciationGuide = pronunciationGuide,
             gloss = gloss,
             explanation = explanation,
             startCharIndex = startCharIndex,

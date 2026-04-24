@@ -61,9 +61,14 @@ class ScenarioLineVocabularyCoverageValidator {
         coveredIndexes: BooleanArray
     ) {
         for (index in vocabularyItem.startCharIndex until vocabularyItem.endCharIndex) {
-            if (requiresCoverage(line.targetText[index]).not() || coveredIndexes[index]) {
+            if (requiresCoverage(line.targetText[index]).not()) {
+                continue
+            }
+
+            if (coveredIndexes[index]) {
                 throw IncompleteVocabularyCoverageException(line.lineOrder)
             }
+
             coveredIndexes[index] = true
         }
     }

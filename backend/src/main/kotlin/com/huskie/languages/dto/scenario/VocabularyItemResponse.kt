@@ -5,7 +5,7 @@ import java.time.Instant
 data class VocabularyItemResponse(
     val id: Long,
     val expression: String,
-    val pinyin: String,
+    val pronunciationGuide: String?,
     val gloss: String,
     val explanation: String?,
     val startCharIndex: Int,

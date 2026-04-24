@@ -135,7 +135,7 @@ class ScenarioLineRepositoryIntegrationTest {
             VocabularyItem(
                 scenarioLine = scenarioLine,
                 expression = "请问",
-                pinyin = "qǐng wèn",
+                pronunciationGuide = "qǐng wèn",
                 gloss = "may I ask",
                 explanation = "A polite phrase before asking a question.",
                 startCharIndex = 0,

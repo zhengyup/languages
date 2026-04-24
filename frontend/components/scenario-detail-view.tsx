@@ -14,7 +14,7 @@ type CompletionRecord = {
 };
 
 export function ScenarioDetailView({ scenario }: ScenarioDetailViewProps) {
-  const [showPinyin, setShowPinyin] = useState(true);
+  const [showPronunciation, setShowPronunciation] = useState(true);
   const [showTranslation, setShowTranslation] = useState(true);
   const [completedScenarioIds, setCompletedScenarioIds] = useState<number[]>([]);
   const [completionReady, setCompletionReady] = useState(false);
@@ -56,6 +56,10 @@ export function ScenarioDetailView({ scenario }: ScenarioDetailViewProps) {
     () => completedScenarioIds.includes(scenario.id),
     [completedScenarioIds, scenario.id]
   );
+  const hasPronunciationGuide = useMemo(
+    () => scenario.lines.some((line) => Boolean(line.pronunciationGuide)),
+    [scenario.lines]
+  );
 
   async function handleMarkCompleted() {
     setIsSubmitting(true);
@@ -91,11 +95,13 @@ export function ScenarioDetailView({ scenario }: ScenarioDetailViewProps) {
       <section className="rounded-card border border-border bg-white px-5 py-5 shadow-card">
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div className="flex flex-wrap items-center gap-3">
-            <ToggleSwitch
-              label="Pinyin"
-              checked={showPinyin}
-              onChange={setShowPinyin}
-            />
+            {hasPronunciationGuide ? (
+              <ToggleSwitch
+                label="Show pronunciation"
+                checked={showPronunciation}
+                onChange={setShowPronunciation}
+              />
+            ) : null}
             <ToggleSwitch
               label="English"
               checked={showTranslation}
@@ -116,7 +122,7 @@ export function ScenarioDetailView({ scenario }: ScenarioDetailViewProps) {
           <ScenarioLineCard
             key={line.id}
             line={line}
-            showPinyin={showPinyin}
+            showPronunciation={showPronunciation}
             showTranslation={showTranslation}
           />
         ))}
@@ -156,4 +162,3 @@ export function ScenarioDetailView({ scenario }: ScenarioDetailViewProps) {
     </div>
   );
 }
-

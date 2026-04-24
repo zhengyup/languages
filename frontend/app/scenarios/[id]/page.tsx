@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { EmptyState } from "@/components/empty-state";
 import { ScenarioDetailView } from "@/components/scenario-detail-view";
 import { BackendError, getScenarioDetail } from "@/lib/backend";
-import { formatTopicLabel } from "@/lib/topic";
+import { formatDifficultyLabel, formatLanguageLabel, formatTopicLabel } from "@/lib/topic";
 
 type ScenarioDetailPageProps = {
   params: Promise<{ id: string }>;
@@ -27,7 +27,7 @@ export default async function ScenarioDetailPage({ params }: ScenarioDetailPageP
             </Link>
             <div className="min-w-0">
               <p className="text-sm font-semibold uppercase tracking-[0.16em] text-accent">
-                {formatTopicLabel(scenario.topic)}
+                {`${formatLanguageLabel(scenario.language)} · ${formatDifficultyLabel(scenario.difficultyLevel)} · ${formatTopicLabel(scenario.topic)}`}
               </p>
               <h1 className="mt-1 text-3xl font-semibold tracking-tight text-ink">
                 {scenario.title}
@@ -69,4 +69,3 @@ export default async function ScenarioDetailPage({ params }: ScenarioDetailPageP
     );
   }
 }
-

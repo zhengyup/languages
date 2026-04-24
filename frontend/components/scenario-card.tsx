@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ScenarioCardData } from "@/lib/types";
-import { formatDifficultyLabel } from "@/lib/topic";
+import { formatDifficultyLabel, formatLanguageLabel } from "@/lib/topic";
 
 type ScenarioCardProps = {
   scenario: ScenarioCardData;
@@ -33,6 +33,9 @@ export function ScenarioCard({
       </div>
 
       <div className="flex flex-wrap items-center gap-3 text-xs font-medium">
+        <span className="text-muted">
+          {formatLanguageLabel(scenario.language)}
+        </span>
         <span className="rounded-full bg-page px-3 py-1 text-ink">
           {formatDifficultyLabel(scenario.difficultyLevel)}
         </span>
@@ -44,4 +47,3 @@ export function ScenarioCard({
     </Link>
   );
 }
-

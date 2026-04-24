@@ -1,6 +1,7 @@
 package com.huskie.languages.controller.scenario
 
 import com.huskie.languages.domain.scenario.DifficultyLevel
+import com.huskie.languages.domain.scenario.LearningLanguage
 import com.huskie.languages.domain.scenario.Scenario
 import com.huskie.languages.domain.scenario.ScenarioLine
 import com.huskie.languages.domain.scenario.ScenarioTopic
@@ -68,6 +69,7 @@ class ScenarioControllerIntegrationTest {
             .andExpect(jsonPath("$.id").isNumber)
             .andExpect(jsonPath("$.title").value("Ordering Food at a Restaurant"))
             .andExpect(jsonPath("$.description").value("Practice a common dining conversation in Mandarin."))
+            .andExpect(jsonPath("$.language").value(LearningLanguage.MANDARIN.name))
             .andExpect(jsonPath("$.topic").value(ScenarioTopic.RESTAURANT.name))
             .andExpect(jsonPath("$.difficultyLevel").value(DifficultyLevel.BEGINNER.name))
             .andExpect(jsonPath("$.createdAt").isNotEmpty)
@@ -76,12 +78,14 @@ class ScenarioControllerIntegrationTest {
             .andExpect(status().isOk)
             .andExpect(jsonPath("$[0].title").value("Ordering Food at a Restaurant"))
             .andExpect(jsonPath("$[0].description").value("Practice a common dining conversation in Mandarin."))
+            .andExpect(jsonPath("$[0].language").value(LearningLanguage.MANDARIN.name))
             .andExpect(jsonPath("$[0].topic").value(ScenarioTopic.RESTAURANT.name))
             .andExpect(jsonPath("$[0].difficultyLevel").value(DifficultyLevel.BEGINNER.name))
 
         val storedScenario = scenarioRepository.findAll().single()
         kotlin.test.assertEquals("Ordering Food at a Restaurant", storedScenario.title)
         kotlin.test.assertEquals("Practice a common dining conversation in Mandarin.", storedScenario.description)
+        kotlin.test.assertEquals(LearningLanguage.MANDARIN, storedScenario.language)
         kotlin.test.assertEquals(ScenarioTopic.RESTAURANT, storedScenario.topic)
         kotlin.test.assertEquals(DifficultyLevel.BEGINNER, storedScenario.difficultyLevel)
     }
@@ -129,7 +133,7 @@ class ScenarioControllerIntegrationTest {
                 VocabularyItem(
                     scenarioLine = travelerLine,
                     expression = "请问",
-                    pinyin = "qǐng wèn",
+                    pronunciationGuide = "qǐng wèn",
                     gloss = "excuse me",
                     explanation = "A polite way to begin a question.",
                     startCharIndex = 0,
@@ -139,7 +143,7 @@ class ScenarioControllerIntegrationTest {
                 VocabularyItem(
                     scenarioLine = travelerLine,
                     expression = "地铁站",
-                    pinyin = "dì tiě zhàn",
+                    pronunciationGuide = "dì tiě zhàn",
                     gloss = "subway station",
                     explanation = "The destination being asked about.",
                     startCharIndex = 3,
@@ -149,7 +153,7 @@ class ScenarioControllerIntegrationTest {
                 VocabularyItem(
                     scenarioLine = travelerLine,
                     expression = "在哪里",
-                    pinyin = "zài nǎ lǐ",
+                    pronunciationGuide = "zài nǎ lǐ",
                     gloss = "where is it",
                     explanation = "Asks for location.",
                     startCharIndex = 6,
@@ -159,7 +163,7 @@ class ScenarioControllerIntegrationTest {
                 VocabularyItem(
                     scenarioLine = localLine,
                     expression = "一直走",
-                    pinyin = "yì zhí zǒu",
+                    pronunciationGuide = "yì zhí zǒu",
                     gloss = "go straight",
                     explanation = "Tells someone to continue forward.",
                     startCharIndex = 0,
@@ -169,7 +173,7 @@ class ScenarioControllerIntegrationTest {
                 VocabularyItem(
                     scenarioLine = localLine,
                     expression = "然后",
-                    pinyin = "rán hòu",
+                    pronunciationGuide = "rán hòu",
                     gloss = "then",
                     explanation = "Connects the next step in the directions.",
                     startCharIndex = 4,
@@ -179,7 +183,7 @@ class ScenarioControllerIntegrationTest {
                 VocabularyItem(
                     scenarioLine = localLine,
                     expression = "左转",
-                    pinyin = "zuǒ zhuǎn",
+                    pronunciationGuide = "zuǒ zhuǎn",
                     gloss = "turn left",
                     explanation = "Directional phrase used when guiding someone.",
                     startCharIndex = 6,
@@ -193,6 +197,7 @@ class ScenarioControllerIntegrationTest {
             .andExpect(status().isOk)
             .andExpect(jsonPath("$.id").value(scenario.id))
             .andExpect(jsonPath("$.title").value("Asking for Directions"))
+            .andExpect(jsonPath("$.language").value(LearningLanguage.MANDARIN.name))
             .andExpect(jsonPath("$.lines.length()").value(2))
             .andExpect(jsonPath("$.lines[0].lineOrder").value(1))
             .andExpect(jsonPath("$.lines[0].speakerName").value("Traveler"))
@@ -201,16 +206,16 @@ class ScenarioControllerIntegrationTest {
             .andExpect(jsonPath("$.lines[0].audioUrl").isEmpty)
             .andExpect(jsonPath("$.lines[0].vocabularyItems.length()").value(3))
             .andExpect(jsonPath("$.lines[0].vocabularyItems[0].expression").value("请问"))
-            .andExpect(jsonPath("$.lines[0].vocabularyItems[0].pinyin").value("qǐng wèn"))
+            .andExpect(jsonPath("$.lines[0].vocabularyItems[0].pronunciationGuide").value("qǐng wèn"))
             .andExpect(jsonPath("$.lines[0].vocabularyItems[0].gloss").value("excuse me"))
             .andExpect(jsonPath("$.lines[0].vocabularyItems[0].startCharIndex").value(0))
             .andExpect(jsonPath("$.lines[0].vocabularyItems[0].endCharIndex").value(2))
             .andExpect(jsonPath("$.lines[0].vocabularyItems[1].expression").value("地铁站"))
-            .andExpect(jsonPath("$.lines[0].vocabularyItems[1].pinyin").value("dì tiě zhàn"))
+            .andExpect(jsonPath("$.lines[0].vocabularyItems[1].pronunciationGuide").value("dì tiě zhàn"))
             .andExpect(jsonPath("$.lines[0].vocabularyItems[1].startCharIndex").value(3))
             .andExpect(jsonPath("$.lines[0].vocabularyItems[1].endCharIndex").value(6))
             .andExpect(jsonPath("$.lines[0].vocabularyItems[2].expression").value("在哪里"))
-            .andExpect(jsonPath("$.lines[0].vocabularyItems[2].pinyin").value("zài nǎ lǐ"))
+            .andExpect(jsonPath("$.lines[0].vocabularyItems[2].pronunciationGuide").value("zài nǎ lǐ"))
             .andExpect(jsonPath("$.lines[0].vocabularyItems[2].startCharIndex").value(6))
             .andExpect(jsonPath("$.lines[0].vocabularyItems[2].endCharIndex").value(9))
             .andExpect(jsonPath("$.lines[1].lineOrder").value(2))
@@ -220,15 +225,15 @@ class ScenarioControllerIntegrationTest {
             .andExpect(jsonPath("$.lines[1].audioUrl").value("http://localhost:8080/audio/scenario-line-2.wav"))
             .andExpect(jsonPath("$.lines[1].vocabularyItems.length()").value(3))
             .andExpect(jsonPath("$.lines[1].vocabularyItems[0].expression").value("一直走"))
-            .andExpect(jsonPath("$.lines[1].vocabularyItems[0].pinyin").value("yì zhí zǒu"))
+            .andExpect(jsonPath("$.lines[1].vocabularyItems[0].pronunciationGuide").value("yì zhí zǒu"))
             .andExpect(jsonPath("$.lines[1].vocabularyItems[0].startCharIndex").value(0))
             .andExpect(jsonPath("$.lines[1].vocabularyItems[0].endCharIndex").value(3))
             .andExpect(jsonPath("$.lines[1].vocabularyItems[1].expression").value("然后"))
-            .andExpect(jsonPath("$.lines[1].vocabularyItems[1].pinyin").value("rán hòu"))
+            .andExpect(jsonPath("$.lines[1].vocabularyItems[1].pronunciationGuide").value("rán hòu"))
             .andExpect(jsonPath("$.lines[1].vocabularyItems[1].startCharIndex").value(4))
             .andExpect(jsonPath("$.lines[1].vocabularyItems[1].endCharIndex").value(6))
             .andExpect(jsonPath("$.lines[1].vocabularyItems[2].expression").value("左转"))
-            .andExpect(jsonPath("$.lines[1].vocabularyItems[2].pinyin").value("zuǒ zhuǎn"))
+            .andExpect(jsonPath("$.lines[1].vocabularyItems[2].pronunciationGuide").value("zuǒ zhuǎn"))
             .andExpect(jsonPath("$.lines[1].vocabularyItems[2].gloss").value("turn left"))
             .andExpect(jsonPath("$.lines[1].vocabularyItems[2].startCharIndex").value(6))
             .andExpect(jsonPath("$.lines[1].vocabularyItems[2].endCharIndex").value(8))
@@ -267,7 +272,7 @@ class ScenarioControllerIntegrationTest {
             VocabularyItem(
                 scenarioLine = line,
                 expression = "请问",
-                pinyin = "qǐng wèn",
+                pronunciationGuide = "qǐng wèn",
                 gloss = "may I ask",
                 explanation = "Polite opener before a question.",
                 startCharIndex = 0,
@@ -323,7 +328,7 @@ class ScenarioControllerIntegrationTest {
                 VocabularyItem(
                     scenarioLine = line,
                     expression = "欢迎光临",
-                    pinyin = "huān yíng guāng lín",
+                    pronunciationGuide = "huān yíng guāng lín",
                     gloss = "welcome",
                     explanation = "A greeting for customers entering a restaurant.",
                     startCharIndex = 0,
@@ -333,7 +338,7 @@ class ScenarioControllerIntegrationTest {
                 VocabularyItem(
                     scenarioLine = line,
                     expression = "请问",
-                    pinyin = "qǐng wèn",
+                    pronunciationGuide = "qǐng wèn",
                     gloss = "may I ask",
                     explanation = "A polite phrase before asking a question.",
                     startCharIndex = 5,
@@ -343,7 +348,7 @@ class ScenarioControllerIntegrationTest {
                 VocabularyItem(
                     scenarioLine = line,
                     expression = "几位",
-                    pinyin = "jǐ wèi",
+                    pronunciationGuide = "jǐ wèi",
                     gloss = "how many guests",
                     explanation = "Asks for the number of diners.",
                     startCharIndex = 7,
@@ -362,7 +367,7 @@ class ScenarioControllerIntegrationTest {
               "vocabularyItems": [
                 {
                   "expression": "欢迎光临",
-                  "pinyin": "huān yíng guāng lín",
+                  "pronunciationGuide": "huān yíng guāng lín",
                   "gloss": "welcome",
                   "explanation": "A greeting for customers entering a restaurant.",
                   "startCharIndex": 0,
@@ -370,7 +375,7 @@ class ScenarioControllerIntegrationTest {
                 },
                 {
                   "expression": "请问",
-                  "pinyin": "qǐng wèn",
+                  "pronunciationGuide": "qǐng wèn",
                   "gloss": "may I ask",
                   "explanation": "A polite phrase before asking a question.",
                   "startCharIndex": 5,
@@ -378,7 +383,7 @@ class ScenarioControllerIntegrationTest {
                 },
                 {
                   "expression": "有几位",
-                  "pinyin": "yǒu jǐ wèi",
+                  "pronunciationGuide": "yǒu jǐ wèi",
                   "gloss": "how many people there are",
                   "explanation": "Asks for the number of diners in a slightly fuller phrasing.",
                   "startCharIndex": 7,

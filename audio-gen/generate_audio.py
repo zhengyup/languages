@@ -18,6 +18,8 @@ Notes:
   at runtime, not packaged at build time.
 - Stable file names like scenario-line-{scenarioLineId}.wav keep URLs stable
   when a line is regenerated and make it easier to swap local disk for S3 later.
+- The script chooses the Chatterbox language code from Scenario.language so the
+  same batch flow can support Mandarin, Spanish, and German.
 """
 
 from __future__ import annotations
@@ -54,12 +56,33 @@ TRIM_THRESHOLD = float(os.getenv("TRIM_THRESHOLD", "0.05"))
 TAIL_PADDING_MS = int(os.getenv("TAIL_PADDING_MS", "10"))
 MAX_SECONDS = float(os.getenv("MAX_SECONDS", "5.0"))
 DEVICE = "cpu"
+LANGUAGE_CONFIG = {
+    "MANDARIN": {
+        "lang_code": "zh",
+        "cfg_weight": CFG_WEIGHT,
+        "exaggeration": EXAGGERATION,
+        "default_max_new_tokens": DEFAULT_MAX_NEW_TOKENS,
+    },
+    "SPANISH": {
+        "lang_code": "es",
+        "cfg_weight": CFG_WEIGHT,
+        "exaggeration": EXAGGERATION,
+        "default_max_new_tokens": DEFAULT_MAX_NEW_TOKENS,
+    },
+    "GERMAN": {
+        "lang_code": "de",
+        "cfg_weight": CFG_WEIGHT,
+        "exaggeration": EXAGGERATION,
+        "default_max_new_tokens": DEFAULT_MAX_NEW_TOKENS,
+    },
+}
 
 
 @dataclass
 class ScenarioLineRow:
     id: int
-    hanzi_text: str
+    language: str
+    target_text: str
 
 
 def resolve_audio_storage_path() -> Path:
@@ -79,7 +102,11 @@ def patch_perth_watermarker_if_needed() -> None:
         perth.PerthImplicitWatermarker = perth.DummyWatermarker
 
 
-def recommend_max_new_tokens(text: str) -> int:
+def get_language_config(language: str) -> dict[str, float | int | str] | None:
+    return LANGUAGE_CONFIG.get(language)
+
+
+def recommend_max_new_tokens(text: str, default_max_new_tokens: int) -> int:
     content_chars = sum(1 for ch in text if ch.strip() and ch not in "，。！？、；：,.!?;:-")
     if content_chars <= 10:
         return 60
@@ -87,21 +114,22 @@ def recommend_max_new_tokens(text: str) -> int:
         return 80
     if content_chars <= 24:
         return 110
-    return DEFAULT_MAX_NEW_TOKENS
+    return default_max_new_tokens
 
 
 def custom_generate(
     model: ChatterboxMultilingualTTS,
     text: str,
-    language_id: str = "zh",
+    language_id: str,
+    cfg_weight: float,
+    exaggeration: float,
+    default_max_new_tokens: int,
     max_new_tokens: int | None = None,
-    cfg_weight: float = CFG_WEIGHT,
-    exaggeration: float = EXAGGERATION,
 ) -> torch.Tensor:
     if language_id.lower() not in SUPPORTED_LANGUAGES:
         raise ValueError(f"Unsupported language_id: {language_id}")
     if max_new_tokens is None:
-        max_new_tokens = recommend_max_new_tokens(text)
+        max_new_tokens = recommend_max_new_tokens(text, default_max_new_tokens)
     if float(exaggeration) != float(model.conds.t3.emotion_adv[0, 0, 0].item()):
         conds: T3Cond = model.conds.t3
         model.conds.t3 = T3Cond(
@@ -174,13 +202,21 @@ def select_lines_for_generation(connection: psycopg.Connection) -> list[Scenario
     with connection.cursor() as cursor:
         cursor.execute(
             """
-            SELECT id, hanzi_text
+            SELECT scenario_lines.id, scenarios.language, scenario_lines.target_text
             FROM scenario_lines
+            JOIN scenarios ON scenarios.id = scenario_lines.scenario_id
             WHERE audio_status IN ('NOT_GENERATED', 'PENDING_REGENERATION')
-            ORDER BY id ASC
+            ORDER BY scenario_lines.id ASC
             """
         )
-        return [ScenarioLineRow(id=row[0], hanzi_text=row[1]) for row in cursor.fetchall()]
+        return [
+            ScenarioLineRow(
+                id=row[0],
+                language=row[1],
+                target_text=row[2],
+            )
+            for row in cursor.fetchall()
+        ]
 
 
 def filename_for_line(scenario_line_id: int) -> str:
@@ -234,9 +270,20 @@ def generate_audio_for_line(
     row: ScenarioLineRow,
     audio_directory: Path,
 ) -> tuple[Path, str]:
+    language_config = get_language_config(row.language)
+    if language_config is None:
+        raise ValueError(f"Unsupported learning language: {row.language}")
+
     filename = filename_for_line(row.id)
     output_path = audio_directory / filename
-    raw_wav = custom_generate(model, row.hanzi_text)
+    raw_wav = custom_generate(
+        model,
+        row.target_text,
+        language_id=str(language_config["lang_code"]),
+        cfg_weight=float(language_config["cfg_weight"]),
+        exaggeration=float(language_config["exaggeration"]),
+        default_max_new_tokens=int(language_config["default_max_new_tokens"]),
+    )
     trimmed_wav = trim_generated_audio(raw_wav, model.sr)
     final_wav = slow_audio(trimmed_wav)
     torchaudio.save(str(output_path), final_wav.cpu(), model.sr)
@@ -253,8 +300,14 @@ def process_lines(
     for row in rows:
         processed += 1
         try:
+            if get_language_config(row.language) is None:
+                failed += 1
+                print(f"[SKIPPED] line={row.id} language={row.language} reason=unsupported-language")
+                continue
+
+            print(f"Generating line {row.id} ({row.language})")
             output_path, audio_url = generate_audio_for_line(model, row, audio_directory)
-            mark_generation_success(connection, row.id, audio_url, text_hash(row.hanzi_text))
+            mark_generation_success(connection, row.id, audio_url, text_hash(row.target_text))
             succeeded += 1
             print(f"[OK] line={row.id} file={output_path.name} url={audio_url}")
         except Exception as exc:  # noqa: BLE001 - batch should continue per row
