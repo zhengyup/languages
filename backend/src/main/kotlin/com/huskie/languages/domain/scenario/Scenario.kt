@@ -28,6 +28,9 @@ class Scenario(
     @Enumerated(EnumType.STRING)
     @Column(name = "difficulty_level", nullable = false)
     val difficultyLevel: DifficultyLevel,
+    @Enumerated(EnumType.STRING)
+    @Column(name = "language", nullable = false)
+    val language: LearningLanguage = LearningLanguage.MANDARIN,
     @Column(name = "created_at", nullable = false, updatable = false)
     val createdAt: Instant,
     @OneToMany(mappedBy = "scenario")

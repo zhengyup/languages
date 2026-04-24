@@ -24,6 +24,8 @@ class VocabularyItem(
     val expression: String,
     @Column(nullable = false)
     val pinyin: String,
+    @Column(name = "pronunciation_guide")
+    val pronunciationGuide: String? = pinyin,
     @Column(nullable = false)
     val gloss: String,
     @Column

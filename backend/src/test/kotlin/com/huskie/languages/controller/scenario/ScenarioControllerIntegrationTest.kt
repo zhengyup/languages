@@ -104,8 +104,8 @@ class ScenarioControllerIntegrationTest {
                     scenario = scenario,
                     lineOrder = 2,
                     speakerName = "Local",
-                    hanziText = "一直走，然后左转。",
-                    pinyinText = "yì zhí zǒu, rán hòu zuǒ zhuǎn.",
+                    targetText = "一直走，然后左转。",
+                    pronunciationGuide = "yì zhí zǒu, rán hòu zuǒ zhuǎn.",
                     englishTranslation = "Go straight, then turn left.",
                     audioUrl = "http://localhost:8080/audio/scenario-line-2.wav",
                     createdAt = Instant.now()
@@ -114,8 +114,8 @@ class ScenarioControllerIntegrationTest {
                     scenario = scenario,
                     lineOrder = 1,
                     speakerName = "Traveler",
-                    hanziText = "请问，地铁站在哪里？",
-                    pinyinText = "qǐng wèn, dì tiě zhàn zài nǎ lǐ?",
+                    targetText = "请问，地铁站在哪里？",
+                    pronunciationGuide = "qǐng wèn, dì tiě zhàn zài nǎ lǐ?",
                     englishTranslation = "Excuse me, where is the subway station?",
                     createdAt = Instant.now()
                 )
@@ -196,8 +196,8 @@ class ScenarioControllerIntegrationTest {
             .andExpect(jsonPath("$.lines.length()").value(2))
             .andExpect(jsonPath("$.lines[0].lineOrder").value(1))
             .andExpect(jsonPath("$.lines[0].speakerName").value("Traveler"))
-            .andExpect(jsonPath("$.lines[0].hanziText").value("请问，地铁站在哪里？"))
-            .andExpect(jsonPath("$.lines[0].pinyinText").value("qǐng wèn, dì tiě zhàn zài nǎ lǐ?"))
+            .andExpect(jsonPath("$.lines[0].targetText").value("请问，地铁站在哪里？"))
+            .andExpect(jsonPath("$.lines[0].pronunciationGuide").value("qǐng wèn, dì tiě zhàn zài nǎ lǐ?"))
             .andExpect(jsonPath("$.lines[0].audioUrl").isEmpty)
             .andExpect(jsonPath("$.lines[0].vocabularyItems.length()").value(3))
             .andExpect(jsonPath("$.lines[0].vocabularyItems[0].expression").value("请问"))
@@ -215,8 +215,8 @@ class ScenarioControllerIntegrationTest {
             .andExpect(jsonPath("$.lines[0].vocabularyItems[2].endCharIndex").value(9))
             .andExpect(jsonPath("$.lines[1].lineOrder").value(2))
             .andExpect(jsonPath("$.lines[1].speakerName").value("Local"))
-            .andExpect(jsonPath("$.lines[1].hanziText").value("一直走，然后左转。"))
-            .andExpect(jsonPath("$.lines[1].pinyinText").value("yì zhí zǒu, rán hòu zuǒ zhuǎn."))
+            .andExpect(jsonPath("$.lines[1].targetText").value("一直走，然后左转。"))
+            .andExpect(jsonPath("$.lines[1].pronunciationGuide").value("yì zhí zǒu, rán hòu zuǒ zhuǎn."))
             .andExpect(jsonPath("$.lines[1].audioUrl").value("http://localhost:8080/audio/scenario-line-2.wav"))
             .andExpect(jsonPath("$.lines[1].vocabularyItems.length()").value(3))
             .andExpect(jsonPath("$.lines[1].vocabularyItems[0].expression").value("一直走"))
@@ -256,8 +256,8 @@ class ScenarioControllerIntegrationTest {
                 scenario = scenario,
                 lineOrder = 1,
                 speakerName = "Host",
-                hanziText = "请问，几位？",
-                pinyinText = "qǐng wèn, jǐ wèi?",
+                targetText = "请问，几位？",
+                pronunciationGuide = "qǐng wèn, jǐ wèi?",
                 englishTranslation = "Hello, for how many people?",
                 createdAt = Instant.now()
             )
@@ -291,7 +291,7 @@ class ScenarioControllerIntegrationTest {
     }
 
     @Test
-    fun shouldInvalidateAudioMetadataWhenScenarioLineHanziTextChanges() {
+    fun shouldInvalidateAudioMetadataWhenScenarioLineTargetTextChanges() {
         val scenario = scenarioRepository.save(
             Scenario(
                 title = "Audio Update Test",
@@ -307,8 +307,8 @@ class ScenarioControllerIntegrationTest {
                 scenario = scenario,
                 lineOrder = 1,
                 speakerName = "服务员",
-                hanziText = "欢迎光临，请问几位？",
-                pinyinText = "huān yíng guāng lín, qǐng wèn jǐ wèi?",
+                targetText = "欢迎光临，请问几位？",
+                pronunciationGuide = "huān yíng guāng lín, qǐng wèn jǐ wèi?",
                 englishTranslation = "Welcome, how many people?",
                 audioUrl = "https://cdn.example.com/audio/line-1.wav",
                 audioStatus = AudioStatus.GENERATED,
@@ -356,8 +356,8 @@ class ScenarioControllerIntegrationTest {
         val requestBody = """
             {
               "speakerName": "服务员",
-              "hanziText": "欢迎光临，请问有几位？",
-              "pinyinText": "huān yíng guāng lín, qǐng wèn yǒu jǐ wèi?",
+              "targetText": "欢迎光临，请问有几位？",
+              "pronunciationGuide": "huān yíng guāng lín, qǐng wèn yǒu jǐ wèi?",
               "englishTranslation": "Welcome, may I ask how many guests there are?",
               "vocabularyItems": [
                 {
@@ -395,12 +395,12 @@ class ScenarioControllerIntegrationTest {
         )
             .andExpect(status().isOk)
             .andExpect(jsonPath("$.id").value(line.id))
-            .andExpect(jsonPath("$.hanziText").value("欢迎光临，请问有几位？"))
+            .andExpect(jsonPath("$.targetText").value("欢迎光临，请问有几位？"))
             .andExpect(jsonPath("$.vocabularyItems.length()").value(3))
             .andExpect(jsonPath("$.vocabularyItems[2].expression").value("有几位"))
 
         val updatedLine = scenarioLineRepository.findById(line.id!!).orElseThrow()
-        kotlin.test.assertEquals("欢迎光临，请问有几位？", updatedLine.hanziText)
+        kotlin.test.assertEquals("欢迎光临，请问有几位？", updatedLine.targetText)
         kotlin.test.assertEquals(AudioStatus.PENDING_REGENERATION, updatedLine.audioStatus)
         kotlin.test.assertEquals(null, updatedLine.audioUrl)
         kotlin.test.assertEquals(null, updatedLine.audioGeneratedAt)

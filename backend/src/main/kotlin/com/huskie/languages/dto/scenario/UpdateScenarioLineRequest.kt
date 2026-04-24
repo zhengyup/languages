@@ -8,8 +8,8 @@ import jakarta.validation.constraints.NotNull
 data class UpdateScenarioLineRequest(
     val speakerName: String? = null,
     @field:NotBlank
-    val hanziText: String,
-    val pinyinText: String? = null,
+    val targetText: String,
+    val pronunciationGuide: String? = null,
     val englishTranslation: String? = null,
     @field:Valid
     @field:NotEmpty

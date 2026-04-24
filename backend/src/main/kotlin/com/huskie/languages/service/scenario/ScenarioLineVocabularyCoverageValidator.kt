@@ -12,13 +12,13 @@ class ScenarioLineVocabularyCoverageValidator {
             throw IncompleteVocabularyCoverageException(line.lineOrder)
         }
 
-        val coveredIndexes = BooleanArray(line.hanziText.length)
+        val coveredIndexes = BooleanArray(line.targetText.length)
 
         vocabularyItems.forEach { vocabularyItem ->
             validateVocabularyItem(line, vocabularyItem, coveredIndexes)
         }
 
-        line.hanziText.forEachIndexed { index, character ->
+        line.targetText.forEachIndexed { index, character ->
             if (requiresCoverage(character) && coveredIndexes[index].not()) {
                 throw IncompleteVocabularyCoverageException(line.lineOrder)
             }
@@ -39,13 +39,13 @@ class ScenarioLineVocabularyCoverageValidator {
         val startIndex = vocabularyItem.startCharIndex
         val endIndex = vocabularyItem.endCharIndex
 
-        if (startIndex < 0 || endIndex > line.hanziText.length || startIndex >= endIndex) {
+        if (startIndex < 0 || endIndex > line.targetText.length || startIndex >= endIndex) {
             throw IncompleteVocabularyCoverageException(line.lineOrder)
         }
     }
 
     private fun validateExpressionMatch(line: ScenarioLine, vocabularyItem: VocabularyItem) {
-        val expressionInLine = line.hanziText.substring(
+        val expressionInLine = line.targetText.substring(
             vocabularyItem.startCharIndex,
             vocabularyItem.endCharIndex
         )
@@ -61,7 +61,7 @@ class ScenarioLineVocabularyCoverageValidator {
         coveredIndexes: BooleanArray
     ) {
         for (index in vocabularyItem.startCharIndex until vocabularyItem.endCharIndex) {
-            if (requiresCoverage(line.hanziText[index]).not() || coveredIndexes[index]) {
+            if (requiresCoverage(line.targetText[index]).not() || coveredIndexes[index]) {
                 throw IncompleteVocabularyCoverageException(line.lineOrder)
             }
             coveredIndexes[index] = true

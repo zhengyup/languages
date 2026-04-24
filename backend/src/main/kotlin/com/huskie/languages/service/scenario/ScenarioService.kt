@@ -98,8 +98,8 @@ class ScenarioService(
     ): ScenarioLine =
         scenarioLine.withUpdatedContent(
             speakerName = request.speakerName?.trim(),
-            hanziText = request.hanziText.trim(),
-            pinyinText = request.pinyinText?.trim(),
+            targetText = request.targetText.trim(),
+            pronunciationGuide = request.pronunciationGuide?.trim(),
             englishTranslation = request.englishTranslation?.trim()
         )
 
@@ -172,8 +172,8 @@ class ScenarioService(
             id = checkNotNull(id),
             lineOrder = lineOrder,
             speakerName = speakerName,
-            hanziText = hanziText,
-            pinyinText = pinyinText,
+            targetText = targetText,
+            pronunciationGuide = pronunciationGuide,
             englishTranslation = englishTranslation,
             audioUrl = audioUrl,
             createdAt = createdAt,

@@ -27,10 +27,10 @@ class ScenarioLine(
     val lineOrder: Int,
     @Column(name = "speaker_name")
     val speakerName: String? = null,
-    @Column(name = "hanzi_text", nullable = false)
-    val hanziText: String,
-    @Column(name = "pinyin_text")
-    val pinyinText: String? = null,
+    @Column(name = "target_text", nullable = false)
+    val targetText: String,
+    @Column(name = "pronunciation_guide")
+    val pronunciationGuide: String? = null,
     @Column(name = "english_translation")
     val englishTranslation: String? = null,
     @Column(name = "audio_url")
@@ -53,8 +53,8 @@ class ScenarioLine(
             scenario = scenario,
             lineOrder = lineOrder,
             speakerName = speakerName,
-            hanziText = hanziText,
-            pinyinText = pinyinText,
+            targetText = targetText,
+            pronunciationGuide = pronunciationGuide,
             englishTranslation = englishTranslation,
             audioUrl = null,
             audioStatus = AudioStatus.PENDING_REGENERATION,
@@ -66,8 +66,8 @@ class ScenarioLine(
 
     fun withUpdatedContent(
         speakerName: String?,
-        hanziText: String,
-        pinyinText: String?,
+        targetText: String,
+        pronunciationGuide: String?,
         englishTranslation: String?
     ): ScenarioLine {
         val updatedLine = ScenarioLine(
@@ -75,8 +75,8 @@ class ScenarioLine(
             scenario = scenario,
             lineOrder = lineOrder,
             speakerName = speakerName,
-            hanziText = hanziText,
-            pinyinText = pinyinText,
+            targetText = targetText,
+            pronunciationGuide = pronunciationGuide,
             englishTranslation = englishTranslation,
             audioUrl = audioUrl,
             audioStatus = audioStatus,
@@ -86,7 +86,7 @@ class ScenarioLine(
             vocabularyItems = vocabularyItems
         )
 
-        return if (this.hanziText != hanziText) {
+        return if (this.targetText != targetText) {
             updatedLine.invalidateAudio()
         } else {
             updatedLine
