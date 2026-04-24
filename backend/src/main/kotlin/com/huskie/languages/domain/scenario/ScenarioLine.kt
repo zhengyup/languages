@@ -31,6 +31,10 @@ class ScenarioLine(
     val hanziText: String,
     @Column(name = "pinyin_text")
     val pinyinText: String? = null,
+    @Column(name = "target_text", nullable = false)
+    val targetText: String = hanziText,
+    @Column(name = "pronunciation_guide")
+    val pronunciationGuide: String? = pinyinText,
     @Column(name = "english_translation")
     val englishTranslation: String? = null,
     @Column(name = "audio_url")
@@ -55,6 +59,8 @@ class ScenarioLine(
             speakerName = speakerName,
             hanziText = hanziText,
             pinyinText = pinyinText,
+            targetText = targetText,
+            pronunciationGuide = pronunciationGuide,
             englishTranslation = englishTranslation,
             audioUrl = null,
             audioStatus = AudioStatus.PENDING_REGENERATION,
@@ -77,6 +83,8 @@ class ScenarioLine(
             speakerName = speakerName,
             hanziText = hanziText,
             pinyinText = pinyinText,
+            targetText = hanziText,
+            pronunciationGuide = pinyinText,
             englishTranslation = englishTranslation,
             audioUrl = audioUrl,
             audioStatus = audioStatus,
