@@ -5,7 +5,7 @@ import { ScenarioLine, VocabularyItem } from "@/lib/types";
 
 type ScenarioLineCardProps = {
   line: ScenarioLine;
-  showPinyin: boolean;
+  showPronunciation: boolean;
   showTranslation: boolean;
 };
 
@@ -15,7 +15,7 @@ type LineSegment =
 
 export function ScenarioLineCard({
   line,
-  showPinyin,
+  showPronunciation,
   showTranslation
 }: ScenarioLineCardProps) {
   const [activeVocabularyId, setActiveVocabularyId] = useState<number | null>(null);
@@ -67,7 +67,11 @@ export function ScenarioLineCard({
               <p className="text-3xl font-semibold tracking-tight text-ink">
                 {activeVocabularyItem.expression}
               </p>
-              <p className="text-base text-muted">{activeVocabularyItem.pinyin}</p>
+              {activeVocabularyItem.pronunciationGuide ? (
+                <p className="text-base text-muted">
+                  {activeVocabularyItem.pronunciationGuide}
+                </p>
+              ) : null}
             </div>
             <p className="mt-3 text-lg font-medium text-ink">
               {activeVocabularyItem.gloss}
@@ -81,8 +85,8 @@ export function ScenarioLineCard({
         ) : null}
       </div>
 
-      {showPinyin && line.pinyinText ? (
-        <p className="mt-4 text-lg leading-8 text-muted">{line.pinyinText}</p>
+      {showPronunciation && line.pronunciationGuide ? (
+        <p className="mt-4 text-lg leading-8 text-muted">{line.pronunciationGuide}</p>
       ) : null}
 
       {showTranslation && line.englishTranslation ? (
@@ -106,7 +110,7 @@ function buildLineSegments(line: ScenarioLine): LineSegment[] {
     if (cursor < item.startCharIndex) {
       segments.push({
         type: "text",
-        value: line.hanziText.slice(cursor, item.startCharIndex),
+        value: line.targetText.slice(cursor, item.startCharIndex),
         key: `text-${cursor}`
       });
     }
@@ -120,10 +124,10 @@ function buildLineSegments(line: ScenarioLine): LineSegment[] {
     cursor = item.endCharIndex;
   });
 
-  if (cursor < line.hanziText.length) {
+  if (cursor < line.targetText.length) {
     segments.push({
       type: "text",
-      value: line.hanziText.slice(cursor),
+      value: line.targetText.slice(cursor),
       key: `text-${cursor}-tail`
     });
   }

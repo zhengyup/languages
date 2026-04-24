@@ -19,7 +19,7 @@ export type ScenarioResponse = {
 export type VocabularyItem = {
   id: number;
   expression: string;
-  pinyin: string;
+  pronunciationGuide?: string | null;
   gloss: string;
   explanation?: string | null;
   startCharIndex: number;
@@ -31,9 +31,10 @@ export type ScenarioLine = {
   id: number;
   lineOrder: number;
   speakerName?: string | null;
-  hanziText: string;
-  pinyinText?: string | null;
+  targetText: string;
+  pronunciationGuide?: string | null;
   englishTranslation?: string | null;
+  audioUrl?: string | null;
   createdAt: string;
   vocabularyItems: VocabularyItem[];
 };
@@ -73,4 +74,3 @@ export type UserScenarioCompletion = {
   scenarioId: number;
   completedAt: string;
 };
-
