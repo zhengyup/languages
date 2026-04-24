@@ -67,9 +67,9 @@ class ScenarioService(
         scenarioLineVocabularyCoverageValidator.validate(updatedLine, replacementVocabularyItems)
 
         val savedLine = scenarioLineRepository.save(updatedLine)
-        replaceVocabularyItemsForLine(savedLine, replacementVocabularyItems)
+        val savedVocabularyItems = replaceVocabularyItemsForLine(savedLine, replacementVocabularyItems)
 
-        return savedLine.toResponse(replacementVocabularyItems)
+        return savedLine.toResponse(savedVocabularyItems)
     }
 
     private fun getVocabularyItemsByLineId(lines: List<ScenarioLine>): Map<Long, List<VocabularyItem>> {
@@ -123,9 +123,11 @@ class ScenarioService(
     private fun replaceVocabularyItemsForLine(
         scenarioLine: ScenarioLine,
         vocabularyItems: List<VocabularyItem>
-    ) {
+    ): List<VocabularyItem> {
         vocabularyItemRepository.deleteAllByScenarioLineId(checkNotNull(scenarioLine.id))
-        vocabularyItemRepository.saveAll(
+        vocabularyItemRepository.flush()
+
+        return vocabularyItemRepository.saveAll(
             vocabularyItems.map {
                 VocabularyItem(
                     scenarioLine = scenarioLine,
