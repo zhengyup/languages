@@ -20,7 +20,7 @@ data class UpdateVocabularyItemRequest(
     @field:NotBlank
     val expression: String,
     @field:NotBlank
-    val pinyin: String,
+    val pronunciationGuide: String,
     @field:NotBlank
     val gloss: String,
     val explanation: String? = null,

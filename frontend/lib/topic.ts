@@ -1,4 +1,4 @@
-import { DifficultyLevel, ScenarioTopic } from "@/lib/types";
+import { DifficultyLevel, LearningLanguage, ScenarioTopic } from "@/lib/types";
 
 const TOPIC_META: Record<
   ScenarioTopic,
@@ -47,3 +47,13 @@ export function formatDifficultyLabel(difficulty: DifficultyLevel): string {
   return difficulty.toLowerCase();
 }
 
+export function formatLanguageLabel(language: LearningLanguage): string {
+  switch (language) {
+    case "MANDARIN":
+      return "Mandarin";
+    case "SPANISH":
+      return "Spanish";
+    case "GERMAN":
+      return "German";
+  }
+}

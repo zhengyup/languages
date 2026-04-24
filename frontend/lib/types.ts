@@ -6,11 +6,13 @@ export type ScenarioTopic =
   | "SHOPPING";
 
 export type DifficultyLevel = "BEGINNER" | "INTERMEDIATE" | "ADVANCED";
+export type LearningLanguage = "MANDARIN" | "SPANISH" | "GERMAN";
 
 export type ScenarioResponse = {
   id: number;
   title: string;
   description: string;
+  language: LearningLanguage;
   topic: ScenarioTopic;
   difficultyLevel: DifficultyLevel;
   createdAt: string;
@@ -43,6 +45,7 @@ export type ScenarioDetail = {
   id: number;
   title: string;
   description: string;
+  language: LearningLanguage;
   topic: ScenarioTopic;
   difficultyLevel: DifficultyLevel;
   createdAt: string;

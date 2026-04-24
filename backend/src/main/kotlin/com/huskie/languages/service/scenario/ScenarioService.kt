@@ -111,7 +111,7 @@ class ScenarioService(
             VocabularyItem(
                 scenarioLine = scenarioLine,
                 expression = it.expression.trim(),
-                pinyin = it.pinyin.trim(),
+                pronunciationGuide = it.pronunciationGuide.trim(),
                 gloss = it.gloss.trim(),
                 explanation = it.explanation?.trim(),
                 startCharIndex = it.startCharIndex,
@@ -130,7 +130,7 @@ class ScenarioService(
                 VocabularyItem(
                     scenarioLine = scenarioLine,
                     expression = it.expression,
-                    pinyin = it.pinyin,
+                    pronunciationGuide = it.pronunciationGuide,
                     gloss = it.gloss,
                     explanation = it.explanation,
                     startCharIndex = it.startCharIndex,
@@ -146,6 +146,7 @@ class ScenarioService(
             id = checkNotNull(id),
             title = title,
             description = description,
+            language = language,
             topic = topic,
             difficultyLevel = difficultyLevel,
             createdAt = createdAt
@@ -159,6 +160,7 @@ class ScenarioService(
             id = checkNotNull(id),
             title = title,
             description = description,
+            language = language,
             topic = topic,
             difficultyLevel = difficultyLevel,
             createdAt = createdAt,
@@ -184,7 +186,7 @@ class ScenarioService(
         VocabularyItemResponse(
             id = checkNotNull(id),
             expression = expression,
-            pinyin = pinyin,
+            pronunciationGuide = pronunciationGuide,
             gloss = gloss,
             explanation = explanation,
             startCharIndex = startCharIndex,

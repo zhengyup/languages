@@ -51,7 +51,7 @@ class ScenarioSeedDataInitializer(
                     lineOrder = index + 1,
                     speakerName = seedLine.speakerName,
                     targetText = seedLine.targetText,
-                    pronunciationGuide = normalizePinyin(seedLine.pronunciationGuide),
+                    pronunciationGuide = normalizePronunciationGuide(seedLine.pronunciationGuide),
                     englishTranslation = seedLine.englishTranslation,
                     createdAt = createdAt
                 )
@@ -61,7 +61,7 @@ class ScenarioSeedDataInitializer(
                 VocabularyItem(
                     scenarioLine = scenarioLine,
                     expression = seedVocabularyItem.expression,
-                    pinyin = normalizePinyin(seedVocabularyItem.pinyin),
+                    pronunciationGuide = normalizePronunciationGuide(seedVocabularyItem.pronunciationGuide),
                     gloss = seedVocabularyItem.gloss,
                     explanation = seedVocabularyItem.explanation,
                     startCharIndex = seedVocabularyItem.startCharIndex,
@@ -455,7 +455,7 @@ class ScenarioSeedDataInitializer(
 
     private fun seedVocabulary(
         expression: String,
-        pinyin: String,
+        pronunciationGuide: String,
         gloss: String,
         explanation: String,
         startCharIndex: Int,
@@ -463,14 +463,14 @@ class ScenarioSeedDataInitializer(
     ): SeedVocabularyItem =
         SeedVocabularyItem(
             expression = expression,
-            pinyin = normalizePinyin(pinyin),
+            pronunciationGuide = normalizePronunciationGuide(pronunciationGuide),
             gloss = gloss,
             explanation = explanation,
             startCharIndex = startCharIndex,
             endCharIndex = endCharIndex
         )
 
-    private fun normalizePinyin(value: String): String =
+    private fun normalizePronunciationGuide(value: String): String =
         Normalizer.normalize(value, Normalizer.Form.NFC)
 
     private data class SeedScenario(
@@ -490,7 +490,7 @@ class ScenarioSeedDataInitializer(
 
     private data class SeedVocabularyItem(
         val expression: String,
-        val pinyin: String,
+        val pronunciationGuide: String,
         val gloss: String,
         val explanation: String,
         val startCharIndex: Int,
