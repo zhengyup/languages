@@ -50,8 +50,8 @@ class ScenarioSeedDataInitializer(
                     scenario = scenario,
                     lineOrder = index + 1,
                     speakerName = seedLine.speakerName,
-                    hanziText = seedLine.hanziText,
-                    pinyinText = normalizePinyin(seedLine.pinyinText),
+                    targetText = seedLine.targetText,
+                    pronunciationGuide = normalizePinyin(seedLine.pronunciationGuide),
                     englishTranslation = seedLine.englishTranslation,
                     createdAt = createdAt
                 )
@@ -84,8 +84,8 @@ class ScenarioSeedDataInitializer(
                 lines = listOf(
                     SeedLine(
                         speakerName = "服务员",
-                        hanziText = "欢迎光临，请问几位？",
-                        pinyinText = "huān yíng guāng lín, qǐng wèn jǐ wèi?",
+                        targetText = "欢迎光临，请问几位？",
+                        pronunciationGuide = "huān yíng guāng lín, qǐng wèn jǐ wèi?",
                         englishTranslation = "Welcome, how many people?",
                         vocabularyItems = listOf(
                             seedVocabulary("欢迎光临", "huān yíng guāng lín", "welcome", "A standard greeting used when customers enter a restaurant.", 0, 4),
@@ -95,8 +95,8 @@ class ScenarioSeedDataInitializer(
                     ),
                     SeedLine(
                         speakerName = "顾客",
-                        hanziText = "两位，有靠窗的位子吗？",
-                        pinyinText = "liǎng wèi, yǒu kào chuāng de wèi zi ma?",
+                        targetText = "两位，有靠窗的位子吗？",
+                        pronunciationGuide = "liǎng wèi, yǒu kào chuāng de wèi zi ma?",
                         englishTranslation = "Two people. Do you have a window seat?",
                         vocabularyItems = listOf(
                             seedVocabulary("两位", "liǎng wèi", "two people", "Used when giving the number of diners.", 0, 2),
@@ -107,8 +107,8 @@ class ScenarioSeedDataInitializer(
                     ),
                     SeedLine(
                         speakerName = "服务员",
-                        hanziText = "有，请跟我来。",
-                        pinyinText = "yǒu, qǐng gēn wǒ lái.",
+                        targetText = "有，请跟我来。",
+                        pronunciationGuide = "yǒu, qǐng gēn wǒ lái.",
                         englishTranslation = "Yes, please follow me.",
                         vocabularyItems = listOf(
                             seedVocabulary("有", "yǒu", "yes / available", "Confirms that the requested seat is available.", 0, 1),
@@ -118,8 +118,8 @@ class ScenarioSeedDataInitializer(
                     ),
                     SeedLine(
                         speakerName = "顾客",
-                        hanziText = "我想点一份牛肉面，再来一杯热茶。",
-                        pinyinText = "wǒ xiǎng diǎn yí fèn niú ròu miàn, zài lái yì bēi rè chá.",
+                        targetText = "我想点一份牛肉面，再来一杯热茶。",
+                        pronunciationGuide = "wǒ xiǎng diǎn yí fèn niú ròu miàn, zài lái yì bēi rè chá.",
                         englishTranslation = "I'd like to order one beef noodle soup and a cup of hot tea.",
                         vocabularyItems = listOf(
                             seedVocabulary("我想", "wǒ xiǎng", "I would like", "A softer way to express what you want.", 0, 2),
@@ -133,8 +133,8 @@ class ScenarioSeedDataInitializer(
                     ),
                     SeedLine(
                         speakerName = "服务员",
-                        hanziText = "好的，要不要再加一个小菜？",
-                        pinyinText = "hǎo de, yào bú yào zài jiā yí ge xiǎo cài?",
+                        targetText = "好的，要不要再加一个小菜？",
+                        pronunciationGuide = "hǎo de, yào bú yào zài jiā yí ge xiǎo cài?",
                         englishTranslation = "Okay. Would you like to add a side dish?",
                         vocabularyItems = listOf(
                             seedVocabulary("好的", "hǎo de", "okay", "Confirms the order politely.", 0, 2),
@@ -146,8 +146,8 @@ class ScenarioSeedDataInitializer(
                     ),
                     SeedLine(
                         speakerName = "顾客",
-                        hanziText = "好啊，那就来一盘拍黄瓜。",
-                        pinyinText = "hǎo a, nà jiù lái yì pán pāi huáng guā.",
+                        targetText = "好啊，那就来一盘拍黄瓜。",
+                        pronunciationGuide = "hǎo a, nà jiù lái yì pán pāi huáng guā.",
                         englishTranslation = "Sure, then let's have one plate of smashed cucumber salad.",
                         vocabularyItems = listOf(
                             seedVocabulary("好啊", "hǎo a", "sure", "A relaxed way to agree.", 0, 2),
@@ -159,8 +159,8 @@ class ScenarioSeedDataInitializer(
                     ),
                     SeedLine(
                         speakerName = "服务员",
-                        hanziText = "没问题，面和茶马上给您送来。",
-                        pinyinText = "méi wèn tí, miàn hé chá mǎ shàng gěi nín sòng lái.",
+                        targetText = "没问题，面和茶马上给您送来。",
+                        pronunciationGuide = "méi wèn tí, miàn hé chá mǎ shàng gěi nín sòng lái.",
                         englishTranslation = "No problem. We'll bring your noodles and tea right away.",
                         vocabularyItems = listOf(
                             seedVocabulary("没问题", "méi wèn tí", "no problem", "A reassuring response to the request.", 0, 3),
@@ -174,8 +174,8 @@ class ScenarioSeedDataInitializer(
                     ),
                     SeedLine(
                         speakerName = "顾客",
-                        hanziText = "谢谢。",
-                        pinyinText = "xiè xie.",
+                        targetText = "谢谢。",
+                        pronunciationGuide = "xiè xie.",
                         englishTranslation = "Thank you.",
                         vocabularyItems = listOf(
                             seedVocabulary("谢谢", "xiè xie", "thank you", "A standard expression of thanks.", 0, 2)
@@ -190,8 +190,8 @@ class ScenarioSeedDataInitializer(
                 lines = listOf(
                     SeedLine(
                         speakerName = "司机",
-                        hanziText = "你是第一次来上海吗？",
-                        pinyinText = "nǐ shì dì yī cì lái shàng hǎi ma?",
+                        targetText = "你是第一次来上海吗？",
+                        pronunciationGuide = "nǐ shì dì yī cì lái shàng hǎi ma?",
                         englishTranslation = "Is this your first time coming to Shanghai?",
                         vocabularyItems = listOf(
                             seedVocabulary("你", "nǐ", "you", "Refers to the passenger.", 0, 1),
@@ -204,8 +204,8 @@ class ScenarioSeedDataInitializer(
                     ),
                     SeedLine(
                         speakerName = "乘客",
-                        hanziText = "不是，我去年也来过，不过这次是来出差的。",
-                        pinyinText = "bú shì, wǒ qù nián yě lái guo, bú guò zhè cì shì lái chū chāi de.",
+                        targetText = "不是，我去年也来过，不过这次是来出差的。",
+                        pronunciationGuide = "bú shì, wǒ qù nián yě lái guo, bú guò zhè cì shì lái chū chāi de.",
                         englishTranslation = "No, I came last year too, but this time I'm here on a business trip.",
                         vocabularyItems = listOf(
                             seedVocabulary("不是", "bú shì", "no / not", "Used to deny the driver's assumption.", 0, 2),
@@ -223,8 +223,8 @@ class ScenarioSeedDataInitializer(
                     ),
                     SeedLine(
                         speakerName = "司机",
-                        hanziText = "上海变化很快，这几年新开的店特别多。",
-                        pinyinText = "shàng hǎi biàn huà hěn kuài, zhè jǐ nián xīn kāi de diàn tè bié duō.",
+                        targetText = "上海变化很快，这几年新开的店特别多。",
+                        pronunciationGuide = "shàng hǎi biàn huà hěn kuài, zhè jǐ nián xīn kāi de diàn tè bié duō.",
                         englishTranslation = "Shanghai changes quickly. In the past few years, many newly opened shops have appeared.",
                         vocabularyItems = listOf(
                             seedVocabulary("上海", "shàng hǎi", "Shanghai", "The city being described.", 0, 2),
@@ -240,8 +240,8 @@ class ScenarioSeedDataInitializer(
                     ),
                     SeedLine(
                         speakerName = "乘客",
-                        hanziText = "我已经发现了，路上高楼比以前多了很多。",
-                        pinyinText = "wǒ yǐ jīng fā xiàn le, lù shàng gāo lóu bǐ yǐ qián duō le hěn duō.",
+                        targetText = "我已经发现了，路上高楼比以前多了很多。",
+                        pronunciationGuide = "wǒ yǐ jīng fā xiàn le, lù shàng gāo lóu bǐ yǐ qián duō le hěn duō.",
                         englishTranslation = "I've already noticed that there are many more tall buildings than before.",
                         vocabularyItems = listOf(
                             seedVocabulary("我", "wǒ", "I", "Refers to the speaker.", 0, 1),
@@ -258,8 +258,8 @@ class ScenarioSeedDataInitializer(
                     ),
                     SeedLine(
                         speakerName = "司机",
-                        hanziText = "这几天打算去哪里逛逛？",
-                        pinyinText = "zhè jǐ tiān dǎ suàn qù nǎ lǐ guàng guàng?",
+                        targetText = "这几天打算去哪里逛逛？",
+                        pronunciationGuide = "zhè jǐ tiān dǎ suàn qù nǎ lǐ guàng guàng?",
                         englishTranslation = "Where are you planning to go look around these next few days?",
                         vocabularyItems = listOf(
                             seedVocabulary("这几天", "zhè jǐ tiān", "these next few days", "Refers to the time during the current stay.", 0, 3),
@@ -271,8 +271,8 @@ class ScenarioSeedDataInitializer(
                     ),
                     SeedLine(
                         speakerName = "乘客",
-                        hanziText = "我想先去外滩，再去城隍庙吃小吃。",
-                        pinyinText = "wǒ xiǎng xiān qù wài tān, zài qù chéng huáng miào chī xiǎo chī.",
+                        targetText = "我想先去外滩，再去城隍庙吃小吃。",
+                        pronunciationGuide = "wǒ xiǎng xiān qù wài tān, zài qù chéng huáng miào chī xiǎo chī.",
                         englishTranslation = "I want to go to the Bund first, then head to City God Temple for snacks.",
                         vocabularyItems = listOf(
                             seedVocabulary("我想", "wǒ xiǎng", "I want to", "Introduces the travel plan politely.", 0, 2),
@@ -288,8 +288,8 @@ class ScenarioSeedDataInitializer(
                     ),
                     SeedLine(
                         speakerName = "司机",
-                        hanziText = "那不错，晚上浦东的夜景也值得看看。",
-                        pinyinText = "nà bú cuò, wǎn shang pǔ dōng de yè jǐng yě zhí de kàn kan.",
+                        targetText = "那不错，晚上浦东的夜景也值得看看。",
+                        pronunciationGuide = "nà bú cuò, wǎn shang pǔ dōng de yè jǐng yě zhí de kàn kan.",
                         englishTranslation = "That sounds good. Pudong's night view is also worth seeing in the evening.",
                         vocabularyItems = listOf(
                             seedVocabulary("那", "nà", "that", "Refers to the passenger's plan.", 0, 1),
@@ -305,8 +305,8 @@ class ScenarioSeedDataInitializer(
                     ),
                     SeedLine(
                         speakerName = "乘客",
-                        hanziText = "听起来很好，我希望这次能多待两天。",
-                        pinyinText = "tīng qǐ lái hěn hǎo, wǒ xī wàng zhè cì néng duō dāi liǎng tiān.",
+                        targetText = "听起来很好，我希望这次能多待两天。",
+                        pronunciationGuide = "tīng qǐ lái hěn hǎo, wǒ xī wàng zhè cì néng duō dāi liǎng tiān.",
                         englishTranslation = "That sounds great. I hope I can stay two more days this time.",
                         vocabularyItems = listOf(
                             seedVocabulary("听起来", "tīng qǐ lái", "sounds", "Used to react to a suggestion or description.", 0, 3),
@@ -328,8 +328,8 @@ class ScenarioSeedDataInitializer(
                 lines = listOf(
                     SeedLine(
                         speakerName = "同事甲",
-                        hanziText = "这个周末你有什么安排？",
-                        pinyinText = "zhè ge zhōu mò nǐ yǒu shén me ān pái?",
+                        targetText = "这个周末你有什么安排？",
+                        pronunciationGuide = "zhè ge zhōu mò nǐ yǒu shén me ān pái?",
                         englishTranslation = "What plans do you have for this weekend?",
                         vocabularyItems = listOf(
                             seedVocabulary("这个周末", "zhè ge zhōu mò", "this weekend", "Refers to the coming weekend.", 0, 4),
@@ -340,8 +340,8 @@ class ScenarioSeedDataInitializer(
                     ),
                     SeedLine(
                         speakerName = "同事乙",
-                        hanziText = "我打算先睡个懒觉，然后下午去看电影。",
-                        pinyinText = "wǒ dǎ suàn xiān shuì ge lǎn jiào, rán hòu xià wǔ qù kàn diàn yǐng.",
+                        targetText = "我打算先睡个懒觉，然后下午去看电影。",
+                        pronunciationGuide = "wǒ dǎ suàn xiān shuì ge lǎn jiào, rán hòu xià wǔ qù kàn diàn yǐng.",
                         englishTranslation = "I'm planning to sleep in first, then watch a movie in the afternoon.",
                         vocabularyItems = listOf(
                             seedVocabulary("我", "wǒ", "I", "Refers to the speaker.", 0, 1),
@@ -356,8 +356,8 @@ class ScenarioSeedDataInitializer(
                     ),
                     SeedLine(
                         speakerName = "同事甲",
-                        hanziText = "听起来不错，你要看哪一部？",
-                        pinyinText = "tīng qǐ lái bú cuò, nǐ yào kàn nǎ yí bù?",
+                        targetText = "听起来不错，你要看哪一部？",
+                        pronunciationGuide = "tīng qǐ lái bú cuò, nǐ yào kàn nǎ yí bù?",
                         englishTranslation = "That sounds good. Which movie do you want to see?",
                         vocabularyItems = listOf(
                             seedVocabulary("听起来", "tīng qǐ lái", "sounds", "Used to react to a plan or idea.", 0, 3),
@@ -370,8 +370,8 @@ class ScenarioSeedDataInitializer(
                     ),
                     SeedLine(
                         speakerName = "同事乙",
-                        hanziText = "我还没决定，可能会看那部新上映的喜剧片。",
-                        pinyinText = "wǒ hái méi jué dìng, kě néng huì kàn nà bù xīn shàng yìng de xǐ jù piàn.",
+                        targetText = "我还没决定，可能会看那部新上映的喜剧片。",
+                        pronunciationGuide = "wǒ hái méi jué dìng, kě néng huì kàn nà bù xīn shàng yìng de xǐ jù piàn.",
                         englishTranslation = "I haven't decided yet. I might watch that newly released comedy.",
                         vocabularyItems = listOf(
                             seedVocabulary("我", "wǒ", "I", "Refers to the speaker.", 0, 1),
@@ -388,8 +388,8 @@ class ScenarioSeedDataInitializer(
                     ),
                     SeedLine(
                         speakerName = "同事甲",
-                        hanziText = "如果你愿意，我也可以一起去。",
-                        pinyinText = "rú guǒ nǐ yuàn yì, wǒ yě kě yǐ yì qǐ qù.",
+                        targetText = "如果你愿意，我也可以一起去。",
+                        pronunciationGuide = "rú guǒ nǐ yuàn yì, wǒ yě kě yǐ yì qǐ qù.",
                         englishTranslation = "If you'd like, I can go with you too.",
                         vocabularyItems = listOf(
                             seedVocabulary("如果", "rú guǒ", "if", "Introduces a condition.", 0, 2),
@@ -404,8 +404,8 @@ class ScenarioSeedDataInitializer(
                     ),
                     SeedLine(
                         speakerName = "同事乙",
-                        hanziText = "好啊，看完电影我们还可以去吃火锅。",
-                        pinyinText = "hǎo a, kàn wán diàn yǐng wǒ men hái kě yǐ qù chī huǒ guō.",
+                        targetText = "好啊，看完电影我们还可以去吃火锅。",
+                        pronunciationGuide = "hǎo a, kàn wán diàn yǐng wǒ men hái kě yǐ qù chī huǒ guō.",
                         englishTranslation = "Sure. After the movie, we can also go eat hot pot.",
                         vocabularyItems = listOf(
                             seedVocabulary("好啊", "hǎo a", "sure", "A relaxed way to agree.", 0, 2),
@@ -421,8 +421,8 @@ class ScenarioSeedDataInitializer(
                     ),
                     SeedLine(
                         speakerName = "同事甲",
-                        hanziText = "没问题，我正好想吃点辣的。",
-                        pinyinText = "méi wèn tí, wǒ zhèng hǎo xiǎng chī diǎn là de.",
+                        targetText = "没问题，我正好想吃点辣的。",
+                        pronunciationGuide = "méi wèn tí, wǒ zhèng hǎo xiǎng chī diǎn là de.",
                         englishTranslation = "No problem. I happen to be craving something spicy.",
                         vocabularyItems = listOf(
                             seedVocabulary("没问题", "méi wèn tí", "no problem", "A natural way to agree to the plan.", 0, 3),
@@ -435,8 +435,8 @@ class ScenarioSeedDataInitializer(
                     ),
                     SeedLine(
                         speakerName = "同事乙",
-                        hanziText = "那我们周六下午联系，到时候再定时间。",
-                        pinyinText = "nà wǒ men zhōu liù xià wǔ lián xì, dào shí hou zài dìng shí jiān.",
+                        targetText = "那我们周六下午联系，到时候再定时间。",
+                        pronunciationGuide = "nà wǒ men zhōu liù xià wǔ lián xì, dào shí hou zài dìng shí jiān.",
                         englishTranslation = "Then let's get in touch Saturday afternoon and decide the time then.",
                         vocabularyItems = listOf(
                             seedVocabulary("那", "nà", "then", "Moves the conversation to the next step.", 0, 1),
@@ -482,8 +482,8 @@ class ScenarioSeedDataInitializer(
 
     private data class SeedLine(
         val speakerName: String,
-        val hanziText: String,
-        val pinyinText: String,
+        val targetText: String,
+        val pronunciationGuide: String,
         val englishTranslation: String,
         val vocabularyItems: List<SeedVocabularyItem>
     )

@@ -55,8 +55,8 @@ class ScenarioLineRepositoryIntegrationTest {
                 scenario = scenario,
                 lineOrder = 1,
                 speakerName = "Speaker",
-                hanziText = "你好，欢迎来到中文情景阅读器。",
-                pinyinText = "nǐ hǎo, huān yíng lái dào zhōng wén qíng jǐng yuè dú qì.",
+                targetText = "你好，欢迎来到中文情景阅读器。",
+                pronunciationGuide = "nǐ hǎo, huān yíng lái dào zhōng wén qíng jǐng yuè dú qì.",
                 englishTranslation = "Hello, welcome to the Mandarin Scenario Reader.",
                 createdAt = Instant.now()
             )
@@ -125,8 +125,8 @@ class ScenarioLineRepositoryIntegrationTest {
                 scenario = scenario,
                 lineOrder = 1,
                 speakerName = "Speaker",
-                hanziText = "请问，几位？",
-                pinyinText = "qǐng wèn, jǐ wèi?",
+                targetText = "请问，几位？",
+                pronunciationGuide = "qǐng wèn, jǐ wèi?",
                 createdAt = Instant.now()
             )
         )
