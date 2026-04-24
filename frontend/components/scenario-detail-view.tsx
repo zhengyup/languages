@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { ScenarioDetail } from "@/lib/types";
 import { ToggleSwitch } from "@/components/toggle-switch";
 import { ScenarioLineCard } from "@/components/scenario-line-card";
@@ -20,6 +20,8 @@ export function ScenarioDetailView({ scenario }: ScenarioDetailViewProps) {
   const [completionReady, setCompletionReady] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [playingLineId, setPlayingLineId] = useState<number | null>(null);
+  const currentAudioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
     let cancelled = false;
@@ -49,6 +51,13 @@ export function ScenarioDetailView({ scenario }: ScenarioDetailViewProps) {
 
     return () => {
       cancelled = true;
+    };
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      currentAudioRef.current?.pause();
+      currentAudioRef.current = null;
     };
   }, []);
 
@@ -90,6 +99,42 @@ export function ScenarioDetailView({ scenario }: ScenarioDetailViewProps) {
     }
   }
 
+  function handleLineAudioToggle(lineId: number, audioUrl: string) {
+    const currentAudio = currentAudioRef.current;
+
+    if (currentAudio) {
+      currentAudio.pause();
+      currentAudio.currentTime = 0;
+      currentAudioRef.current = null;
+    }
+
+    if (playingLineId === lineId) {
+      setPlayingLineId(null);
+      return;
+    }
+
+    const nextAudio = new Audio(audioUrl);
+
+    nextAudio.onended = () => {
+      currentAudioRef.current = null;
+      setPlayingLineId(null);
+    };
+    nextAudio.onerror = () => {
+      currentAudioRef.current = null;
+      setPlayingLineId(null);
+      console.error(`Could not play audio for scenario line ${lineId}.`);
+    };
+
+    currentAudioRef.current = nextAudio;
+    setPlayingLineId(lineId);
+
+    void nextAudio.play().catch(() => {
+      currentAudioRef.current = null;
+      setPlayingLineId(null);
+      console.error(`Could not play audio for scenario line ${lineId}.`);
+    });
+  }
+
   return (
     <div className="flex flex-col gap-6">
       <section className="rounded-card border border-border bg-white px-5 py-5 shadow-card">
@@ -124,6 +169,14 @@ export function ScenarioDetailView({ scenario }: ScenarioDetailViewProps) {
             line={line}
             showPronunciation={showPronunciation}
             showTranslation={showTranslation}
+            isPlaying={playingLineId === line.id}
+            onPlayToggle={(selectedLine) => {
+              if (!selectedLine.audioUrl) {
+                return;
+              }
+
+              handleLineAudioToggle(selectedLine.id, selectedLine.audioUrl);
+            }}
           />
         ))}
       </section>

@@ -25,7 +25,16 @@ export async function getScenarioList(): Promise<ScenarioResponse[]> {
 }
 
 export async function getScenarioDetail(id: number): Promise<ScenarioDetail> {
-  return backendFetch<ScenarioDetail>(`/scenarios/${id}`);
+  const scenario = await backendFetch<ScenarioDetail>(`/scenarios/${id}`);
+
+  return {
+    ...scenario,
+    audioUrl: normalizeAudioUrl(scenario.audioUrl),
+    lines: scenario.lines.map((line) => ({
+      ...line,
+      audioUrl: normalizeAudioUrl(line.audioUrl)
+    }))
+  };
 }
 
 export async function getGroupedScenarioCards(): Promise<ScenarioGroup[]> {
@@ -115,4 +124,16 @@ async function getErrorMessage(response: Response): Promise<string> {
   } catch {
     return `Request failed with status ${response.status}`;
   }
+}
+
+function normalizeAudioUrl(audioUrl?: string | null): string | null | undefined {
+  if (!audioUrl) {
+    return audioUrl;
+  }
+
+  if (audioUrl.startsWith("http://") || audioUrl.startsWith("https://")) {
+    return audioUrl;
+  }
+
+  return `${BACKEND_API_URL}${audioUrl.startsWith("/") ? audioUrl : `/${audioUrl}`}`;
 }

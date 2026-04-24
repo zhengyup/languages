@@ -7,6 +7,8 @@ type ScenarioLineCardProps = {
   line: ScenarioLine;
   showPronunciation: boolean;
   showTranslation: boolean;
+  isPlaying: boolean;
+  onPlayToggle: (line: ScenarioLine) => void;
 };
 
 type LineSegment =
@@ -16,7 +18,9 @@ type LineSegment =
 export function ScenarioLineCard({
   line,
   showPronunciation,
-  showTranslation
+  showTranslation,
+  isPlaying,
+  onPlayToggle
 }: ScenarioLineCardProps) {
   const [activeVocabularyId, setActiveVocabularyId] = useState<number | null>(null);
 
@@ -32,7 +36,23 @@ export function ScenarioLineCard({
         <span className="text-sm font-semibold text-accent">
           {line.speakerName ?? "Narration"}
         </span>
-        <span className="text-sm font-medium text-muted">#{line.lineOrder}</span>
+        <div className="flex items-center gap-3">
+          {line.audioUrl ? (
+            <button
+              type="button"
+              onClick={() => onPlayToggle(line)}
+              className={`inline-flex h-9 w-9 items-center justify-center rounded-full border text-sm transition ${
+                isPlaying
+                  ? "border-accent bg-accent text-white"
+                  : "border-border bg-white text-ink hover:border-accent hover:text-accent"
+              }`}
+              aria-label={isPlaying ? "Stop audio" : "Play audio"}
+            >
+              {isPlaying ? "■" : "▶"}
+            </button>
+          ) : null}
+          <span className="text-sm font-medium text-muted">#{line.lineOrder}</span>
+        </div>
       </div>
 
       <div className="relative">
