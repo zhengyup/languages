@@ -13,3 +13,6 @@ __pycache__/
 # Local Python tooling folders in this repo
 audio-gen/.venv/
 experiments/venv/
+
+# Experimental generated audio outputs
+experiments/*.wav
