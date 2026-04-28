@@ -91,6 +91,39 @@ class ScenarioControllerIntegrationTest {
     }
 
     @Test
+    fun shouldHideArchivedLanguageScenariosFromReaderApis() {
+        val mandarinScenario = scenarioRepository.save(
+            Scenario(
+                title = "Ordering Tea",
+                description = "A Mandarin scenario that should stay visible.",
+                language = LearningLanguage.MANDARIN,
+                topic = ScenarioTopic.RESTAURANT,
+                difficultyLevel = DifficultyLevel.BEGINNER,
+                createdAt = Instant.now()
+            )
+        )
+        val archivedGermanScenario = scenarioRepository.save(
+            Scenario(
+                title = "Checking into a Hotel",
+                description = "An archived German scenario.",
+                language = LearningLanguage.GERMAN,
+                topic = ScenarioTopic.TRAVEL,
+                difficultyLevel = DifficultyLevel.INTERMEDIATE,
+                createdAt = Instant.now()
+            )
+        )
+
+        mockMvc.perform(get("/scenarios"))
+            .andExpect(status().isOk)
+            .andExpect(jsonPath("$.length()").value(1))
+            .andExpect(jsonPath("$[0].id").value(mandarinScenario.id))
+            .andExpect(jsonPath("$[0].language").value(LearningLanguage.MANDARIN.name))
+
+        mockMvc.perform(get("/scenarios/${archivedGermanScenario.id}"))
+            .andExpect(status().isNotFound)
+    }
+
+    @Test
     fun shouldRetrieveScenarioDetailWithOrderedLines() {
         val scenario = scenarioRepository.save(
             Scenario(

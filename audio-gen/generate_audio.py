@@ -19,7 +19,7 @@ Notes:
 - Stable file names like scenario-line-{scenarioLineId}.wav keep URLs stable
   when a line is regenerated and make it easier to swap local disk for S3 later.
 - The script chooses the Chatterbox language code from Scenario.language so the
-  same batch flow can support Mandarin, Spanish, and German.
+  same batch flow can support the active reader languages.
 """
 
 from __future__ import annotations
@@ -63,14 +63,14 @@ LANGUAGE_CONFIG = {
         "exaggeration": EXAGGERATION,
         "default_max_new_tokens": DEFAULT_MAX_NEW_TOKENS,
     },
-    "SPANISH": {
-        "lang_code": "es",
+    "KOREAN": {
+        "lang_code": "ko",
         "cfg_weight": CFG_WEIGHT,
         "exaggeration": EXAGGERATION,
         "default_max_new_tokens": DEFAULT_MAX_NEW_TOKENS,
     },
-    "GERMAN": {
-        "lang_code": "de",
+    "JAPANESE": {
+        "lang_code": "ja",
         "cfg_weight": CFG_WEIGHT,
         "exaggeration": EXAGGERATION,
         "default_max_new_tokens": DEFAULT_MAX_NEW_TOKENS,
@@ -200,14 +200,17 @@ def load_model() -> ChatterboxMultilingualTTS:
 
 def select_lines_for_generation(connection: psycopg.Connection) -> list[ScenarioLineRow]:
     with connection.cursor() as cursor:
+        active_languages = tuple(LANGUAGE_CONFIG.keys())
         cursor.execute(
             """
             SELECT scenario_lines.id, scenarios.language, scenario_lines.target_text
             FROM scenario_lines
             JOIN scenarios ON scenarios.id = scenario_lines.scenario_id
             WHERE audio_status IN ('NOT_GENERATED', 'PENDING_REGENERATION')
+              AND scenarios.language = ANY(%s)
             ORDER BY scenario_lines.id ASC
-            """
+            """,
+            (list(active_languages),),
         )
         return [
             ScenarioLineRow(

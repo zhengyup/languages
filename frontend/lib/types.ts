@@ -6,7 +6,7 @@ export type ScenarioTopic =
   | "SHOPPING";
 
 export type DifficultyLevel = "BEGINNER" | "INTERMEDIATE" | "ADVANCED";
-export type LearningLanguage = "MANDARIN" | "SPANISH" | "GERMAN";
+export type LearningLanguage = "MANDARIN" | "KOREAN" | "JAPANESE";
 
 export type ScenarioResponse = {
   id: number;

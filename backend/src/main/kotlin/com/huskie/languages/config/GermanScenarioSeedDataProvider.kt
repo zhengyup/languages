@@ -2,9 +2,10 @@ package com.huskie.languages.config
 
 import com.huskie.languages.domain.scenario.LearningLanguage
 import com.huskie.languages.domain.scenario.ScenarioTopic
-import org.springframework.stereotype.Component
 
-@Component
+// Archived temporarily while the active reader focuses on Mandarin and
+// future Korean/Japanese support. Kept here as seed reference data but not
+// registered as an active provider.
 class GermanScenarioSeedDataProvider : ScenarioSeedDataProvider {
     override val language: LearningLanguage = LearningLanguage.GERMAN
 
