@@ -8,10 +8,9 @@ import com.huskie.languages.domain.scenario.ScenarioTopic
 import org.springframework.stereotype.Component
 
 @Component
-class JapaneseScenarioSeedDataProvider(
-    private val objectMapper: ObjectMapper
-) : ScenarioSeedDataProvider {
+class JapaneseScenarioSeedDataProvider : ScenarioSeedDataProvider {
     override val language: LearningLanguage = LearningLanguage.JAPANESE
+    private val objectMapper = ObjectMapper()
 
     override fun scenarios(): List<SeedScenario> {
         val inputStream = javaClass.getResourceAsStream("/seed-data/japanese_seed_scenarios_full.json")

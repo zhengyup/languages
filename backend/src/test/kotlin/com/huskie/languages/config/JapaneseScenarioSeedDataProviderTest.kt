@@ -1,15 +1,12 @@
 package com.huskie.languages.config
 
-import com.fasterxml.jackson.databind.ObjectMapper
 import com.huskie.languages.domain.scenario.LearningLanguage
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
 class JapaneseScenarioSeedDataProviderTest {
-    private val provider = JapaneseScenarioSeedDataProvider(
-        ObjectMapper()
-    )
+    private val provider = JapaneseScenarioSeedDataProvider()
 
     @Test
     fun shouldLoadJapaneseSeedScenariosFromResource() {
