@@ -39,11 +39,18 @@ class ScenarioService(
     }
 
     fun getAllScenarios(): List<ScenarioResponse> =
-        scenarioRepository.findAll(Sort.by(Sort.Direction.ASC, "createdAt")).map { it.toResponse() }
+        scenarioRepository.findAll(Sort.by(Sort.Direction.ASC, "createdAt"))
+            .filter { it.language.isReaderVisible() }
+            .map { it.toResponse() }
 
     fun getScenarioById(id: Long): ScenarioDetailResponse {
         val scenario = scenarioRepository.findById(id)
             .orElseThrow { ScenarioNotFoundException(id) }
+            .also {
+                if (it.language.isReaderVisible().not()) {
+                    throw ScenarioNotFoundException(id)
+                }
+            }
         val lines = scenarioLineRepository.findAllByScenarioIdOrderByLineOrderAsc(id)
         val vocabularyItemsByLineId = getVocabularyItemsByLineId(lines)
 

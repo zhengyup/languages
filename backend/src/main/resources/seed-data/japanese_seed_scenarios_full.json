@@ -1,0 +1,3410 @@
+[
+  {
+    "title": "Ordering Food at a Ramen Shop",
+    "description": "A customer orders ramen and tea at a small ramen restaurant.",
+    "topic": "ordering food",
+    "difficultyLevel": "BEGINNER",
+    "language": "JAPANESE",
+    "lines": [
+      {
+        "lineOrder": 1,
+        "speakerName": "Staff",
+        "targetText": "いらっしゃいませ。何名様ですか。",
+        "pronunciationGuide": "irasshaimase. nanmeisama desu ka.",
+        "englishTranslation": "Welcome. How many people?",
+        "vocabularyItems": [
+          {
+            "expression": "いらっしゃいませ",
+            "pronunciationGuide": "irasshaimase",
+            "gloss": "welcome",
+            "explanation": "A common greeting used by staff.",
+            "startCharIndex": 0,
+            "endCharIndex": 8
+          },
+          {
+            "expression": "。",
+            "pronunciationGuide": ".",
+            "gloss": "period",
+            "explanation": null,
+            "startCharIndex": 8,
+            "endCharIndex": 9
+          },
+          {
+            "expression": "何名様",
+            "pronunciationGuide": "nanmeisama",
+            "gloss": "how many people",
+            "explanation": "Polite way to ask the number of guests.",
+            "startCharIndex": 9,
+            "endCharIndex": 12
+          },
+          {
+            "expression": "ですか",
+            "pronunciationGuide": "desu ka",
+            "gloss": "is it?",
+            "explanation": "Polite question ending.",
+            "startCharIndex": 12,
+            "endCharIndex": 15
+          },
+          {
+            "expression": "。",
+            "pronunciationGuide": ".",
+            "gloss": "period",
+            "explanation": null,
+            "startCharIndex": 15,
+            "endCharIndex": 16
+          }
+        ]
+      },
+      {
+        "lineOrder": 2,
+        "speakerName": "Customer",
+        "targetText": "一人です。",
+        "pronunciationGuide": "hitori desu.",
+        "englishTranslation": "Just one person.",
+        "vocabularyItems": [
+          {
+            "expression": "一人",
+            "pronunciationGuide": "hitori",
+            "gloss": "one person",
+            "explanation": "Counter expression for one person.",
+            "startCharIndex": 0,
+            "endCharIndex": 2
+          },
+          {
+            "expression": "です",
+            "pronunciationGuide": "desu",
+            "gloss": "to be",
+            "explanation": "Polite copula.",
+            "startCharIndex": 2,
+            "endCharIndex": 4
+          },
+          {
+            "expression": "。",
+            "pronunciationGuide": ".",
+            "gloss": "period",
+            "explanation": null,
+            "startCharIndex": 4,
+            "endCharIndex": 5
+          }
+        ]
+      },
+      {
+        "lineOrder": 3,
+        "speakerName": "Staff",
+        "targetText": "こちらの席へどうぞ。",
+        "pronunciationGuide": "kochira no seki e douzo.",
+        "englishTranslation": "Please take this seat.",
+        "vocabularyItems": [
+          {
+            "expression": "こちら",
+            "pronunciationGuide": "kochira",
+            "gloss": "this way",
+            "explanation": "Polite way to refer to a direction or place.",
+            "startCharIndex": 0,
+            "endCharIndex": 3
+          },
+          {
+            "expression": "の",
+            "pronunciationGuide": "no",
+            "gloss": "of",
+            "explanation": "Connects nouns.",
+            "startCharIndex": 3,
+            "endCharIndex": 4
+          },
+          {
+            "expression": "席",
+            "pronunciationGuide": "seki",
+            "gloss": "seat",
+            "explanation": "A place to sit.",
+            "startCharIndex": 4,
+            "endCharIndex": 5
+          },
+          {
+            "expression": "へ",
+            "pronunciationGuide": "e",
+            "gloss": "toward",
+            "explanation": "Direction particle.",
+            "startCharIndex": 5,
+            "endCharIndex": 6
+          },
+          {
+            "expression": "どうぞ",
+            "pronunciationGuide": "douzo",
+            "gloss": "please",
+            "explanation": "Used when offering or inviting.",
+            "startCharIndex": 6,
+            "endCharIndex": 9
+          },
+          {
+            "expression": "。",
+            "pronunciationGuide": ".",
+            "gloss": "period",
+            "explanation": null,
+            "startCharIndex": 9,
+            "endCharIndex": 10
+          }
+        ]
+      },
+      {
+        "lineOrder": 4,
+        "speakerName": "Customer",
+        "targetText": "味噌ラーメンをお願いします。",
+        "pronunciationGuide": "miso raamen o onegaishimasu.",
+        "englishTranslation": "Miso ramen, please.",
+        "vocabularyItems": [
+          {
+            "expression": "味噌ラーメン",
+            "pronunciationGuide": "miso raamen",
+            "gloss": "miso ramen",
+            "explanation": "A ramen dish with miso broth.",
+            "startCharIndex": 0,
+            "endCharIndex": 6
+          },
+          {
+            "expression": "を",
+            "pronunciationGuide": "o",
+            "gloss": "object marker",
+            "explanation": "Marks the object of the sentence.",
+            "startCharIndex": 6,
+            "endCharIndex": 7
+          },
+          {
+            "expression": "お願いします",
+            "pronunciationGuide": "onegaishimasu",
+            "gloss": "please",
+            "explanation": "Polite phrase used when making requests.",
+            "startCharIndex": 7,
+            "endCharIndex": 13
+          },
+          {
+            "expression": "。",
+            "pronunciationGuide": ".",
+            "gloss": "period",
+            "explanation": null,
+            "startCharIndex": 13,
+            "endCharIndex": 14
+          }
+        ]
+      },
+      {
+        "lineOrder": 5,
+        "speakerName": "Staff",
+        "targetText": "飲み物はいかがですか。",
+        "pronunciationGuide": "nomimono wa ikaga desu ka.",
+        "englishTranslation": "Would you like a drink?",
+        "vocabularyItems": [
+          {
+            "expression": "飲み物",
+            "pronunciationGuide": "nomimono",
+            "gloss": "drink",
+            "explanation": "General word for beverages.",
+            "startCharIndex": 0,
+            "endCharIndex": 3
+          },
+          {
+            "expression": "は",
+            "pronunciationGuide": "wa",
+            "gloss": "topic marker",
+            "explanation": "Marks the topic.",
+            "startCharIndex": 3,
+            "endCharIndex": 4
+          },
+          {
+            "expression": "いかがですか",
+            "pronunciationGuide": "ikaga desu ka",
+            "gloss": "would you like",
+            "explanation": "Polite phrase for offering something.",
+            "startCharIndex": 4,
+            "endCharIndex": 10
+          },
+          {
+            "expression": "。",
+            "pronunciationGuide": ".",
+            "gloss": "period",
+            "explanation": null,
+            "startCharIndex": 10,
+            "endCharIndex": 11
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Asking for Directions to the Station",
+    "description": "A tourist asks a local person how to get to the nearest train station.",
+    "topic": "asking for directions",
+    "difficultyLevel": "BEGINNER",
+    "language": "JAPANESE",
+    "lines": [
+      {
+        "lineOrder": 1,
+        "speakerName": "Tourist",
+        "targetText": "すみません、駅はどこですか。",
+        "pronunciationGuide": "sumimasen, eki wa doko desu ka.",
+        "englishTranslation": "Excuse me, where is the station?",
+        "vocabularyItems": [
+          {
+            "expression": "すみません",
+            "pronunciationGuide": "sumimasen",
+            "gloss": "excuse me",
+            "explanation": "Used to politely get someone's attention.",
+            "startCharIndex": 0,
+            "endCharIndex": 5
+          },
+          {
+            "expression": "、",
+            "pronunciationGuide": ",",
+            "gloss": "comma",
+            "explanation": null,
+            "startCharIndex": 5,
+            "endCharIndex": 6
+          },
+          {
+            "expression": "駅",
+            "pronunciationGuide": "eki",
+            "gloss": "station",
+            "explanation": "Usually refers to a train station.",
+            "startCharIndex": 6,
+            "endCharIndex": 7
+          },
+          {
+            "expression": "は",
+            "pronunciationGuide": "wa",
+            "gloss": "topic marker",
+            "explanation": "Marks the topic.",
+            "startCharIndex": 7,
+            "endCharIndex": 8
+          },
+          {
+            "expression": "どこ",
+            "pronunciationGuide": "doko",
+            "gloss": "where",
+            "explanation": "Question word for location.",
+            "startCharIndex": 8,
+            "endCharIndex": 10
+          },
+          {
+            "expression": "ですか",
+            "pronunciationGuide": "desu ka",
+            "gloss": "is it?",
+            "explanation": "Polite question ending.",
+            "startCharIndex": 10,
+            "endCharIndex": 13
+          },
+          {
+            "expression": "。",
+            "pronunciationGuide": ".",
+            "gloss": "period",
+            "explanation": null,
+            "startCharIndex": 13,
+            "endCharIndex": 14
+          }
+        ]
+      },
+      {
+        "lineOrder": 2,
+        "speakerName": "Local",
+        "targetText": "駅はこの道をまっすぐです。",
+        "pronunciationGuide": "eki wa kono michi o massugu desu.",
+        "englishTranslation": "The station is straight down this road.",
+        "vocabularyItems": [
+          {
+            "expression": "駅",
+            "pronunciationGuide": "eki",
+            "gloss": "station",
+            "explanation": "Train station.",
+            "startCharIndex": 0,
+            "endCharIndex": 1
+          },
+          {
+            "expression": "は",
+            "pronunciationGuide": "wa",
+            "gloss": "topic marker",
+            "explanation": "Marks the topic.",
+            "startCharIndex": 1,
+            "endCharIndex": 2
+          },
+          {
+            "expression": "この",
+            "pronunciationGuide": "kono",
+            "gloss": "this",
+            "explanation": "Used before a noun near the speaker.",
+            "startCharIndex": 2,
+            "endCharIndex": 4
+          },
+          {
+            "expression": "道",
+            "pronunciationGuide": "michi",
+            "gloss": "road",
+            "explanation": "Road or path.",
+            "startCharIndex": 4,
+            "endCharIndex": 5
+          },
+          {
+            "expression": "を",
+            "pronunciationGuide": "o",
+            "gloss": "object marker",
+            "explanation": "Marks the route taken.",
+            "startCharIndex": 5,
+            "endCharIndex": 6
+          },
+          {
+            "expression": "まっすぐ",
+            "pronunciationGuide": "massugu",
+            "gloss": "straight",
+            "explanation": "Means to go straight ahead.",
+            "startCharIndex": 6,
+            "endCharIndex": 10
+          },
+          {
+            "expression": "です",
+            "pronunciationGuide": "desu",
+            "gloss": "is",
+            "explanation": "Polite copula.",
+            "startCharIndex": 10,
+            "endCharIndex": 12
+          },
+          {
+            "expression": "。",
+            "pronunciationGuide": ".",
+            "gloss": "period",
+            "explanation": null,
+            "startCharIndex": 12,
+            "endCharIndex": 13
+          }
+        ]
+      },
+      {
+        "lineOrder": 3,
+        "speakerName": "Tourist",
+        "targetText": "ここから歩いて何分ぐらいですか。",
+        "pronunciationGuide": "koko kara aruite nanpun gurai desu ka.",
+        "englishTranslation": "About how many minutes is it on foot from here?",
+        "vocabularyItems": [
+          {
+            "expression": "ここ",
+            "pronunciationGuide": "koko",
+            "gloss": "here",
+            "explanation": "This place.",
+            "startCharIndex": 0,
+            "endCharIndex": 2
+          },
+          {
+            "expression": "から",
+            "pronunciationGuide": "kara",
+            "gloss": "from",
+            "explanation": "Marks the starting point.",
+            "startCharIndex": 2,
+            "endCharIndex": 4
+          },
+          {
+            "expression": "歩いて",
+            "pronunciationGuide": "aruite",
+            "gloss": "walking",
+            "explanation": "Te-form of walk; means by walking.",
+            "startCharIndex": 4,
+            "endCharIndex": 7
+          },
+          {
+            "expression": "何分",
+            "pronunciationGuide": "nanpun",
+            "gloss": "how many minutes",
+            "explanation": "Asks about time in minutes.",
+            "startCharIndex": 7,
+            "endCharIndex": 9
+          },
+          {
+            "expression": "ぐらい",
+            "pronunciationGuide": "gurai",
+            "gloss": "about",
+            "explanation": "Approximation.",
+            "startCharIndex": 9,
+            "endCharIndex": 12
+          },
+          {
+            "expression": "ですか",
+            "pronunciationGuide": "desu ka",
+            "gloss": "is it?",
+            "explanation": "Polite question ending.",
+            "startCharIndex": 12,
+            "endCharIndex": 15
+          },
+          {
+            "expression": "。",
+            "pronunciationGuide": ".",
+            "gloss": "period",
+            "explanation": null,
+            "startCharIndex": 15,
+            "endCharIndex": 16
+          }
+        ]
+      },
+      {
+        "lineOrder": 4,
+        "speakerName": "Local",
+        "targetText": "五分ぐらいです。近いですよ。",
+        "pronunciationGuide": "gofun gurai desu. chikai desu yo.",
+        "englishTranslation": "About five minutes. It's close.",
+        "vocabularyItems": [
+          {
+            "expression": "五分",
+            "pronunciationGuide": "gofun",
+            "gloss": "five minutes",
+            "explanation": "A time duration.",
+            "startCharIndex": 0,
+            "endCharIndex": 2
+          },
+          {
+            "expression": "ぐらい",
+            "pronunciationGuide": "gurai",
+            "gloss": "about",
+            "explanation": "Approximation.",
+            "startCharIndex": 2,
+            "endCharIndex": 5
+          },
+          {
+            "expression": "です",
+            "pronunciationGuide": "desu",
+            "gloss": "is",
+            "explanation": "Polite copula.",
+            "startCharIndex": 5,
+            "endCharIndex": 7
+          },
+          {
+            "expression": "。",
+            "pronunciationGuide": ".",
+            "gloss": "period",
+            "explanation": null,
+            "startCharIndex": 7,
+            "endCharIndex": 8
+          },
+          {
+            "expression": "近い",
+            "pronunciationGuide": "chikai",
+            "gloss": "near",
+            "explanation": "Describes something close by.",
+            "startCharIndex": 8,
+            "endCharIndex": 10
+          },
+          {
+            "expression": "です",
+            "pronunciationGuide": "desu",
+            "gloss": "is",
+            "explanation": "Polite copula.",
+            "startCharIndex": 10,
+            "endCharIndex": 12
+          },
+          {
+            "expression": "よ",
+            "pronunciationGuide": "yo",
+            "gloss": "you know",
+            "explanation": "Adds emphasis or friendly assurance.",
+            "startCharIndex": 12,
+            "endCharIndex": 13
+          },
+          {
+            "expression": "。",
+            "pronunciationGuide": ".",
+            "gloss": "period",
+            "explanation": null,
+            "startCharIndex": 13,
+            "endCharIndex": 14
+          }
+        ]
+      },
+      {
+        "lineOrder": 5,
+        "speakerName": "Tourist",
+        "targetText": "ありがとうございます。助かります。",
+        "pronunciationGuide": "arigatou gozaimasu. tasukarimasu.",
+        "englishTranslation": "Thank you very much. That helps.",
+        "vocabularyItems": [
+          {
+            "expression": "ありがとうございます",
+            "pronunciationGuide": "arigatou gozaimasu",
+            "gloss": "thank you very much",
+            "explanation": "Polite expression of thanks.",
+            "startCharIndex": 0,
+            "endCharIndex": 10
+          },
+          {
+            "expression": "。",
+            "pronunciationGuide": ".",
+            "gloss": "period",
+            "explanation": null,
+            "startCharIndex": 10,
+            "endCharIndex": 11
+          },
+          {
+            "expression": "助かります",
+            "pronunciationGuide": "tasukarimasu",
+            "gloss": "that helps",
+            "explanation": "Used to say something is helpful.",
+            "startCharIndex": 11,
+            "endCharIndex": 16
+          },
+          {
+            "expression": "。",
+            "pronunciationGuide": ".",
+            "gloss": "period",
+            "explanation": null,
+            "startCharIndex": 16,
+            "endCharIndex": 17
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Checking Into a Hotel",
+    "description": "A traveler checks into a hotel and asks about breakfast.",
+    "topic": "hotel",
+    "difficultyLevel": "BEGINNER",
+    "language": "JAPANESE",
+    "lines": [
+      {
+        "lineOrder": 1,
+        "speakerName": "Guest",
+        "targetText": "こんばんは。予約があります。",
+        "pronunciationGuide": "konbanwa. yoyaku ga arimasu.",
+        "englishTranslation": "Good evening. I have a reservation.",
+        "vocabularyItems": [
+          {
+            "expression": "こんばんは",
+            "pronunciationGuide": "konbanwa",
+            "gloss": "good evening",
+            "explanation": "Evening greeting.",
+            "startCharIndex": 0,
+            "endCharIndex": 5
+          },
+          {
+            "expression": "。",
+            "pronunciationGuide": ".",
+            "gloss": "period",
+            "explanation": null,
+            "startCharIndex": 5,
+            "endCharIndex": 6
+          },
+          {
+            "expression": "予約",
+            "pronunciationGuide": "yoyaku",
+            "gloss": "reservation",
+            "explanation": "A booking.",
+            "startCharIndex": 6,
+            "endCharIndex": 8
+          },
+          {
+            "expression": "が",
+            "pronunciationGuide": "ga",
+            "gloss": "subject marker",
+            "explanation": "Marks the subject.",
+            "startCharIndex": 8,
+            "endCharIndex": 9
+          },
+          {
+            "expression": "あります",
+            "pronunciationGuide": "arimasu",
+            "gloss": "there is",
+            "explanation": "Polite form of aru, used for things.",
+            "startCharIndex": 9,
+            "endCharIndex": 13
+          },
+          {
+            "expression": "。",
+            "pronunciationGuide": ".",
+            "gloss": "period",
+            "explanation": null,
+            "startCharIndex": 13,
+            "endCharIndex": 14
+          }
+        ]
+      },
+      {
+        "lineOrder": 2,
+        "speakerName": "Staff",
+        "targetText": "お名前をお願いします。",
+        "pronunciationGuide": "onamae o onegaishimasu.",
+        "englishTranslation": "May I have your name, please?",
+        "vocabularyItems": [
+          {
+            "expression": "お名前",
+            "pronunciationGuide": "onamae",
+            "gloss": "your name",
+            "explanation": "Polite word for name.",
+            "startCharIndex": 0,
+            "endCharIndex": 3
+          },
+          {
+            "expression": "を",
+            "pronunciationGuide": "o",
+            "gloss": "object marker",
+            "explanation": "Marks the requested information.",
+            "startCharIndex": 3,
+            "endCharIndex": 4
+          },
+          {
+            "expression": "お願いします",
+            "pronunciationGuide": "onegaishimasu",
+            "gloss": "please",
+            "explanation": "Polite request phrase.",
+            "startCharIndex": 4,
+            "endCharIndex": 10
+          },
+          {
+            "expression": "。",
+            "pronunciationGuide": ".",
+            "gloss": "period",
+            "explanation": null,
+            "startCharIndex": 10,
+            "endCharIndex": 11
+          }
+        ]
+      },
+      {
+        "lineOrder": 3,
+        "speakerName": "Guest",
+        "targetText": "田中です。今日から二泊です。",
+        "pronunciationGuide": "Tanaka desu. kyou kara nihaku desu.",
+        "englishTranslation": "I'm Tanaka. I'm staying two nights from today.",
+        "vocabularyItems": [
+          {
+            "expression": "田中",
+            "pronunciationGuide": "Tanaka",
+            "gloss": "Tanaka",
+            "explanation": "A Japanese family name.",
+            "startCharIndex": 0,
+            "endCharIndex": 2
+          },
+          {
+            "expression": "です",
+            "pronunciationGuide": "desu",
+            "gloss": "am",
+            "explanation": "Polite copula.",
+            "startCharIndex": 2,
+            "endCharIndex": 4
+          },
+          {
+            "expression": "。",
+            "pronunciationGuide": ".",
+            "gloss": "period",
+            "explanation": null,
+            "startCharIndex": 4,
+            "endCharIndex": 5
+          },
+          {
+            "expression": "今日",
+            "pronunciationGuide": "kyou",
+            "gloss": "today",
+            "explanation": "The current day.",
+            "startCharIndex": 5,
+            "endCharIndex": 7
+          },
+          {
+            "expression": "から",
+            "pronunciationGuide": "kara",
+            "gloss": "from",
+            "explanation": "Marks the starting point.",
+            "startCharIndex": 7,
+            "endCharIndex": 9
+          },
+          {
+            "expression": "二泊",
+            "pronunciationGuide": "nihaku",
+            "gloss": "two nights",
+            "explanation": "Counter for nights stayed.",
+            "startCharIndex": 9,
+            "endCharIndex": 11
+          },
+          {
+            "expression": "です",
+            "pronunciationGuide": "desu",
+            "gloss": "is",
+            "explanation": "Polite copula.",
+            "startCharIndex": 11,
+            "endCharIndex": 13
+          },
+          {
+            "expression": "。",
+            "pronunciationGuide": ".",
+            "gloss": "period",
+            "explanation": null,
+            "startCharIndex": 13,
+            "endCharIndex": 14
+          }
+        ]
+      },
+      {
+        "lineOrder": 4,
+        "speakerName": "Staff",
+        "targetText": "はい、こちらがカードキーです。",
+        "pronunciationGuide": "hai, kochira ga kaado kii desu.",
+        "englishTranslation": "Yes, this is your key card.",
+        "vocabularyItems": [
+          {
+            "expression": "はい",
+            "pronunciationGuide": "hai",
+            "gloss": "yes",
+            "explanation": "Polite acknowledgment.",
+            "startCharIndex": 0,
+            "endCharIndex": 2
+          },
+          {
+            "expression": "、",
+            "pronunciationGuide": ",",
+            "gloss": "comma",
+            "explanation": null,
+            "startCharIndex": 2,
+            "endCharIndex": 3
+          },
+          {
+            "expression": "こちら",
+            "pronunciationGuide": "kochira",
+            "gloss": "this",
+            "explanation": "Polite way to refer to something nearby.",
+            "startCharIndex": 3,
+            "endCharIndex": 6
+          },
+          {
+            "expression": "が",
+            "pronunciationGuide": "ga",
+            "gloss": "subject marker",
+            "explanation": "Marks the subject.",
+            "startCharIndex": 6,
+            "endCharIndex": 7
+          },
+          {
+            "expression": "カードキー",
+            "pronunciationGuide": "kaado kii",
+            "gloss": "key card",
+            "explanation": "Loanword written in katakana.",
+            "startCharIndex": 7,
+            "endCharIndex": 12
+          },
+          {
+            "expression": "です",
+            "pronunciationGuide": "desu",
+            "gloss": "is",
+            "explanation": "Polite copula.",
+            "startCharIndex": 12,
+            "endCharIndex": 14
+          },
+          {
+            "expression": "。",
+            "pronunciationGuide": ".",
+            "gloss": "period",
+            "explanation": null,
+            "startCharIndex": 14,
+            "endCharIndex": 15
+          }
+        ]
+      },
+      {
+        "lineOrder": 5,
+        "speakerName": "Guest",
+        "targetText": "朝ご飯は何時からですか。",
+        "pronunciationGuide": "asagohan wa nanji kara desu ka.",
+        "englishTranslation": "What time does breakfast start?",
+        "vocabularyItems": [
+          {
+            "expression": "朝ご飯",
+            "pronunciationGuide": "asagohan",
+            "gloss": "breakfast",
+            "explanation": "Morning meal.",
+            "startCharIndex": 0,
+            "endCharIndex": 3
+          },
+          {
+            "expression": "は",
+            "pronunciationGuide": "wa",
+            "gloss": "topic marker",
+            "explanation": "Marks the topic.",
+            "startCharIndex": 3,
+            "endCharIndex": 4
+          },
+          {
+            "expression": "何時",
+            "pronunciationGuide": "nanji",
+            "gloss": "what time",
+            "explanation": "Question word for time.",
+            "startCharIndex": 4,
+            "endCharIndex": 6
+          },
+          {
+            "expression": "から",
+            "pronunciationGuide": "kara",
+            "gloss": "from",
+            "explanation": "Used for starting time.",
+            "startCharIndex": 6,
+            "endCharIndex": 8
+          },
+          {
+            "expression": "ですか",
+            "pronunciationGuide": "desu ka",
+            "gloss": "is it?",
+            "explanation": "Polite question ending.",
+            "startCharIndex": 8,
+            "endCharIndex": 11
+          },
+          {
+            "expression": "。",
+            "pronunciationGuide": ".",
+            "gloss": "period",
+            "explanation": null,
+            "startCharIndex": 11,
+            "endCharIndex": 12
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Buying Snacks at a Convenience Store",
+    "description": "A customer buys snacks and a drink at a convenience store.",
+    "topic": "convenience store",
+    "difficultyLevel": "BEGINNER",
+    "language": "JAPANESE",
+    "lines": [
+      {
+        "lineOrder": 1,
+        "speakerName": "Clerk",
+        "targetText": "いらっしゃいませ。",
+        "pronunciationGuide": "irasshaimase.",
+        "englishTranslation": "Welcome.",
+        "vocabularyItems": [
+          {
+            "expression": "いらっしゃいませ",
+            "pronunciationGuide": "irasshaimase",
+            "gloss": "welcome",
+            "explanation": "Standard store greeting.",
+            "startCharIndex": 0,
+            "endCharIndex": 8
+          },
+          {
+            "expression": "。",
+            "pronunciationGuide": ".",
+            "gloss": "period",
+            "explanation": null,
+            "startCharIndex": 8,
+            "endCharIndex": 9
+          }
+        ]
+      },
+      {
+        "lineOrder": 2,
+        "speakerName": "Customer",
+        "targetText": "これとお茶をお願いします。",
+        "pronunciationGuide": "kore to ocha o onegaishimasu.",
+        "englishTranslation": "This and tea, please.",
+        "vocabularyItems": [
+          {
+            "expression": "これ",
+            "pronunciationGuide": "kore",
+            "gloss": "this",
+            "explanation": "Refers to something near the speaker.",
+            "startCharIndex": 0,
+            "endCharIndex": 2
+          },
+          {
+            "expression": "と",
+            "pronunciationGuide": "to",
+            "gloss": "and",
+            "explanation": "Connects nouns.",
+            "startCharIndex": 2,
+            "endCharIndex": 3
+          },
+          {
+            "expression": "お茶",
+            "pronunciationGuide": "ocha",
+            "gloss": "tea",
+            "explanation": "Polite/common word for tea.",
+            "startCharIndex": 3,
+            "endCharIndex": 5
+          },
+          {
+            "expression": "を",
+            "pronunciationGuide": "o",
+            "gloss": "object marker",
+            "explanation": "Marks the object.",
+            "startCharIndex": 5,
+            "endCharIndex": 6
+          },
+          {
+            "expression": "お願いします",
+            "pronunciationGuide": "onegaishimasu",
+            "gloss": "please",
+            "explanation": "Polite request phrase.",
+            "startCharIndex": 6,
+            "endCharIndex": 12
+          },
+          {
+            "expression": "。",
+            "pronunciationGuide": ".",
+            "gloss": "period",
+            "explanation": null,
+            "startCharIndex": 12,
+            "endCharIndex": 13
+          }
+        ]
+      },
+      {
+        "lineOrder": 3,
+        "speakerName": "Clerk",
+        "targetText": "袋は必要ですか。",
+        "pronunciationGuide": "fukuro wa hitsuyou desu ka.",
+        "englishTranslation": "Do you need a bag?",
+        "vocabularyItems": [
+          {
+            "expression": "袋",
+            "pronunciationGuide": "fukuro",
+            "gloss": "bag",
+            "explanation": "Shopping bag.",
+            "startCharIndex": 0,
+            "endCharIndex": 1
+          },
+          {
+            "expression": "は",
+            "pronunciationGuide": "wa",
+            "gloss": "topic marker",
+            "explanation": "Marks the topic.",
+            "startCharIndex": 1,
+            "endCharIndex": 2
+          },
+          {
+            "expression": "必要",
+            "pronunciationGuide": "hitsuyou",
+            "gloss": "necessary",
+            "explanation": "Means needed or necessary.",
+            "startCharIndex": 2,
+            "endCharIndex": 4
+          },
+          {
+            "expression": "ですか",
+            "pronunciationGuide": "desu ka",
+            "gloss": "is it?",
+            "explanation": "Polite question ending.",
+            "startCharIndex": 4,
+            "endCharIndex": 7
+          },
+          {
+            "expression": "。",
+            "pronunciationGuide": ".",
+            "gloss": "period",
+            "explanation": null,
+            "startCharIndex": 7,
+            "endCharIndex": 8
+          }
+        ]
+      },
+      {
+        "lineOrder": 4,
+        "speakerName": "Customer",
+        "targetText": "大丈夫です。いりません。",
+        "pronunciationGuide": "daijoubu desu. irimasen.",
+        "englishTranslation": "It's okay. I don't need one.",
+        "vocabularyItems": [
+          {
+            "expression": "大丈夫",
+            "pronunciationGuide": "daijoubu",
+            "gloss": "okay",
+            "explanation": "Often used to politely decline.",
+            "startCharIndex": 0,
+            "endCharIndex": 3
+          },
+          {
+            "expression": "です",
+            "pronunciationGuide": "desu",
+            "gloss": "is",
+            "explanation": "Polite copula.",
+            "startCharIndex": 3,
+            "endCharIndex": 5
+          },
+          {
+            "expression": "。",
+            "pronunciationGuide": ".",
+            "gloss": "period",
+            "explanation": null,
+            "startCharIndex": 5,
+            "endCharIndex": 6
+          },
+          {
+            "expression": "いりません",
+            "pronunciationGuide": "irimasen",
+            "gloss": "do not need",
+            "explanation": "Polite negative of iru, to need.",
+            "startCharIndex": 6,
+            "endCharIndex": 11
+          },
+          {
+            "expression": "。",
+            "pronunciationGuide": ".",
+            "gloss": "period",
+            "explanation": null,
+            "startCharIndex": 11,
+            "endCharIndex": 12
+          }
+        ]
+      },
+      {
+        "lineOrder": 5,
+        "speakerName": "Clerk",
+        "targetText": "全部で五百円です。",
+        "pronunciationGuide": "zenbu de gohyaku en desu.",
+        "englishTranslation": "That will be 500 yen in total.",
+        "vocabularyItems": [
+          {
+            "expression": "全部で",
+            "pronunciationGuide": "zenbu de",
+            "gloss": "in total",
+            "explanation": "Used when giving the total amount.",
+            "startCharIndex": 0,
+            "endCharIndex": 3
+          },
+          {
+            "expression": "五百円",
+            "pronunciationGuide": "gohyaku en",
+            "gloss": "500 yen",
+            "explanation": "Price amount.",
+            "startCharIndex": 3,
+            "endCharIndex": 6
+          },
+          {
+            "expression": "です",
+            "pronunciationGuide": "desu",
+            "gloss": "is",
+            "explanation": "Polite copula.",
+            "startCharIndex": 6,
+            "endCharIndex": 8
+          },
+          {
+            "expression": "。",
+            "pronunciationGuide": ".",
+            "gloss": "period",
+            "explanation": null,
+            "startCharIndex": 8,
+            "endCharIndex": 9
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Small Talk With a Friend",
+    "description": "Two friends talk about the weather and weekend plans.",
+    "topic": "casual small talk",
+    "difficultyLevel": "BEGINNER",
+    "language": "JAPANESE",
+    "lines": [
+      {
+        "lineOrder": 1,
+        "speakerName": "Friend A",
+        "targetText": "今日はいい天気ですね。",
+        "pronunciationGuide": "kyou wa ii tenki desu ne.",
+        "englishTranslation": "The weather is nice today, isn't it?",
+        "vocabularyItems": [
+          {
+            "expression": "今日",
+            "pronunciationGuide": "kyou",
+            "gloss": "today",
+            "explanation": "The current day.",
+            "startCharIndex": 0,
+            "endCharIndex": 2
+          },
+          {
+            "expression": "は",
+            "pronunciationGuide": "wa",
+            "gloss": "topic marker",
+            "explanation": "Marks the topic.",
+            "startCharIndex": 2,
+            "endCharIndex": 3
+          },
+          {
+            "expression": "いい",
+            "pronunciationGuide": "ii",
+            "gloss": "good",
+            "explanation": "Common adjective meaning good or nice.",
+            "startCharIndex": 3,
+            "endCharIndex": 5
+          },
+          {
+            "expression": "天気",
+            "pronunciationGuide": "tenki",
+            "gloss": "weather",
+            "explanation": "Weather.",
+            "startCharIndex": 5,
+            "endCharIndex": 7
+          },
+          {
+            "expression": "です",
+            "pronunciationGuide": "desu",
+            "gloss": "is",
+            "explanation": "Polite copula.",
+            "startCharIndex": 7,
+            "endCharIndex": 9
+          },
+          {
+            "expression": "ね",
+            "pronunciationGuide": "ne",
+            "gloss": "isn't it",
+            "explanation": "Seeks agreement.",
+            "startCharIndex": 9,
+            "endCharIndex": 10
+          },
+          {
+            "expression": "。",
+            "pronunciationGuide": ".",
+            "gloss": "period",
+            "explanation": null,
+            "startCharIndex": 10,
+            "endCharIndex": 11
+          }
+        ]
+      },
+      {
+        "lineOrder": 2,
+        "speakerName": "Friend B",
+        "targetText": "本当ですね。外に行きたいです。",
+        "pronunciationGuide": "hontou desu ne. soto ni ikitai desu.",
+        "englishTranslation": "It really is. I want to go outside.",
+        "vocabularyItems": [
+          {
+            "expression": "本当",
+            "pronunciationGuide": "hontou",
+            "gloss": "really",
+            "explanation": "Means true or really.",
+            "startCharIndex": 0,
+            "endCharIndex": 2
+          },
+          {
+            "expression": "です",
+            "pronunciationGuide": "desu",
+            "gloss": "is",
+            "explanation": "Polite copula.",
+            "startCharIndex": 2,
+            "endCharIndex": 4
+          },
+          {
+            "expression": "ね",
+            "pronunciationGuide": "ne",
+            "gloss": "right",
+            "explanation": "Seeks agreement.",
+            "startCharIndex": 4,
+            "endCharIndex": 5
+          },
+          {
+            "expression": "。",
+            "pronunciationGuide": ".",
+            "gloss": "period",
+            "explanation": null,
+            "startCharIndex": 5,
+            "endCharIndex": 6
+          },
+          {
+            "expression": "外",
+            "pronunciationGuide": "soto",
+            "gloss": "outside",
+            "explanation": "The outdoors.",
+            "startCharIndex": 6,
+            "endCharIndex": 7
+          },
+          {
+            "expression": "に",
+            "pronunciationGuide": "ni",
+            "gloss": "to",
+            "explanation": "Direction particle.",
+            "startCharIndex": 7,
+            "endCharIndex": 8
+          },
+          {
+            "expression": "行きたい",
+            "pronunciationGuide": "ikitai",
+            "gloss": "want to go",
+            "explanation": "Tai-form of iku, to go.",
+            "startCharIndex": 8,
+            "endCharIndex": 12
+          },
+          {
+            "expression": "です",
+            "pronunciationGuide": "desu",
+            "gloss": "is",
+            "explanation": "Makes the sentence polite.",
+            "startCharIndex": 12,
+            "endCharIndex": 14
+          },
+          {
+            "expression": "。",
+            "pronunciationGuide": ".",
+            "gloss": "period",
+            "explanation": null,
+            "startCharIndex": 14,
+            "endCharIndex": 15
+          }
+        ]
+      },
+      {
+        "lineOrder": 3,
+        "speakerName": "Friend A",
+        "targetText": "明日、時間がありますか。",
+        "pronunciationGuide": "ashita, jikan ga arimasu ka.",
+        "englishTranslation": "Do you have time tomorrow?",
+        "vocabularyItems": [
+          {
+            "expression": "明日",
+            "pronunciationGuide": "ashita",
+            "gloss": "tomorrow",
+            "explanation": "The next day.",
+            "startCharIndex": 0,
+            "endCharIndex": 2
+          },
+          {
+            "expression": "、",
+            "pronunciationGuide": ",",
+            "gloss": "comma",
+            "explanation": null,
+            "startCharIndex": 2,
+            "endCharIndex": 3
+          },
+          {
+            "expression": "時間",
+            "pronunciationGuide": "jikan",
+            "gloss": "time",
+            "explanation": "Time.",
+            "startCharIndex": 3,
+            "endCharIndex": 5
+          },
+          {
+            "expression": "が",
+            "pronunciationGuide": "ga",
+            "gloss": "subject marker",
+            "explanation": "Marks the subject.",
+            "startCharIndex": 5,
+            "endCharIndex": 6
+          },
+          {
+            "expression": "ありますか",
+            "pronunciationGuide": "arimasu ka",
+            "gloss": "do you have?",
+            "explanation": "Polite question using aru.",
+            "startCharIndex": 6,
+            "endCharIndex": 11
+          },
+          {
+            "expression": "。",
+            "pronunciationGuide": ".",
+            "gloss": "period",
+            "explanation": null,
+            "startCharIndex": 11,
+            "endCharIndex": 12
+          }
+        ]
+      },
+      {
+        "lineOrder": 4,
+        "speakerName": "Friend B",
+        "targetText": "午後なら大丈夫です。",
+        "pronunciationGuide": "gogo nara daijoubu desu.",
+        "englishTranslation": "Afternoon is fine.",
+        "vocabularyItems": [
+          {
+            "expression": "午後",
+            "pronunciationGuide": "gogo",
+            "gloss": "afternoon",
+            "explanation": "Time after noon.",
+            "startCharIndex": 0,
+            "endCharIndex": 2
+          },
+          {
+            "expression": "なら",
+            "pronunciationGuide": "nara",
+            "gloss": "if it is",
+            "explanation": "Conditional/topic marker used for narrowing.",
+            "startCharIndex": 2,
+            "endCharIndex": 4
+          },
+          {
+            "expression": "大丈夫",
+            "pronunciationGuide": "daijoubu",
+            "gloss": "okay",
+            "explanation": "Means fine or alright.",
+            "startCharIndex": 4,
+            "endCharIndex": 7
+          },
+          {
+            "expression": "です",
+            "pronunciationGuide": "desu",
+            "gloss": "is",
+            "explanation": "Polite copula.",
+            "startCharIndex": 7,
+            "endCharIndex": 9
+          },
+          {
+            "expression": "。",
+            "pronunciationGuide": ".",
+            "gloss": "period",
+            "explanation": null,
+            "startCharIndex": 9,
+            "endCharIndex": 10
+          }
+        ]
+      },
+      {
+        "lineOrder": 5,
+        "speakerName": "Friend A",
+        "targetText": "じゃあ、公園で会いましょう。",
+        "pronunciationGuide": "jaa, kouen de aimashou.",
+        "englishTranslation": "Then let's meet at the park.",
+        "vocabularyItems": [
+          {
+            "expression": "じゃあ",
+            "pronunciationGuide": "jaa",
+            "gloss": "then",
+            "explanation": "Casual transition phrase.",
+            "startCharIndex": 0,
+            "endCharIndex": 3
+          },
+          {
+            "expression": "、",
+            "pronunciationGuide": ",",
+            "gloss": "comma",
+            "explanation": null,
+            "startCharIndex": 3,
+            "endCharIndex": 4
+          },
+          {
+            "expression": "公園",
+            "pronunciationGuide": "kouen",
+            "gloss": "park",
+            "explanation": "Public park.",
+            "startCharIndex": 4,
+            "endCharIndex": 6
+          },
+          {
+            "expression": "で",
+            "pronunciationGuide": "de",
+            "gloss": "at",
+            "explanation": "Marks location of action.",
+            "startCharIndex": 6,
+            "endCharIndex": 7
+          },
+          {
+            "expression": "会いましょう",
+            "pronunciationGuide": "aimashou",
+            "gloss": "let's meet",
+            "explanation": "Polite volitional form of au, to meet.",
+            "startCharIndex": 7,
+            "endCharIndex": 13
+          },
+          {
+            "expression": "。",
+            "pronunciationGuide": ".",
+            "gloss": "period",
+            "explanation": null,
+            "startCharIndex": 13,
+            "endCharIndex": 14
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Meeting a New Classmate",
+    "description": "Two students introduce themselves before class.",
+    "topic": "introductions",
+    "difficultyLevel": "BEGINNER",
+    "language": "JAPANESE",
+    "lines": [
+      {
+        "lineOrder": 1,
+        "speakerName": "Student A",
+        "targetText": "はじめまして。私はユキです。",
+        "pronunciationGuide": "hajimemashite. watashi wa Yuki desu.",
+        "englishTranslation": "Nice to meet you. I'm Yuki.",
+        "vocabularyItems": [
+          {
+            "expression": "はじめまして",
+            "pronunciationGuide": "hajimemashite",
+            "gloss": "nice to meet you",
+            "explanation": "Set phrase used when meeting someone for the first time.",
+            "startCharIndex": 0,
+            "endCharIndex": 6
+          },
+          {
+            "expression": "。",
+            "pronunciationGuide": ".",
+            "gloss": "period",
+            "explanation": null,
+            "startCharIndex": 6,
+            "endCharIndex": 7
+          },
+          {
+            "expression": "私",
+            "pronunciationGuide": "watashi",
+            "gloss": "I",
+            "explanation": "Polite/common first-person pronoun.",
+            "startCharIndex": 7,
+            "endCharIndex": 8
+          },
+          {
+            "expression": "は",
+            "pronunciationGuide": "wa",
+            "gloss": "topic marker",
+            "explanation": "Marks the topic.",
+            "startCharIndex": 8,
+            "endCharIndex": 9
+          },
+          {
+            "expression": "ユキ",
+            "pronunciationGuide": "Yuki",
+            "gloss": "Yuki",
+            "explanation": "A Japanese given name.",
+            "startCharIndex": 9,
+            "endCharIndex": 11
+          },
+          {
+            "expression": "です",
+            "pronunciationGuide": "desu",
+            "gloss": "am",
+            "explanation": "Polite copula.",
+            "startCharIndex": 11,
+            "endCharIndex": 13
+          },
+          {
+            "expression": "。",
+            "pronunciationGuide": ".",
+            "gloss": "period",
+            "explanation": null,
+            "startCharIndex": 13,
+            "endCharIndex": 14
+          }
+        ]
+      },
+      {
+        "lineOrder": 2,
+        "speakerName": "Student B",
+        "targetText": "はじめまして。ケンです。",
+        "pronunciationGuide": "hajimemashite. Ken desu.",
+        "englishTranslation": "Nice to meet you. I'm Ken.",
+        "vocabularyItems": [
+          {
+            "expression": "はじめまして",
+            "pronunciationGuide": "hajimemashite",
+            "gloss": "nice to meet you",
+            "explanation": "Set phrase for first meetings.",
+            "startCharIndex": 0,
+            "endCharIndex": 6
+          },
+          {
+            "expression": "。",
+            "pronunciationGuide": ".",
+            "gloss": "period",
+            "explanation": null,
+            "startCharIndex": 6,
+            "endCharIndex": 7
+          },
+          {
+            "expression": "ケン",
+            "pronunciationGuide": "Ken",
+            "gloss": "Ken",
+            "explanation": "A given name written in katakana here.",
+            "startCharIndex": 7,
+            "endCharIndex": 9
+          },
+          {
+            "expression": "です",
+            "pronunciationGuide": "desu",
+            "gloss": "am",
+            "explanation": "Polite copula.",
+            "startCharIndex": 9,
+            "endCharIndex": 11
+          },
+          {
+            "expression": "。",
+            "pronunciationGuide": ".",
+            "gloss": "period",
+            "explanation": null,
+            "startCharIndex": 11,
+            "endCharIndex": 12
+          }
+        ]
+      },
+      {
+        "lineOrder": 3,
+        "speakerName": "Student A",
+        "targetText": "このクラスは初めてですか。",
+        "pronunciationGuide": "kono kurasu wa hajimete desu ka.",
+        "englishTranslation": "Is this your first time in this class?",
+        "vocabularyItems": [
+          {
+            "expression": "この",
+            "pronunciationGuide": "kono",
+            "gloss": "this",
+            "explanation": "Used before a noun near the speaker.",
+            "startCharIndex": 0,
+            "endCharIndex": 2
+          },
+          {
+            "expression": "クラス",
+            "pronunciationGuide": "kurasu",
+            "gloss": "class",
+            "explanation": "Loanword for class.",
+            "startCharIndex": 2,
+            "endCharIndex": 5
+          },
+          {
+            "expression": "は",
+            "pronunciationGuide": "wa",
+            "gloss": "topic marker",
+            "explanation": "Marks the topic.",
+            "startCharIndex": 5,
+            "endCharIndex": 6
+          },
+          {
+            "expression": "初めて",
+            "pronunciationGuide": "hajimete",
+            "gloss": "first time",
+            "explanation": "Used for doing something for the first time.",
+            "startCharIndex": 6,
+            "endCharIndex": 9
+          },
+          {
+            "expression": "ですか",
+            "pronunciationGuide": "desu ka",
+            "gloss": "is it?",
+            "explanation": "Polite question ending.",
+            "startCharIndex": 9,
+            "endCharIndex": 12
+          },
+          {
+            "expression": "。",
+            "pronunciationGuide": ".",
+            "gloss": "period",
+            "explanation": null,
+            "startCharIndex": 12,
+            "endCharIndex": 13
+          }
+        ]
+      },
+      {
+        "lineOrder": 4,
+        "speakerName": "Student B",
+        "targetText": "はい、少し緊張しています。",
+        "pronunciationGuide": "hai, sukoshi kinchou shite imasu.",
+        "englishTranslation": "Yes, I'm a little nervous.",
+        "vocabularyItems": [
+          {
+            "expression": "はい",
+            "pronunciationGuide": "hai",
+            "gloss": "yes",
+            "explanation": "Polite yes.",
+            "startCharIndex": 0,
+            "endCharIndex": 2
+          },
+          {
+            "expression": "、",
+            "pronunciationGuide": ",",
+            "gloss": "comma",
+            "explanation": null,
+            "startCharIndex": 2,
+            "endCharIndex": 3
+          },
+          {
+            "expression": "少し",
+            "pronunciationGuide": "sukoshi",
+            "gloss": "a little",
+            "explanation": "Small amount.",
+            "startCharIndex": 3,
+            "endCharIndex": 5
+          },
+          {
+            "expression": "緊張",
+            "pronunciationGuide": "kinchou",
+            "gloss": "nervousness",
+            "explanation": "Noun meaning tension or nervousness.",
+            "startCharIndex": 5,
+            "endCharIndex": 7
+          },
+          {
+            "expression": "しています",
+            "pronunciationGuide": "shite imasu",
+            "gloss": "am doing",
+            "explanation": "Progressive form of suru.",
+            "startCharIndex": 7,
+            "endCharIndex": 12
+          },
+          {
+            "expression": "。",
+            "pronunciationGuide": ".",
+            "gloss": "period",
+            "explanation": null,
+            "startCharIndex": 12,
+            "endCharIndex": 13
+          }
+        ]
+      },
+      {
+        "lineOrder": 5,
+        "speakerName": "Student A",
+        "targetText": "大丈夫ですよ。先生は優しいです。",
+        "pronunciationGuide": "daijoubu desu yo. sensei wa yasashii desu.",
+        "englishTranslation": "It's okay. The teacher is kind.",
+        "vocabularyItems": [
+          {
+            "expression": "大丈夫",
+            "pronunciationGuide": "daijoubu",
+            "gloss": "okay",
+            "explanation": "Reassuring phrase.",
+            "startCharIndex": 0,
+            "endCharIndex": 3
+          },
+          {
+            "expression": "です",
+            "pronunciationGuide": "desu",
+            "gloss": "is",
+            "explanation": "Polite copula.",
+            "startCharIndex": 3,
+            "endCharIndex": 5
+          },
+          {
+            "expression": "よ",
+            "pronunciationGuide": "yo",
+            "gloss": "you know",
+            "explanation": "Adds friendly reassurance.",
+            "startCharIndex": 5,
+            "endCharIndex": 6
+          },
+          {
+            "expression": "。",
+            "pronunciationGuide": ".",
+            "gloss": "period",
+            "explanation": null,
+            "startCharIndex": 6,
+            "endCharIndex": 7
+          },
+          {
+            "expression": "先生",
+            "pronunciationGuide": "sensei",
+            "gloss": "teacher",
+            "explanation": "Teacher or instructor.",
+            "startCharIndex": 7,
+            "endCharIndex": 9
+          },
+          {
+            "expression": "は",
+            "pronunciationGuide": "wa",
+            "gloss": "topic marker",
+            "explanation": "Marks the topic.",
+            "startCharIndex": 9,
+            "endCharIndex": 10
+          },
+          {
+            "expression": "優しい",
+            "pronunciationGuide": "yasashii",
+            "gloss": "kind",
+            "explanation": "Describes a kind person.",
+            "startCharIndex": 10,
+            "endCharIndex": 13
+          },
+          {
+            "expression": "です",
+            "pronunciationGuide": "desu",
+            "gloss": "is",
+            "explanation": "Polite copula.",
+            "startCharIndex": 13,
+            "endCharIndex": 15
+          },
+          {
+            "expression": "。",
+            "pronunciationGuide": ".",
+            "gloss": "period",
+            "explanation": null,
+            "startCharIndex": 15,
+            "endCharIndex": 16
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Ordering Coffee at a Cafe",
+    "description": "A customer orders coffee and cake at a cafe.",
+    "topic": "cafe",
+    "difficultyLevel": "BEGINNER",
+    "language": "JAPANESE",
+    "lines": [
+      {
+        "lineOrder": 1,
+        "speakerName": "Staff",
+        "targetText": "ご注文はお決まりですか。",
+        "pronunciationGuide": "gochuumon wa okimari desu ka.",
+        "englishTranslation": "Are you ready to order?",
+        "vocabularyItems": [
+          {
+            "expression": "ご注文",
+            "pronunciationGuide": "gochuumon",
+            "gloss": "your order",
+            "explanation": "Polite word for an order.",
+            "startCharIndex": 0,
+            "endCharIndex": 3
+          },
+          {
+            "expression": "は",
+            "pronunciationGuide": "wa",
+            "gloss": "topic marker",
+            "explanation": "Marks the topic.",
+            "startCharIndex": 3,
+            "endCharIndex": 4
+          },
+          {
+            "expression": "お決まり",
+            "pronunciationGuide": "okimari",
+            "gloss": "decided",
+            "explanation": "Polite expression meaning decided.",
+            "startCharIndex": 4,
+            "endCharIndex": 8
+          },
+          {
+            "expression": "ですか",
+            "pronunciationGuide": "desu ka",
+            "gloss": "is it?",
+            "explanation": "Polite question ending.",
+            "startCharIndex": 8,
+            "endCharIndex": 11
+          },
+          {
+            "expression": "。",
+            "pronunciationGuide": ".",
+            "gloss": "period",
+            "explanation": null,
+            "startCharIndex": 11,
+            "endCharIndex": 12
+          }
+        ]
+      },
+      {
+        "lineOrder": 2,
+        "speakerName": "Customer",
+        "targetText": "ホットコーヒーを一つください。",
+        "pronunciationGuide": "hotto koohii o hitotsu kudasai.",
+        "englishTranslation": "One hot coffee, please.",
+        "vocabularyItems": [
+          {
+            "expression": "ホットコーヒー",
+            "pronunciationGuide": "hotto koohii",
+            "gloss": "hot coffee",
+            "explanation": "Loanword written in katakana.",
+            "startCharIndex": 0,
+            "endCharIndex": 7
+          },
+          {
+            "expression": "を",
+            "pronunciationGuide": "o",
+            "gloss": "object marker",
+            "explanation": "Marks the object.",
+            "startCharIndex": 7,
+            "endCharIndex": 8
+          },
+          {
+            "expression": "一つ",
+            "pronunciationGuide": "hitotsu",
+            "gloss": "one",
+            "explanation": "Generic counter for one item.",
+            "startCharIndex": 8,
+            "endCharIndex": 10
+          },
+          {
+            "expression": "ください",
+            "pronunciationGuide": "kudasai",
+            "gloss": "please give me",
+            "explanation": "Polite request expression.",
+            "startCharIndex": 10,
+            "endCharIndex": 14
+          },
+          {
+            "expression": "。",
+            "pronunciationGuide": ".",
+            "gloss": "period",
+            "explanation": null,
+            "startCharIndex": 14,
+            "endCharIndex": 15
+          }
+        ]
+      },
+      {
+        "lineOrder": 3,
+        "speakerName": "Staff",
+        "targetText": "ケーキもいかがですか。",
+        "pronunciationGuide": "keeki mo ikaga desu ka.",
+        "englishTranslation": "Would you also like cake?",
+        "vocabularyItems": [
+          {
+            "expression": "ケーキ",
+            "pronunciationGuide": "keeki",
+            "gloss": "cake",
+            "explanation": "Loanword for cake.",
+            "startCharIndex": 0,
+            "endCharIndex": 3
+          },
+          {
+            "expression": "も",
+            "pronunciationGuide": "mo",
+            "gloss": "also",
+            "explanation": "Means also or too.",
+            "startCharIndex": 3,
+            "endCharIndex": 4
+          },
+          {
+            "expression": "いかがですか",
+            "pronunciationGuide": "ikaga desu ka",
+            "gloss": "would you like",
+            "explanation": "Polite offering phrase.",
+            "startCharIndex": 4,
+            "endCharIndex": 10
+          },
+          {
+            "expression": "。",
+            "pronunciationGuide": ".",
+            "gloss": "period",
+            "explanation": null,
+            "startCharIndex": 10,
+            "endCharIndex": 11
+          }
+        ]
+      },
+      {
+        "lineOrder": 4,
+        "speakerName": "Customer",
+        "targetText": "そうですね。チーズケーキもお願いします。",
+        "pronunciationGuide": "sou desu ne. chiizu keeki mo onegaishimasu.",
+        "englishTranslation": "Let me see. Cheesecake too, please.",
+        "vocabularyItems": [
+          {
+            "expression": "そうですね",
+            "pronunciationGuide": "sou desu ne",
+            "gloss": "let me see",
+            "explanation": "Common phrase used while thinking.",
+            "startCharIndex": 0,
+            "endCharIndex": 5
+          },
+          {
+            "expression": "。",
+            "pronunciationGuide": ".",
+            "gloss": "period",
+            "explanation": null,
+            "startCharIndex": 5,
+            "endCharIndex": 6
+          },
+          {
+            "expression": "チーズケーキ",
+            "pronunciationGuide": "chiizu keeki",
+            "gloss": "cheesecake",
+            "explanation": "Loanword written in katakana.",
+            "startCharIndex": 6,
+            "endCharIndex": 12
+          },
+          {
+            "expression": "も",
+            "pronunciationGuide": "mo",
+            "gloss": "also",
+            "explanation": "Adds another item.",
+            "startCharIndex": 12,
+            "endCharIndex": 13
+          },
+          {
+            "expression": "お願いします",
+            "pronunciationGuide": "onegaishimasu",
+            "gloss": "please",
+            "explanation": "Polite request phrase.",
+            "startCharIndex": 13,
+            "endCharIndex": 19
+          },
+          {
+            "expression": "。",
+            "pronunciationGuide": ".",
+            "gloss": "period",
+            "explanation": null,
+            "startCharIndex": 19,
+            "endCharIndex": 20
+          }
+        ]
+      },
+      {
+        "lineOrder": 5,
+        "speakerName": "Staff",
+        "targetText": "店内で召し上がりますか。",
+        "pronunciationGuide": "tennai de meshiagarimasu ka.",
+        "englishTranslation": "Will you have it here?",
+        "vocabularyItems": [
+          {
+            "expression": "店内",
+            "pronunciationGuide": "tennai",
+            "gloss": "inside the store",
+            "explanation": "Used for eating or drinking in.",
+            "startCharIndex": 0,
+            "endCharIndex": 2
+          },
+          {
+            "expression": "で",
+            "pronunciationGuide": "de",
+            "gloss": "at/in",
+            "explanation": "Marks place of action.",
+            "startCharIndex": 2,
+            "endCharIndex": 3
+          },
+          {
+            "expression": "召し上がりますか",
+            "pronunciationGuide": "meshiagarimasu ka",
+            "gloss": "will you eat/drink?",
+            "explanation": "Very polite form of eat or drink.",
+            "startCharIndex": 3,
+            "endCharIndex": 11
+          },
+          {
+            "expression": "。",
+            "pronunciationGuide": ".",
+            "gloss": "period",
+            "explanation": null,
+            "startCharIndex": 11,
+            "endCharIndex": 12
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Shopping for Clothes",
+    "description": "A customer looks for a jacket in a clothing store.",
+    "topic": "shopping",
+    "difficultyLevel": "BEGINNER",
+    "language": "JAPANESE",
+    "lines": [
+      {
+        "lineOrder": 1,
+        "speakerName": "Customer",
+        "targetText": "すみません、この上着はいくらですか。",
+        "pronunciationGuide": "sumimasen, kono uwagi wa ikura desu ka.",
+        "englishTranslation": "Excuse me, how much is this jacket?",
+        "vocabularyItems": [
+          {
+            "expression": "すみません",
+            "pronunciationGuide": "sumimasen",
+            "gloss": "excuse me",
+            "explanation": "Used to get attention politely.",
+            "startCharIndex": 0,
+            "endCharIndex": 5
+          },
+          {
+            "expression": "、",
+            "pronunciationGuide": ",",
+            "gloss": "comma",
+            "explanation": null,
+            "startCharIndex": 5,
+            "endCharIndex": 6
+          },
+          {
+            "expression": "この",
+            "pronunciationGuide": "kono",
+            "gloss": "this",
+            "explanation": "Used before a noun near the speaker.",
+            "startCharIndex": 6,
+            "endCharIndex": 8
+          },
+          {
+            "expression": "上着",
+            "pronunciationGuide": "uwagi",
+            "gloss": "jacket",
+            "explanation": "Outerwear or jacket.",
+            "startCharIndex": 8,
+            "endCharIndex": 10
+          },
+          {
+            "expression": "は",
+            "pronunciationGuide": "wa",
+            "gloss": "topic marker",
+            "explanation": "Marks the topic.",
+            "startCharIndex": 10,
+            "endCharIndex": 11
+          },
+          {
+            "expression": "いくら",
+            "pronunciationGuide": "ikura",
+            "gloss": "how much",
+            "explanation": "Question word for price.",
+            "startCharIndex": 11,
+            "endCharIndex": 14
+          },
+          {
+            "expression": "ですか",
+            "pronunciationGuide": "desu ka",
+            "gloss": "is it?",
+            "explanation": "Polite question ending.",
+            "startCharIndex": 14,
+            "endCharIndex": 17
+          },
+          {
+            "expression": "。",
+            "pronunciationGuide": ".",
+            "gloss": "period",
+            "explanation": null,
+            "startCharIndex": 17,
+            "endCharIndex": 18
+          }
+        ]
+      },
+      {
+        "lineOrder": 2,
+        "speakerName": "Clerk",
+        "targetText": "それは三千円です。",
+        "pronunciationGuide": "sore wa sanzen en desu.",
+        "englishTranslation": "That is 3,000 yen.",
+        "vocabularyItems": [
+          {
+            "expression": "それ",
+            "pronunciationGuide": "sore",
+            "gloss": "that",
+            "explanation": "Refers to something near the listener.",
+            "startCharIndex": 0,
+            "endCharIndex": 2
+          },
+          {
+            "expression": "は",
+            "pronunciationGuide": "wa",
+            "gloss": "topic marker",
+            "explanation": "Marks the topic.",
+            "startCharIndex": 2,
+            "endCharIndex": 3
+          },
+          {
+            "expression": "三千円",
+            "pronunciationGuide": "sanzen en",
+            "gloss": "3,000 yen",
+            "explanation": "Price amount.",
+            "startCharIndex": 3,
+            "endCharIndex": 6
+          },
+          {
+            "expression": "です",
+            "pronunciationGuide": "desu",
+            "gloss": "is",
+            "explanation": "Polite copula.",
+            "startCharIndex": 6,
+            "endCharIndex": 8
+          },
+          {
+            "expression": "。",
+            "pronunciationGuide": ".",
+            "gloss": "period",
+            "explanation": null,
+            "startCharIndex": 8,
+            "endCharIndex": 9
+          }
+        ]
+      },
+      {
+        "lineOrder": 3,
+        "speakerName": "Customer",
+        "targetText": "黒はありますか。",
+        "pronunciationGuide": "kuro wa arimasu ka.",
+        "englishTranslation": "Do you have it in black?",
+        "vocabularyItems": [
+          {
+            "expression": "黒",
+            "pronunciationGuide": "kuro",
+            "gloss": "black",
+            "explanation": "Color black.",
+            "startCharIndex": 0,
+            "endCharIndex": 1
+          },
+          {
+            "expression": "は",
+            "pronunciationGuide": "wa",
+            "gloss": "topic marker",
+            "explanation": "Marks the requested color as topic.",
+            "startCharIndex": 1,
+            "endCharIndex": 2
+          },
+          {
+            "expression": "ありますか",
+            "pronunciationGuide": "arimasu ka",
+            "gloss": "is there?",
+            "explanation": "Polite way to ask availability.",
+            "startCharIndex": 2,
+            "endCharIndex": 7
+          },
+          {
+            "expression": "。",
+            "pronunciationGuide": ".",
+            "gloss": "period",
+            "explanation": null,
+            "startCharIndex": 7,
+            "endCharIndex": 8
+          }
+        ]
+      },
+      {
+        "lineOrder": 4,
+        "speakerName": "Clerk",
+        "targetText": "はい、少し待ってください。",
+        "pronunciationGuide": "hai, sukoshi matte kudasai.",
+        "englishTranslation": "Yes, please wait a moment.",
+        "vocabularyItems": [
+          {
+            "expression": "はい",
+            "pronunciationGuide": "hai",
+            "gloss": "yes",
+            "explanation": "Polite acknowledgment.",
+            "startCharIndex": 0,
+            "endCharIndex": 2
+          },
+          {
+            "expression": "、",
+            "pronunciationGuide": ",",
+            "gloss": "comma",
+            "explanation": null,
+            "startCharIndex": 2,
+            "endCharIndex": 3
+          },
+          {
+            "expression": "少し",
+            "pronunciationGuide": "sukoshi",
+            "gloss": "a little",
+            "explanation": "Small amount.",
+            "startCharIndex": 3,
+            "endCharIndex": 5
+          },
+          {
+            "expression": "待ってください",
+            "pronunciationGuide": "matte kudasai",
+            "gloss": "please wait",
+            "explanation": "Polite request using te-form plus kudasai.",
+            "startCharIndex": 5,
+            "endCharIndex": 12
+          },
+          {
+            "expression": "。",
+            "pronunciationGuide": ".",
+            "gloss": "period",
+            "explanation": null,
+            "startCharIndex": 12,
+            "endCharIndex": 13
+          }
+        ]
+      },
+      {
+        "lineOrder": 5,
+        "speakerName": "Customer",
+        "targetText": "試着してもいいですか。",
+        "pronunciationGuide": "shichaku shite mo ii desu ka.",
+        "englishTranslation": "May I try it on?",
+        "vocabularyItems": [
+          {
+            "expression": "試着",
+            "pronunciationGuide": "shichaku",
+            "gloss": "trying on",
+            "explanation": "Trying on clothes.",
+            "startCharIndex": 0,
+            "endCharIndex": 2
+          },
+          {
+            "expression": "してもいいですか",
+            "pronunciationGuide": "shite mo ii desu ka",
+            "gloss": "may I do?",
+            "explanation": "Pattern used to ask permission.",
+            "startCharIndex": 2,
+            "endCharIndex": 10
+          },
+          {
+            "expression": "。",
+            "pronunciationGuide": ".",
+            "gloss": "period",
+            "explanation": null,
+            "startCharIndex": 10,
+            "endCharIndex": 11
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "At the Pharmacy",
+    "description": "A traveler asks for cold medicine at a pharmacy.",
+    "topic": "health",
+    "difficultyLevel": "BEGINNER",
+    "language": "JAPANESE",
+    "lines": [
+      {
+        "lineOrder": 1,
+        "speakerName": "Customer",
+        "targetText": "すみません、風邪薬はありますか。",
+        "pronunciationGuide": "sumimasen, kazegusuri wa arimasu ka.",
+        "englishTranslation": "Excuse me, do you have cold medicine?",
+        "vocabularyItems": [
+          {
+            "expression": "すみません",
+            "pronunciationGuide": "sumimasen",
+            "gloss": "excuse me",
+            "explanation": "Used to politely get attention.",
+            "startCharIndex": 0,
+            "endCharIndex": 5
+          },
+          {
+            "expression": "、",
+            "pronunciationGuide": ",",
+            "gloss": "comma",
+            "explanation": null,
+            "startCharIndex": 5,
+            "endCharIndex": 6
+          },
+          {
+            "expression": "風邪薬",
+            "pronunciationGuide": "kazegusuri",
+            "gloss": "cold medicine",
+            "explanation": "Medicine for a cold.",
+            "startCharIndex": 6,
+            "endCharIndex": 9
+          },
+          {
+            "expression": "は",
+            "pronunciationGuide": "wa",
+            "gloss": "topic marker",
+            "explanation": "Marks the topic.",
+            "startCharIndex": 9,
+            "endCharIndex": 10
+          },
+          {
+            "expression": "ありますか",
+            "pronunciationGuide": "arimasu ka",
+            "gloss": "is there?",
+            "explanation": "Polite way to ask availability.",
+            "startCharIndex": 10,
+            "endCharIndex": 15
+          },
+          {
+            "expression": "。",
+            "pronunciationGuide": ".",
+            "gloss": "period",
+            "explanation": null,
+            "startCharIndex": 15,
+            "endCharIndex": 16
+          }
+        ]
+      },
+      {
+        "lineOrder": 2,
+        "speakerName": "Staff",
+        "targetText": "はい、あります。熱はありますか。",
+        "pronunciationGuide": "hai, arimasu. netsu wa arimasu ka.",
+        "englishTranslation": "Yes, we do. Do you have a fever?",
+        "vocabularyItems": [
+          {
+            "expression": "はい",
+            "pronunciationGuide": "hai",
+            "gloss": "yes",
+            "explanation": "Polite acknowledgment.",
+            "startCharIndex": 0,
+            "endCharIndex": 2
+          },
+          {
+            "expression": "、",
+            "pronunciationGuide": ",",
+            "gloss": "comma",
+            "explanation": null,
+            "startCharIndex": 2,
+            "endCharIndex": 3
+          },
+          {
+            "expression": "あります",
+            "pronunciationGuide": "arimasu",
+            "gloss": "there is",
+            "explanation": "Polite form of aru.",
+            "startCharIndex": 3,
+            "endCharIndex": 7
+          },
+          {
+            "expression": "。",
+            "pronunciationGuide": ".",
+            "gloss": "period",
+            "explanation": null,
+            "startCharIndex": 7,
+            "endCharIndex": 8
+          },
+          {
+            "expression": "熱",
+            "pronunciationGuide": "netsu",
+            "gloss": "fever",
+            "explanation": "Body temperature or fever.",
+            "startCharIndex": 8,
+            "endCharIndex": 9
+          },
+          {
+            "expression": "は",
+            "pronunciationGuide": "wa",
+            "gloss": "topic marker",
+            "explanation": "Marks the topic.",
+            "startCharIndex": 9,
+            "endCharIndex": 10
+          },
+          {
+            "expression": "ありますか",
+            "pronunciationGuide": "arimasu ka",
+            "gloss": "do you have?",
+            "explanation": "Polite question asking if a symptom exists.",
+            "startCharIndex": 10,
+            "endCharIndex": 15
+          },
+          {
+            "expression": "。",
+            "pronunciationGuide": ".",
+            "gloss": "period",
+            "explanation": null,
+            "startCharIndex": 15,
+            "endCharIndex": 16
+          }
+        ]
+      },
+      {
+        "lineOrder": 3,
+        "speakerName": "Customer",
+        "targetText": "いいえ、のどが痛いです。",
+        "pronunciationGuide": "iie, nodo ga itai desu.",
+        "englishTranslation": "No, my throat hurts.",
+        "vocabularyItems": [
+          {
+            "expression": "いいえ",
+            "pronunciationGuide": "iie",
+            "gloss": "no",
+            "explanation": "Polite no.",
+            "startCharIndex": 0,
+            "endCharIndex": 3
+          },
+          {
+            "expression": "、",
+            "pronunciationGuide": ",",
+            "gloss": "comma",
+            "explanation": null,
+            "startCharIndex": 3,
+            "endCharIndex": 4
+          },
+          {
+            "expression": "のど",
+            "pronunciationGuide": "nodo",
+            "gloss": "throat",
+            "explanation": "Throat.",
+            "startCharIndex": 4,
+            "endCharIndex": 6
+          },
+          {
+            "expression": "が",
+            "pronunciationGuide": "ga",
+            "gloss": "subject marker",
+            "explanation": "Marks the body part with the symptom.",
+            "startCharIndex": 6,
+            "endCharIndex": 7
+          },
+          {
+            "expression": "痛い",
+            "pronunciationGuide": "itai",
+            "gloss": "hurts",
+            "explanation": "Painful.",
+            "startCharIndex": 7,
+            "endCharIndex": 9
+          },
+          {
+            "expression": "です",
+            "pronunciationGuide": "desu",
+            "gloss": "is",
+            "explanation": "Makes the sentence polite.",
+            "startCharIndex": 9,
+            "endCharIndex": 11
+          },
+          {
+            "expression": "。",
+            "pronunciationGuide": ".",
+            "gloss": "period",
+            "explanation": null,
+            "startCharIndex": 11,
+            "endCharIndex": 12
+          }
+        ]
+      },
+      {
+        "lineOrder": 4,
+        "speakerName": "Staff",
+        "targetText": "では、この薬を一日三回飲んでください。",
+        "pronunciationGuide": "dewa, kono kusuri o ichinichi sankai nonde kudasai.",
+        "englishTranslation": "Then please take this medicine three times a day.",
+        "vocabularyItems": [
+          {
+            "expression": "では",
+            "pronunciationGuide": "dewa",
+            "gloss": "then",
+            "explanation": "Formal transition phrase.",
+            "startCharIndex": 0,
+            "endCharIndex": 2
+          },
+          {
+            "expression": "、",
+            "pronunciationGuide": ",",
+            "gloss": "comma",
+            "explanation": null,
+            "startCharIndex": 2,
+            "endCharIndex": 3
+          },
+          {
+            "expression": "この",
+            "pronunciationGuide": "kono",
+            "gloss": "this",
+            "explanation": "Used before a noun near the speaker.",
+            "startCharIndex": 3,
+            "endCharIndex": 5
+          },
+          {
+            "expression": "薬",
+            "pronunciationGuide": "kusuri",
+            "gloss": "medicine",
+            "explanation": "Medicine.",
+            "startCharIndex": 5,
+            "endCharIndex": 6
+          },
+          {
+            "expression": "を",
+            "pronunciationGuide": "o",
+            "gloss": "object marker",
+            "explanation": "Marks the object.",
+            "startCharIndex": 6,
+            "endCharIndex": 7
+          },
+          {
+            "expression": "一日三回",
+            "pronunciationGuide": "ichinichi sankai",
+            "gloss": "three times a day",
+            "explanation": "Frequency expression.",
+            "startCharIndex": 7,
+            "endCharIndex": 11
+          },
+          {
+            "expression": "飲んでください",
+            "pronunciationGuide": "nonde kudasai",
+            "gloss": "please take/drink",
+            "explanation": "Polite request form of nomu.",
+            "startCharIndex": 11,
+            "endCharIndex": 18
+          },
+          {
+            "expression": "。",
+            "pronunciationGuide": ".",
+            "gloss": "period",
+            "explanation": null,
+            "startCharIndex": 18,
+            "endCharIndex": 19
+          }
+        ]
+      },
+      {
+        "lineOrder": 5,
+        "speakerName": "Customer",
+        "targetText": "ありがとうございます。",
+        "pronunciationGuide": "arigatou gozaimasu.",
+        "englishTranslation": "Thank you very much.",
+        "vocabularyItems": [
+          {
+            "expression": "ありがとうございます",
+            "pronunciationGuide": "arigatou gozaimasu",
+            "gloss": "thank you very much",
+            "explanation": "Polite expression of thanks.",
+            "startCharIndex": 0,
+            "endCharIndex": 10
+          },
+          {
+            "expression": "。",
+            "pronunciationGuide": ".",
+            "gloss": "period",
+            "explanation": null,
+            "startCharIndex": 10,
+            "endCharIndex": 11
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Buying a Train Ticket",
+    "description": "A traveler asks about buying a train ticket.",
+    "topic": "train station",
+    "difficultyLevel": "BEGINNER",
+    "language": "JAPANESE",
+    "lines": [
+      {
+        "lineOrder": 1,
+        "speakerName": "Traveler",
+        "targetText": "すみません、東京までの切符を買いたいです。",
+        "pronunciationGuide": "sumimasen, Toukyou made no kippu o kaitai desu.",
+        "englishTranslation": "Excuse me, I want to buy a ticket to Tokyo.",
+        "vocabularyItems": [
+          {
+            "expression": "すみません",
+            "pronunciationGuide": "sumimasen",
+            "gloss": "excuse me",
+            "explanation": "Used to get attention politely.",
+            "startCharIndex": 0,
+            "endCharIndex": 5
+          },
+          {
+            "expression": "、",
+            "pronunciationGuide": ",",
+            "gloss": "comma",
+            "explanation": null,
+            "startCharIndex": 5,
+            "endCharIndex": 6
+          },
+          {
+            "expression": "東京",
+            "pronunciationGuide": "Toukyou",
+            "gloss": "Tokyo",
+            "explanation": "Place name.",
+            "startCharIndex": 6,
+            "endCharIndex": 8
+          },
+          {
+            "expression": "まで",
+            "pronunciationGuide": "made",
+            "gloss": "until/to",
+            "explanation": "Marks the destination.",
+            "startCharIndex": 8,
+            "endCharIndex": 10
+          },
+          {
+            "expression": "の",
+            "pronunciationGuide": "no",
+            "gloss": "of",
+            "explanation": "Connects destination with ticket.",
+            "startCharIndex": 10,
+            "endCharIndex": 11
+          },
+          {
+            "expression": "切符",
+            "pronunciationGuide": "kippu",
+            "gloss": "ticket",
+            "explanation": "Train ticket.",
+            "startCharIndex": 11,
+            "endCharIndex": 13
+          },
+          {
+            "expression": "を",
+            "pronunciationGuide": "o",
+            "gloss": "object marker",
+            "explanation": "Marks the object.",
+            "startCharIndex": 13,
+            "endCharIndex": 14
+          },
+          {
+            "expression": "買いたい",
+            "pronunciationGuide": "kaitai",
+            "gloss": "want to buy",
+            "explanation": "Tai-form of kau, to buy.",
+            "startCharIndex": 14,
+            "endCharIndex": 18
+          },
+          {
+            "expression": "です",
+            "pronunciationGuide": "desu",
+            "gloss": "is",
+            "explanation": "Makes the sentence polite.",
+            "startCharIndex": 18,
+            "endCharIndex": 20
+          },
+          {
+            "expression": "。",
+            "pronunciationGuide": ".",
+            "gloss": "period",
+            "explanation": null,
+            "startCharIndex": 20,
+            "endCharIndex": 21
+          }
+        ]
+      },
+      {
+        "lineOrder": 2,
+        "speakerName": "Staff",
+        "targetText": "普通電車でいいですか。",
+        "pronunciationGuide": "futsuu densha de ii desu ka.",
+        "englishTranslation": "Is a local train okay?",
+        "vocabularyItems": [
+          {
+            "expression": "普通電車",
+            "pronunciationGuide": "futsuu densha",
+            "gloss": "local train",
+            "explanation": "Train that stops at regular stations.",
+            "startCharIndex": 0,
+            "endCharIndex": 4
+          },
+          {
+            "expression": "で",
+            "pronunciationGuide": "de",
+            "gloss": "by/with",
+            "explanation": "Marks means or choice.",
+            "startCharIndex": 4,
+            "endCharIndex": 5
+          },
+          {
+            "expression": "いい",
+            "pronunciationGuide": "ii",
+            "gloss": "good/okay",
+            "explanation": "Means acceptable here.",
+            "startCharIndex": 5,
+            "endCharIndex": 7
+          },
+          {
+            "expression": "ですか",
+            "pronunciationGuide": "desu ka",
+            "gloss": "is it?",
+            "explanation": "Polite question ending.",
+            "startCharIndex": 7,
+            "endCharIndex": 10
+          },
+          {
+            "expression": "。",
+            "pronunciationGuide": ".",
+            "gloss": "period",
+            "explanation": null,
+            "startCharIndex": 10,
+            "endCharIndex": 11
+          }
+        ]
+      },
+      {
+        "lineOrder": 3,
+        "speakerName": "Traveler",
+        "targetText": "はい、大丈夫です。",
+        "pronunciationGuide": "hai, daijoubu desu.",
+        "englishTranslation": "Yes, that's fine.",
+        "vocabularyItems": [
+          {
+            "expression": "はい",
+            "pronunciationGuide": "hai",
+            "gloss": "yes",
+            "explanation": "Polite yes.",
+            "startCharIndex": 0,
+            "endCharIndex": 2
+          },
+          {
+            "expression": "、",
+            "pronunciationGuide": ",",
+            "gloss": "comma",
+            "explanation": null,
+            "startCharIndex": 2,
+            "endCharIndex": 3
+          },
+          {
+            "expression": "大丈夫",
+            "pronunciationGuide": "daijoubu",
+            "gloss": "okay",
+            "explanation": "Means fine or no problem.",
+            "startCharIndex": 3,
+            "endCharIndex": 6
+          },
+          {
+            "expression": "です",
+            "pronunciationGuide": "desu",
+            "gloss": "is",
+            "explanation": "Polite copula.",
+            "startCharIndex": 6,
+            "endCharIndex": 8
+          },
+          {
+            "expression": "。",
+            "pronunciationGuide": ".",
+            "gloss": "period",
+            "explanation": null,
+            "startCharIndex": 8,
+            "endCharIndex": 9
+          }
+        ]
+      },
+      {
+        "lineOrder": 4,
+        "speakerName": "Staff",
+        "targetText": "片道で六百円です。",
+        "pronunciationGuide": "katamichi de roppyaku en desu.",
+        "englishTranslation": "One way is 600 yen.",
+        "vocabularyItems": [
+          {
+            "expression": "片道",
+            "pronunciationGuide": "katamichi",
+            "gloss": "one way",
+            "explanation": "A one-way trip.",
+            "startCharIndex": 0,
+            "endCharIndex": 2
+          },
+          {
+            "expression": "で",
+            "pronunciationGuide": "de",
+            "gloss": "for/as",
+            "explanation": "Used when stating the ticket type.",
+            "startCharIndex": 2,
+            "endCharIndex": 3
+          },
+          {
+            "expression": "六百円",
+            "pronunciationGuide": "roppyaku en",
+            "gloss": "600 yen",
+            "explanation": "Price amount.",
+            "startCharIndex": 3,
+            "endCharIndex": 6
+          },
+          {
+            "expression": "です",
+            "pronunciationGuide": "desu",
+            "gloss": "is",
+            "explanation": "Polite copula.",
+            "startCharIndex": 6,
+            "endCharIndex": 8
+          },
+          {
+            "expression": "。",
+            "pronunciationGuide": ".",
+            "gloss": "period",
+            "explanation": null,
+            "startCharIndex": 8,
+            "endCharIndex": 9
+          }
+        ]
+      },
+      {
+        "lineOrder": 5,
+        "speakerName": "Traveler",
+        "targetText": "カードで払えますか。",
+        "pronunciationGuide": "kaado de haraemasu ka.",
+        "englishTranslation": "Can I pay by card?",
+        "vocabularyItems": [
+          {
+            "expression": "カード",
+            "pronunciationGuide": "kaado",
+            "gloss": "card",
+            "explanation": "Credit or payment card.",
+            "startCharIndex": 0,
+            "endCharIndex": 3
+          },
+          {
+            "expression": "で",
+            "pronunciationGuide": "de",
+            "gloss": "by",
+            "explanation": "Marks payment method.",
+            "startCharIndex": 3,
+            "endCharIndex": 4
+          },
+          {
+            "expression": "払えますか",
+            "pronunciationGuide": "haraemasu ka",
+            "gloss": "can I pay?",
+            "explanation": "Potential polite form of harau, to pay.",
+            "startCharIndex": 4,
+            "endCharIndex": 9
+          },
+          {
+            "expression": "。",
+            "pronunciationGuide": ".",
+            "gloss": "period",
+            "explanation": null,
+            "startCharIndex": 9,
+            "endCharIndex": 10
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Talking About Weekend Plans",
+    "description": "Two coworkers talk about plans for the weekend.",
+    "topic": "small talk",
+    "difficultyLevel": "BEGINNER",
+    "language": "JAPANESE",
+    "lines": [
+      {
+        "lineOrder": 1,
+        "speakerName": "Coworker A",
+        "targetText": "週末は何をしますか。",
+        "pronunciationGuide": "shuumatsu wa nani o shimasu ka.",
+        "englishTranslation": "What will you do this weekend?",
+        "vocabularyItems": [
+          {
+            "expression": "週末",
+            "pronunciationGuide": "shuumatsu",
+            "gloss": "weekend",
+            "explanation": "Saturday and Sunday period.",
+            "startCharIndex": 0,
+            "endCharIndex": 2
+          },
+          {
+            "expression": "は",
+            "pronunciationGuide": "wa",
+            "gloss": "topic marker",
+            "explanation": "Marks the topic.",
+            "startCharIndex": 2,
+            "endCharIndex": 3
+          },
+          {
+            "expression": "何",
+            "pronunciationGuide": "nani",
+            "gloss": "what",
+            "explanation": "Question word.",
+            "startCharIndex": 3,
+            "endCharIndex": 4
+          },
+          {
+            "expression": "を",
+            "pronunciationGuide": "o",
+            "gloss": "object marker",
+            "explanation": "Marks the object.",
+            "startCharIndex": 4,
+            "endCharIndex": 5
+          },
+          {
+            "expression": "しますか",
+            "pronunciationGuide": "shimasu ka",
+            "gloss": "will do?",
+            "explanation": "Polite question form of suru.",
+            "startCharIndex": 5,
+            "endCharIndex": 9
+          },
+          {
+            "expression": "。",
+            "pronunciationGuide": ".",
+            "gloss": "period",
+            "explanation": null,
+            "startCharIndex": 9,
+            "endCharIndex": 10
+          }
+        ]
+      },
+      {
+        "lineOrder": 2,
+        "speakerName": "Coworker B",
+        "targetText": "友達と映画を見ます。",
+        "pronunciationGuide": "tomodachi to eiga o mimasu.",
+        "englishTranslation": "I'll watch a movie with a friend.",
+        "vocabularyItems": [
+          {
+            "expression": "友達",
+            "pronunciationGuide": "tomodachi",
+            "gloss": "friend",
+            "explanation": "Friend.",
+            "startCharIndex": 0,
+            "endCharIndex": 2
+          },
+          {
+            "expression": "と",
+            "pronunciationGuide": "to",
+            "gloss": "with",
+            "explanation": "Marks someone you do something with.",
+            "startCharIndex": 2,
+            "endCharIndex": 3
+          },
+          {
+            "expression": "映画",
+            "pronunciationGuide": "eiga",
+            "gloss": "movie",
+            "explanation": "Film or movie.",
+            "startCharIndex": 3,
+            "endCharIndex": 5
+          },
+          {
+            "expression": "を",
+            "pronunciationGuide": "o",
+            "gloss": "object marker",
+            "explanation": "Marks the object.",
+            "startCharIndex": 5,
+            "endCharIndex": 6
+          },
+          {
+            "expression": "見ます",
+            "pronunciationGuide": "mimasu",
+            "gloss": "watch",
+            "explanation": "Polite form of miru.",
+            "startCharIndex": 6,
+            "endCharIndex": 9
+          },
+          {
+            "expression": "。",
+            "pronunciationGuide": ".",
+            "gloss": "period",
+            "explanation": null,
+            "startCharIndex": 9,
+            "endCharIndex": 10
+          }
+        ]
+      },
+      {
+        "lineOrder": 3,
+        "speakerName": "Coworker A",
+        "targetText": "いいですね。どんな映画ですか。",
+        "pronunciationGuide": "ii desu ne. donna eiga desu ka.",
+        "englishTranslation": "Nice. What kind of movie is it?",
+        "vocabularyItems": [
+          {
+            "expression": "いい",
+            "pronunciationGuide": "ii",
+            "gloss": "good",
+            "explanation": "Common adjective meaning good or nice.",
+            "startCharIndex": 0,
+            "endCharIndex": 2
+          },
+          {
+            "expression": "です",
+            "pronunciationGuide": "desu",
+            "gloss": "is",
+            "explanation": "Polite copula.",
+            "startCharIndex": 2,
+            "endCharIndex": 4
+          },
+          {
+            "expression": "ね",
+            "pronunciationGuide": "ne",
+            "gloss": "right",
+            "explanation": "Seeks agreement.",
+            "startCharIndex": 4,
+            "endCharIndex": 5
+          },
+          {
+            "expression": "。",
+            "pronunciationGuide": ".",
+            "gloss": "period",
+            "explanation": null,
+            "startCharIndex": 5,
+            "endCharIndex": 6
+          },
+          {
+            "expression": "どんな",
+            "pronunciationGuide": "donna",
+            "gloss": "what kind of",
+            "explanation": "Asks about type or kind.",
+            "startCharIndex": 6,
+            "endCharIndex": 9
+          },
+          {
+            "expression": "映画",
+            "pronunciationGuide": "eiga",
+            "gloss": "movie",
+            "explanation": "Film or movie.",
+            "startCharIndex": 9,
+            "endCharIndex": 11
+          },
+          {
+            "expression": "ですか",
+            "pronunciationGuide": "desu ka",
+            "gloss": "is it?",
+            "explanation": "Polite question ending.",
+            "startCharIndex": 11,
+            "endCharIndex": 14
+          },
+          {
+            "expression": "。",
+            "pronunciationGuide": ".",
+            "gloss": "period",
+            "explanation": null,
+            "startCharIndex": 14,
+            "endCharIndex": 15
+          }
+        ]
+      },
+      {
+        "lineOrder": 4,
+        "speakerName": "Coworker B",
+        "targetText": "新しいアニメ映画です。",
+        "pronunciationGuide": "atarashii anime eiga desu.",
+        "englishTranslation": "It's a new anime movie.",
+        "vocabularyItems": [
+          {
+            "expression": "新しい",
+            "pronunciationGuide": "atarashii",
+            "gloss": "new",
+            "explanation": "Describes something new.",
+            "startCharIndex": 0,
+            "endCharIndex": 3
+          },
+          {
+            "expression": "アニメ映画",
+            "pronunciationGuide": "anime eiga",
+            "gloss": "anime movie",
+            "explanation": "Animated movie.",
+            "startCharIndex": 3,
+            "endCharIndex": 8
+          },
+          {
+            "expression": "です",
+            "pronunciationGuide": "desu",
+            "gloss": "is",
+            "explanation": "Polite copula.",
+            "startCharIndex": 8,
+            "endCharIndex": 10
+          },
+          {
+            "expression": "。",
+            "pronunciationGuide": ".",
+            "gloss": "period",
+            "explanation": null,
+            "startCharIndex": 10,
+            "endCharIndex": 11
+          }
+        ]
+      },
+      {
+        "lineOrder": 5,
+        "speakerName": "Coworker A",
+        "targetText": "楽しんでください。",
+        "pronunciationGuide": "tanoshinde kudasai.",
+        "englishTranslation": "Have fun.",
+        "vocabularyItems": [
+          {
+            "expression": "楽しんでください",
+            "pronunciationGuide": "tanoshinde kudasai",
+            "gloss": "have fun",
+            "explanation": "Friendly phrase wishing someone enjoyment.",
+            "startCharIndex": 0,
+            "endCharIndex": 8
+          },
+          {
+            "expression": "。",
+            "pronunciationGuide": ".",
+            "gloss": "period",
+            "explanation": null,
+            "startCharIndex": 8,
+            "endCharIndex": 9
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Missing the Last Train",
+    "description": "Two friends decide what to do after missing the last train.",
+    "topic": "travel",
+    "difficultyLevel": "INTERMEDIATE",
+    "language": "JAPANESE",
+    "lines": [
+      {
+        "lineOrder": 1,
+        "speakerName": "Friend A",
+        "targetText": "あ、終電がもう行きました。",
+        "pronunciationGuide": "a, shuuden ga mou ikimashita.",
+        "englishTranslation": "Oh, the last train has already left.",
+        "vocabularyItems": [
+          {
+            "expression": "あ",
+            "pronunciationGuide": "a",
+            "gloss": "oh",
+            "explanation": "Interjection showing surprise.",
+            "startCharIndex": 0,
+            "endCharIndex": 1
+          },
+          {
+            "expression": "、",
+            "pronunciationGuide": ",",
+            "gloss": "comma",
+            "explanation": null,
+            "startCharIndex": 1,
+            "endCharIndex": 2
+          },
+          {
+            "expression": "終電",
+            "pronunciationGuide": "shuuden",
+            "gloss": "last train",
+            "explanation": "The final train of the day.",
+            "startCharIndex": 2,
+            "endCharIndex": 4
+          },
+          {
+            "expression": "が",
+            "pronunciationGuide": "ga",
+            "gloss": "subject marker",
+            "explanation": "Marks the subject.",
+            "startCharIndex": 4,
+            "endCharIndex": 5
+          },
+          {
+            "expression": "もう",
+            "pronunciationGuide": "mou",
+            "gloss": "already",
+            "explanation": "Shows something has happened already.",
+            "startCharIndex": 5,
+            "endCharIndex": 7
+          },
+          {
+            "expression": "行きました",
+            "pronunciationGuide": "ikimashita",
+            "gloss": "went/left",
+            "explanation": "Polite past form of iku.",
+            "startCharIndex": 7,
+            "endCharIndex": 12
+          },
+          {
+            "expression": "。",
+            "pronunciationGuide": ".",
+            "gloss": "period",
+            "explanation": null,
+            "startCharIndex": 12,
+            "endCharIndex": 13
+          }
+        ]
+      },
+      {
+        "lineOrder": 2,
+        "speakerName": "Friend B",
+        "targetText": "本当ですか。どうしましょう。",
+        "pronunciationGuide": "hontou desu ka. dou shimashou.",
+        "englishTranslation": "Really? What should we do?",
+        "vocabularyItems": [
+          {
+            "expression": "本当",
+            "pronunciationGuide": "hontou",
+            "gloss": "really",
+            "explanation": "Means true or really.",
+            "startCharIndex": 0,
+            "endCharIndex": 2
+          },
+          {
+            "expression": "ですか",
+            "pronunciationGuide": "desu ka",
+            "gloss": "is it?",
+            "explanation": "Polite question ending.",
+            "startCharIndex": 2,
+            "endCharIndex": 5
+          },
+          {
+            "expression": "。",
+            "pronunciationGuide": ".",
+            "gloss": "period",
+            "explanation": null,
+            "startCharIndex": 5,
+            "endCharIndex": 6
+          },
+          {
+            "expression": "どうしましょう",
+            "pronunciationGuide": "dou shimashou",
+            "gloss": "what should we do",
+            "explanation": "Polite phrase for considering what action to take.",
+            "startCharIndex": 6,
+            "endCharIndex": 13
+          },
+          {
+            "expression": "。",
+            "pronunciationGuide": ".",
+            "gloss": "period",
+            "explanation": null,
+            "startCharIndex": 13,
+            "endCharIndex": 14
+          }
+        ]
+      },
+      {
+        "lineOrder": 3,
+        "speakerName": "Friend A",
+        "targetText": "タクシーで帰りますか。",
+        "pronunciationGuide": "takushii de kaerimasu ka.",
+        "englishTranslation": "Shall we go home by taxi?",
+        "vocabularyItems": [
+          {
+            "expression": "タクシー",
+            "pronunciationGuide": "takushii",
+            "gloss": "taxi",
+            "explanation": "Loanword for taxi.",
+            "startCharIndex": 0,
+            "endCharIndex": 4
+          },
+          {
+            "expression": "で",
+            "pronunciationGuide": "de",
+            "gloss": "by",
+            "explanation": "Marks means of transportation.",
+            "startCharIndex": 4,
+            "endCharIndex": 5
+          },
+          {
+            "expression": "帰りますか",
+            "pronunciationGuide": "kaerimasu ka",
+            "gloss": "shall we go home?",
+            "explanation": "Polite question form of kaeru.",
+            "startCharIndex": 5,
+            "endCharIndex": 10
+          },
+          {
+            "expression": "。",
+            "pronunciationGuide": ".",
+            "gloss": "period",
+            "explanation": null,
+            "startCharIndex": 10,
+            "endCharIndex": 11
+          }
+        ]
+      },
+      {
+        "lineOrder": 4,
+        "speakerName": "Friend B",
+        "targetText": "少し高いですね。近くのホテルを見ましょう。",
+        "pronunciationGuide": "sukoshi takai desu ne. chikaku no hoteru o mimashou.",
+        "englishTranslation": "That's a bit expensive. Let's look for a nearby hotel.",
+        "vocabularyItems": [
+          {
+            "expression": "少し",
+            "pronunciationGuide": "sukoshi",
+            "gloss": "a little",
+            "explanation": "Small amount.",
+            "startCharIndex": 0,
+            "endCharIndex": 2
+          },
+          {
+            "expression": "高い",
+            "pronunciationGuide": "takai",
+            "gloss": "expensive",
+            "explanation": "Means high or expensive.",
+            "startCharIndex": 2,
+            "endCharIndex": 4
+          },
+          {
+            "expression": "です",
+            "pronunciationGuide": "desu",
+            "gloss": "is",
+            "explanation": "Polite copula.",
+            "startCharIndex": 4,
+            "endCharIndex": 6
+          },
+          {
+            "expression": "ね",
+            "pronunciationGuide": "ne",
+            "gloss": "isn't it",
+            "explanation": "Seeks agreement.",
+            "startCharIndex": 6,
+            "endCharIndex": 7
+          },
+          {
+            "expression": "。",
+            "pronunciationGuide": ".",
+            "gloss": "period",
+            "explanation": null,
+            "startCharIndex": 7,
+            "endCharIndex": 8
+          },
+          {
+            "expression": "近く",
+            "pronunciationGuide": "chikaku",
+            "gloss": "nearby",
+            "explanation": "Nearby area.",
+            "startCharIndex": 8,
+            "endCharIndex": 10
+          },
+          {
+            "expression": "の",
+            "pronunciationGuide": "no",
+            "gloss": "of",
+            "explanation": "Connects nouns.",
+            "startCharIndex": 10,
+            "endCharIndex": 11
+          },
+          {
+            "expression": "ホテル",
+            "pronunciationGuide": "hoteru",
+            "gloss": "hotel",
+            "explanation": "Loanword for hotel.",
+            "startCharIndex": 11,
+            "endCharIndex": 14
+          },
+          {
+            "expression": "を",
+            "pronunciationGuide": "o",
+            "gloss": "object marker",
+            "explanation": "Marks the object.",
+            "startCharIndex": 14,
+            "endCharIndex": 15
+          },
+          {
+            "expression": "見ましょう",
+            "pronunciationGuide": "mimashou",
+            "gloss": "let's look",
+            "explanation": "Polite volitional form of miru.",
+            "startCharIndex": 15,
+            "endCharIndex": 20
+          },
+          {
+            "expression": "。",
+            "pronunciationGuide": ".",
+            "gloss": "period",
+            "explanation": null,
+            "startCharIndex": 20,
+            "endCharIndex": 21
+          }
+        ]
+      },
+      {
+        "lineOrder": 5,
+        "speakerName": "Friend A",
+        "targetText": "そうですね。今、スマホで調べます。",
+        "pronunciationGuide": "sou desu ne. ima, sumaho de shirabemasu.",
+        "englishTranslation": "Good idea. I'll check on my phone now.",
+        "vocabularyItems": [
+          {
+            "expression": "そうですね",
+            "pronunciationGuide": "sou desu ne",
+            "gloss": "that's true",
+            "explanation": "Common phrase for agreement or thinking.",
+            "startCharIndex": 0,
+            "endCharIndex": 5
+          },
+          {
+            "expression": "。",
+            "pronunciationGuide": ".",
+            "gloss": "period",
+            "explanation": null,
+            "startCharIndex": 5,
+            "endCharIndex": 6
+          },
+          {
+            "expression": "今",
+            "pronunciationGuide": "ima",
+            "gloss": "now",
+            "explanation": "Current time.",
+            "startCharIndex": 6,
+            "endCharIndex": 7
+          },
+          {
+            "expression": "、",
+            "pronunciationGuide": ",",
+            "gloss": "comma",
+            "explanation": null,
+            "startCharIndex": 7,
+            "endCharIndex": 8
+          },
+          {
+            "expression": "スマホ",
+            "pronunciationGuide": "sumaho",
+            "gloss": "smartphone",
+            "explanation": "Casual loanword for smartphone.",
+            "startCharIndex": 8,
+            "endCharIndex": 11
+          },
+          {
+            "expression": "で",
+            "pronunciationGuide": "de",
+            "gloss": "with",
+            "explanation": "Marks tool or means.",
+            "startCharIndex": 11,
+            "endCharIndex": 12
+          },
+          {
+            "expression": "調べます",
+            "pronunciationGuide": "shirabemasu",
+            "gloss": "will check",
+            "explanation": "Polite form of shiraberu.",
+            "startCharIndex": 12,
+            "endCharIndex": 16
+          },
+          {
+            "expression": "。",
+            "pronunciationGuide": ".",
+            "gloss": "period",
+            "explanation": null,
+            "startCharIndex": 16,
+            "endCharIndex": 17
+          }
+        ]
+      }
+    ]
+  }
+]

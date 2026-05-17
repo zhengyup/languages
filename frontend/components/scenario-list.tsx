@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { ScenarioCard } from "@/components/scenario-card";
 import { LearningLanguage, ScenarioGroup } from "@/lib/types";
+import { formatLanguageLabel } from "@/lib/topic";
 
 type ScenarioListProps = {
   groups: ScenarioGroup[];
@@ -13,13 +14,7 @@ type CompletionRecord = {
 };
 
 type LanguageFilter = "ALL" | LearningLanguage;
-
-const LANGUAGE_FILTERS: Array<{ value: LanguageFilter; label: string }> = [
-  { value: "ALL", label: "All" },
-  { value: "MANDARIN", label: "Mandarin" },
-  { value: "SPANISH", label: "Spanish" },
-  { value: "GERMAN", label: "German" }
-];
+const ACTIVE_LANGUAGE_ORDER: LearningLanguage[] = ["MANDARIN", "KOREAN", "JAPANESE"];
 
 export function ScenarioList({ groups }: ScenarioListProps) {
   const [completedScenarioIds, setCompletedScenarioIds] = useState<number[]>([]);
@@ -74,11 +69,25 @@ export function ScenarioList({ groups }: ScenarioListProps) {
         .filter((group) => group.scenarios.length > 0),
     [activeLanguage, groups]
   );
+  const languageFilters = useMemo<Array<{ value: LanguageFilter; label: string }>>(
+    () => [
+      { value: "ALL", label: "All" },
+      ...ACTIVE_LANGUAGE_ORDER.filter((language) =>
+        groups.some((group) =>
+          group.scenarios.some((scenario) => scenario.language === language)
+        )
+      ).map((language) => ({
+        value: language,
+        label: formatLanguageLabel(language)
+      }))
+    ],
+    [groups]
+  );
 
   return (
     <div className="flex flex-col gap-10">
       <section className="flex flex-wrap gap-2">
-        {LANGUAGE_FILTERS.map((filter) => (
+        {languageFilters.map((filter) => (
           <button
             key={filter.value}
             type="button"

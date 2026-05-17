@@ -51,9 +51,9 @@ export function formatLanguageLabel(language: LearningLanguage): string {
   switch (language) {
     case "MANDARIN":
       return "Mandarin";
-    case "SPANISH":
-      return "Spanish";
-    case "GERMAN":
-      return "German";
+    case "KOREAN":
+      return "Korean";
+    case "JAPANESE":
+      return "Japanese";
   }
 }
