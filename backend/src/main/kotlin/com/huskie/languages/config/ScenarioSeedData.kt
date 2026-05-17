@@ -1,5 +1,6 @@
 package com.huskie.languages.config
 
+import com.huskie.languages.domain.scenario.DifficultyLevel
 import com.huskie.languages.domain.scenario.LearningLanguage
 import com.huskie.languages.domain.scenario.ScenarioTopic
 
@@ -14,6 +15,7 @@ data class SeedScenario(
     val description: String,
     val language: LearningLanguage,
     val topic: ScenarioTopic,
+    val difficultyLevel: DifficultyLevel = DifficultyLevel.INTERMEDIATE,
     val lines: List<SeedLine>
 )
 
@@ -29,7 +31,7 @@ data class SeedVocabularyItem(
     val expression: String,
     val pronunciationGuide: String,
     val gloss: String,
-    val explanation: String,
+    val explanation: String?,
     val startCharIndex: Int,
     val endCharIndex: Int
 )
@@ -38,7 +40,7 @@ fun seedVocabulary(
     expression: String,
     pronunciationGuide: String,
     gloss: String,
-    explanation: String,
+    explanation: String?,
     startCharIndex: Int,
     endCharIndex: Int
 ): SeedVocabularyItem =

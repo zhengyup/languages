@@ -1,6 +1,5 @@
 package com.huskie.languages.config
 
-import com.huskie.languages.domain.scenario.DifficultyLevel
 import com.huskie.languages.domain.scenario.Scenario
 import com.huskie.languages.domain.scenario.ScenarioLine
 import com.huskie.languages.domain.scenario.VocabularyItem
@@ -54,7 +53,7 @@ class ScenarioSeedDataInitializer(
                 description = seedScenario.description,
                 language = seedScenario.language,
                 topic = seedScenario.topic,
-                difficultyLevel = DifficultyLevel.INTERMEDIATE,
+                difficultyLevel = seedScenario.difficultyLevel,
                 createdAt = createdAt
             )
         )
